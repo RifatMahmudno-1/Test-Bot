@@ -1,12 +1,22 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+var aliive = 0;
 
-app.get("/", (req, res) => res.send("Keep Alive!"));
+function aliivee() {
+    aliive += 1;
+    app.get("/", (req, res) => res.send(`Keep Alive!--->> ${aliive}`));
+    return aliive;
+}
+setInterval(() => {
+    aliivee()
+}, 300000);
+aliivee();
 
 app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}`)
 );
+
 /*--------------------------------------*/
 const Discord = require('discord.js');
 require('dotenv').config();
@@ -22,12 +32,35 @@ function readyDiscord() {
 
 client.on('message', gotMessage)
 
-var gmt=6;
 function time() {
     var date = new Date();
-    var hour = date.getHours()+gmt;
+    var hour = date.getHours() + 6;
     var minute = date.getMinutes();
     var ampm;
+    if (hour >= 24) {
+        hour = (hour - 24)
+    }
+    if (hour >= 12) {
+        ampm = 'pm'
+    } else if (hour >= 0) {
+        ampm = 'am'
+    }
+    if (hour > 12) {
+        hour = (hour - 12)
+    } else if (hour == 0) {
+        hour = 12
+    }
+    return [hour, minute, ampm];
+}
+
+function tim(a) {
+    var date = new Date();
+    var hour = date.getHours() + a;
+    var minute = date.getMinutes();
+    var ampm
+    if (hour >= 24) {
+        hour = (hour - 24)
+    }
     if (hour >= 12) {
         ampm = 'pm'
     } else if (hour >= 0) {
@@ -43,7 +76,7 @@ function time() {
 
 function greeting() {
     var date = new Date();
-    var hour = date.getHours()+gmt;
+    var hour = date.getHours();
     var greet
     if (hour >= 12 && hour < 16) {
         greet = 'Good Noon'
@@ -62,24 +95,25 @@ function greeting() {
 }
 
 function gff(a, b) {
-    str = a.content;
-    str = str.slice(0, b);
+    str = a.content.slice(0, b);
     return str;
 }
+
+function gii(a, b) {
+    sub = a.content.substring(b);
+    return sub;
+}
+
 async function gotMessage(msg) {
-    //individual function
-    gff(msg, 4);
-    //------------------------------------------------------------
-    if (msg.content === '/name') {
-        msg.reply('Rifat')
+    if (msg.content === '/admin') {
+        msg.channel.send('Admin is <@715938370840166433>')
     } else if (msg.content === '/time') {
-        msg.reply(`It's ${time()[0]}:${time()[1]} ${time()[2]} now`)
-        //msg.channel.send(`It's ${time()[0]}:${time()[1]} ${time()[2]} now in GMT+6`)
+        msg.channel.send(`It's ${time()[0]}:${time()[1]} ${time()[2]} now in GMT'+6'`)
     } else if (msg.content === '/Hi' || msg.content === '/Hello' || msg.content === '/hi' || msg.content === '/hello') {
         msg.reply(greeting())
-    } else if (str === '/gif') {
-        var keywords = msg.content;
-        keywords = keywords.substring(5);
+    } else if (gff(msg, 4) === '/gif') {
+        var keywords = gii(msg, 5);
+        //keywords = keywords.substring(5);
         let url = `https://g.tenor.com/v1/search?q=${keywords}&key=${process.env.TENORAPI}&limit=8`
         let response = await fetch(url);
         let json = await response.json();
@@ -87,9 +121,13 @@ async function gotMessage(msg) {
         msg.reply(json.results[index].url);
     } else if (msg.content === '/help') {
         msg.channel.send(
-            `Type '/time' to get time
+            `Type '/time' to get time of GMT+6
             '/hi' or '/hello' or '/Hi' or '/Hello' for greetings
-            '/gif <search> for gif'`
+            '/gif <search>' for gif
+            '/time<GMT>' such as '/time+6' or 'time+8' etc to get your timezone's time.`
         )
+    } else if (gff(msg, 5) === '/time') {
+        var aa = parseFloat(gii(msg, 5))
+        msg.channel.send(`It's ${tim(aa)[0]}:${tim(aa)[1]} ${tim(aa)[2]} now in GMT '${aa}'`)
     }
 }
