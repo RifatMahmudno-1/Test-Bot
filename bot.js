@@ -22,9 +22,10 @@ function readyDiscord() {
 
 client.on('message', gotMessage)
 
+var gmt=6;
 function time() {
     var date = new Date();
-    var hour = date.getHours()+6;
+    var hour = date.getHours()+gmt;
     var minute = date.getMinutes();
     var ampm;
     if (hour >= 12) {
@@ -42,7 +43,7 @@ function time() {
 
 function greeting() {
     var date = new Date();
-    var hour = date.getHours();
+    var hour = date.getHours()+gmt;
     var greet
     if (hour >= 12 && hour < 16) {
         greet = 'Good Noon'
@@ -73,7 +74,7 @@ async function gotMessage(msg) {
         msg.reply('Rifat')
     } else if (msg.content === '/time') {
         msg.reply(`It's ${time()[0]}:${time()[1]} ${time()[2]} now`)
-        //msg.channel.send(`It's ${time()[0]}:${time()[1]} ${time()[2]} now`)
+        //msg.channel.send(`It's ${time()[0]}:${time()[1]} ${time()[2]} now in GMT+6`)
     } else if (msg.content === '/Hi' || msg.content === '/Hello' || msg.content === '/hi' || msg.content === '/hello') {
         msg.reply(greeting())
     } else if (str === '/gif') {
