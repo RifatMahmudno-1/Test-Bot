@@ -24,7 +24,7 @@ client.on('message', gotMessage)
 
 function time() {
     var date = new Date();
-    var hour = date.getHours();
+    var hour = date.getHours()+6;
     var minute = date.getMinutes();
     var ampm;
     if (hour >= 12) {
@@ -74,7 +74,7 @@ async function gotMessage(msg) {
     } else if (msg.content === '/time') {
         msg.reply(`It's ${time()[0]}:${time()[1]} ${time()[2]} now`)
         //msg.channel.send(`It's ${time()[0]}:${time()[1]} ${time()[2]} now`)
-    } else if (msg.content === 'Hi' || msg.content === 'Hello' || msg.content === 'hi' || msg.content === 'hello') {
+    } else if (msg.content === '/Hi' || msg.content === '/Hello' || msg.content === '/hi' || msg.content === '/hello') {
         msg.reply(greeting())
     } else if (str === '/gif') {
         var keywords = msg.content;
@@ -87,7 +87,7 @@ async function gotMessage(msg) {
     } else if (msg.content === '/help') {
         msg.channel.send(
             `Type '/time' to get time
-            '/hi' or '/hello' for greetings
+            '/hi' or '/hello' or '/Hi' or '/Hello' for greetings
             '/gif <search> for gif'`
         )
     }
