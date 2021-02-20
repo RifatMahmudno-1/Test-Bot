@@ -103,7 +103,7 @@ async function gotMessage(msg) {
         msg.reply(json.results[index].url);
     } else if (tokens[0] === '/help') {
         msg.channel.send(
-            `Type
+            `**Type**
             **(1)**'/hi' or '/hello' for greetings accoeding to GMT+6
             **(2)**'/hi <GMT>' or '/hello <GMT>' for greetings accoeding to provided GMT such as '/hi +3' '/hello -5'
             **(3)**'/gif <search>' for gif such as '/gif dog' '/gif cute kitten'
