@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const app = express();
 const port = 3000;
 
@@ -75,7 +75,13 @@ function gii(a, b) {
     sub = a.content.substring(b);
     return sub;
 }*/
-
+function del(msg) {
+    msg.channel.messages.fetch({
+        limit: 1
+    }).then(results => {
+        msg.channel.bulkDelete(results)
+    })
+}
 async function gotMessage(msg) {
     let tokens = msg.content.split(' ');
 
@@ -102,13 +108,15 @@ async function gotMessage(msg) {
         const index = Math.floor(Math.random() * json.results.length)
         msg.reply(json.results[index].url);
     } else if (tokens[0] === '/help') {
+        //del(msg)
         msg.channel.send(
             `**Type**
             **(1)**'/hi' or '/hello' for greetings accoeding to GMT+6
             **(2)**'/hi <GMT>' or '/hello <GMT>' for greetings accoeding to provided GMT such as '/hi +3' '/hello -5'
             **(3)**'/gif <search>' for gif such as '/gif dog' '/gif cute kitten'
             **(4)**'/time' to get time of GMT+6
-            **(5)**'/time <GMT>' such as '/time +6' or '/time +8' etc to get your timezone's time.`
+            **(5)**'/time <GMT>' such as '/time +6' or '/time +8' etc to get your timezone's time.
+            **(6)**'/clear' to delete previous message. It has some other functionality that only administrators are allowed to perform.`
         )
     } else if (tokens[0] === '/time') {
         if (tokens.length == 1) {
@@ -119,6 +127,26 @@ async function gotMessage(msg) {
             msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
         } else {
             msg.reply(`Type correctly. For help type /help`)
+        }
+    } else if (tokens[0] === '/clear') {
+        if (tokens.length == 1) {
+            let xy = 2
+            msg.channel.messages.fetch({
+                limit: xy
+            }).then(results => {
+                msg.channel.bulkDelete(results)
+            })
+        } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens[1] === 'all') {
+            msg.channel.messages.fetch().then(results => {
+                msg.channel.bulkDelete(results)
+            })
+        } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens.length == 2) {
+            let xy = parseInt(tokens[1]) + 1
+            msg.channel.messages.fetch({
+                limit: xy
+            }).then(results => {
+                msg.channel.bulkDelete(results)
+            })
         }
     }
 }
