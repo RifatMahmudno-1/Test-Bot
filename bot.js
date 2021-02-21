@@ -174,25 +174,15 @@ async function gotMessage(msg) {
                 })
             }
         } else if (tokens[0] === 'cha') {
-            let chann = msg.guild.channels.cache;
-            let arrname = [];
-            let arrid = [];
-            let channelsArray = chann.array();
-            for (var i = 3; i < channelsArray.length; i++) {
-                arrname.push(channelsArray[i].name);
-                arrid.push(channelsArray[i].id);
-            }
-            if (arrname.includes(tokens[1]) == true) {
-                var index = arrname.indexOf(tokens[1])
-                var idd = arrid[index]
-                var keywords = tokens.slice(2, tokens.length).join(' ')
-                chann.get(idd).send(`${keywords}`);
+            if (tokens.length < 3) {
+                let keywords = tokens.slice(2, tokens.length).join(' ')
+                msg.guild.channels.cache.find(i => i.name === tokens[1]).send(keywords)
             } else {
-                msg.reply(`Type Correctly. For help type '${prefix}help'`)
+                msg.reply(`Type correctly. For help type ${prefix}help`)
             }
         } else if (tokens[0] === 'kick') {
             if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
-                if (tokens.length > 1) {
+                if (tokens.length > 2) {
                     let userArray = msg.mentions.users.array();
                     userArray.forEach(function (el) {
                         msg.guild.members.cache.get(el.id).kick()
