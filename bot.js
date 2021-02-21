@@ -46,22 +46,20 @@ function time(a) {
 function greeting(a) {
     var date = new Date();
     var hour = date.getHours() + a;
-    var greet
+    var greet = 'hello';
     if (hour >= 24) {
         hour = (hour - 24)
     }
-    if (hour >= 12 && hour < 16) {
-        greet = 'Good Noon'
-    } else if (hour >= 16 && hour < 18) {
-        greet = 'Good Afternoon'
-    } else if (hour >= 18 && hour < 20) {
-        greet = 'Good Evening'
-    } else if (hour >= 20 && hour <= 23) {
+    if (hour >= 0 && hour < 7) {
         greet = 'Good Night'
-    } else if (hour >= 0 && hour < 6) {
-        greet = 'Good Night'
-    } else if (hour >= 6 && hour < 12) {
+    } else if (hour >= 7 && hour < 12) {
         greet = 'Good Morning'
+    } else if (hour >= 12 && hour <= 16) {
+        greet = 'Good Afternoon'
+    } else if (hour > 16 && hour <= 18) {
+        greet = 'Good Evening'
+    } else if (hour >= 19 && hour <= 23) {
+        greet = 'Good Night'
     }
     return greet
 }
@@ -82,71 +80,111 @@ function del(msg) {
         msg.channel.bulkDelete(results)
     })
 }
+const prefix = process.env.PREFIX;
 async function gotMessage(msg) {
     let tokens = msg.content.split(' ');
-
-    if (tokens[0] === '/admin') {
-        msg.channel.send('Admin is <@715938370840166433>')
-    } else if (tokens[0] === '/hi' || tokens[0] === '/hello') {
-        if (tokens.length == 1) {
-            let aa = 6;
-            msg.reply(greeting(aa))
-        } else if (tokens.length == 2) {
-            let aa = parseFloat(tokens[1])
-            msg.reply(greeting(aa))
-        } else {
-            msg.reply(`Type correctly. For help type /help`)
-        }
-    } else if (tokens[0] === '/gif') {
-        let keywords = 'cute anime girl'
-        if (tokens.length > 1) {
-            keywords = tokens.slice(1, tokens.length).join(' ')
-        }
-        let url = `https://g.tenor.com/v1/search?q=${keywords}&key=${process.env.TENORAPI}&contentfilter=off`
-        let response = await fetch(url);
-        let json = await response.json();
-        const index = Math.floor(Math.random() * json.results.length)
-        msg.reply(json.results[index].url);
-    } else if (tokens[0] === '/help') {
-        //del(msg)
-        msg.channel.send(
-            `**Type**
-            **(1)**'/hi' or '/hello' for greetings accoeding to GMT+6
-            **(2)**'/hi <GMT>' or '/hello <GMT>' for greetings accoeding to provided GMT such as '/hi +3' '/hello -5'
-            **(3)**'/gif <search>' for gif such as '/gif dog' '/gif cute kitten'
-            **(4)**'/time' to get time of GMT+6
-            **(5)**'/time <GMT>' such as '/time +6' or '/time +8' etc to get your timezone's time.
-            **(6)**'/clear' to delete previous message. It has some other functionality that only administrators are allowed to perform.`
-        )
-    } else if (tokens[0] === '/time') {
-        if (tokens.length == 1) {
-            let aa = 6
-            msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
-        } else if (tokens.length == 2) {
-            let aa = parseFloat(tokens[1])
-            msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
-        } else {
-            msg.reply(`Type correctly. For help type /help`)
-        }
-    } else if (tokens[0] === '/clear') {
-        if (tokens.length == 1) {
-            let xy = 2
-            msg.channel.messages.fetch({
-                limit: xy
-            }).then(results => {
-                msg.channel.bulkDelete(results)
-            })
-        } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens[1] === 'all') {
-            msg.channel.messages.fetch().then(results => {
-                msg.channel.bulkDelete(results)
-            })
-        } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens.length == 2) {
-            let xy = parseInt(tokens[1]) + 1
-            msg.channel.messages.fetch({
-                limit: xy
-            }).then(results => {
-                msg.channel.bulkDelete(results)
-            })
+    if (tokens[0].slice(0, 1) == prefix) {
+        tokens[0] = tokens[0].substring(1)
+        if (tokens[0] === 'admin') {
+            msg.channel.send('Admin is <@715938370840166433>')
+        } else if (tokens[0] === 'hi' || tokens[0] === 'hello') {
+            if (tokens.length == 1) {
+                let aa = 6;
+                msg.reply(greeting(aa))
+            } else if (tokens.length == 2) {
+                let aa = parseFloat(tokens[1])
+                msg.reply(greeting(aa))
+            } else {
+                msg.reply(`Type correctly. For help type '${prefix}help'`)
+            }
+        } else if (tokens[0] === 'gif') {
+            let keywords = 'cute anime girl'
+            if (tokens.length > 1) {
+                keywords = tokens.slice(1, tokens.length).join(' ')
+            }
+            let url = `https://g.tenor.com/v1/search?q=${keywords}&key=${process.env.TENORAPI}&contentfilter=off`
+            let response = await fetch(url);
+            let json = await response.json();
+            const index = Math.floor(Math.random() * json.results.length)
+            msg.reply(json.results[index].url);
+        } else if (tokens[0] === 'help') {
+            msg.channel.send(
+                `**Type**
+            **(1)** '${prefix}hi' or '${prefix}hello' for greetings accoeding to GMT+6
+            **(2)** '${prefix}hi <GMT>' or '${prefix}hello <GMT>' for greetings accoeding to provided GMT such as '${prefix}hi +3' '${prefix}hello -5'
+            **(3)** '${prefix}gif <search>' for gif such as '${prefix}gif dog' '${prefix}gif cute kitten'
+            **(4)** '${prefix}time' to get time of GMT+6
+            **(5)** '${prefix}time <GMT>' such as '${prefix}time +6' or '${prefix}time +8' etc to get your timezone's time.
+            **(6)** '${prefix}clear' to delete previous message. It has some other functionality that only administrators are allowed to perform.
+            **(7)** if you type '${prefix}bhf <@mension> <Type your text>' then the bot will say on your behalf. Such as- '${prefix}bhf  @Rifat is admin' etc.
+            **(8)** if you type '${prefix}avt' then the bot will reply your avatar.
+            **(9)** if you type '${prefix}avt @mention @mention ...' then the bot will reply their avater.
+            **(10)** if you type '${prefix}cha <channel name> <Your message>' then the bot will send that message to that specific channel. Such as- '${prefix}cha general How are you??' etc..`
+            )
+        } else if (tokens[0] === 'time') {
+            if (tokens.length == 1) {
+                let aa = 6
+                msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
+            } else if (tokens.length == 2) {
+                let aa = parseFloat(tokens[1])
+                msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
+            } else {
+                msg.reply(`Type correctly. For help type '${prefix}help'`)
+            }
+        } else if (tokens[0] === 'clear') {
+            if (tokens.length == 1) {
+                let xy = 2
+                msg.channel.messages.fetch({
+                    limit: xy
+                }).then(results => {
+                    msg.channel.bulkDelete(results)
+                })
+            } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens[1] === 'all') {
+                msg.channel.messages.fetch().then(results => {
+                    msg.channel.bulkDelete(results)
+                })
+            } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens.length == 2) {
+                let xy = parseInt(tokens[1]) + 1
+                msg.channel.messages.fetch({
+                    limit: xy
+                }).then(results => {
+                    msg.channel.bulkDelete(results)
+                })
+            }
+        } else if (tokens[0] === 'bhf') {
+            if (tokens.length <= 2) {
+                msg.reply(`Type correctly. For help type '${prefix}help'`)
+            } else if (tokens.length >= 3) {
+                del(msg)
+                let aa = tokens.slice(2, tokens.length).join(' ')
+                msg.channel.send(tokens[1] + ' ' + aa)
+            }
+        } else if (tokens[0] === 'avt') {
+            if (tokens.length == 1) {
+                msg.reply(msg.author.displayAvatarURL() + '?size=2048');
+            } else if (tokens.length > 1) {
+                let userArray = msg.mentions.users.array();
+                userArray.forEach(function (el) {
+                    msg.reply(el.displayAvatarURL() + '?size=2048');
+                })
+            }
+        } else if (tokens[0] === 'cha') {
+            let chann = msg.guild.channels.cache;
+            let arrname = [];
+            let arrid = [];
+            let channelsArray = chann.array();
+            for (var i = 3; i < channelsArray.length; i++) {
+                arrname.push(channelsArray[i].name);
+                arrid.push(channelsArray[i].id);
+            }
+            if (arrname.includes(tokens[1]) == true) {
+                var index = arrname.indexOf(tokens[1])
+                var idd = arrid[index]
+                var keywords = tokens.slice(2, tokens.length).join(' ')
+                chann.get(idd).send(`${keywords}`);
+            } else {
+                msg.reply(`Type Correctly. For help type '${prefix}help'`)
+            }
         }
     }
 }
