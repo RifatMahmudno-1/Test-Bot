@@ -130,7 +130,7 @@ async function gotMessage(msg) {
             if (tokens.length == 1) {
                 let aa = 6
                 msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
-            } else if (tokens.length == 2) {
+            } else if (tokens.length >= 2) {
                 let aa = parseFloat(tokens[1])
                 msg.channel.send(`It's ${time(aa)[0]}:${time(aa)[1]} ${time(aa)[2]} now in GMT '${aa}'`)
             } else {
@@ -148,7 +148,7 @@ async function gotMessage(msg) {
                 msg.channel.messages.fetch().then(results => {
                     msg.channel.bulkDelete(results)
                 })
-            } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens.length == 2) {
+            } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens.length >= 2) {
                 let xy = parseInt(tokens[1]) + 1
                 msg.channel.messages.fetch({
                     limit: xy
@@ -157,12 +157,12 @@ async function gotMessage(msg) {
                 })
             }
         } else if (tokens[0] === 'bhf') {
-            if (tokens.length <= 2) {
+            if (tokens.length >= 2) {
+                del(msg);
+                let aa = tokens.slice(1, tokens.length).join(' ')
+                msg.channel.send(aa)
+            } else {
                 msg.reply(`Type correctly. For help type '${prefix}help'`)
-            } else if (tokens.length >= 3) {
-                del(msg)
-                let aa = tokens.slice(2, tokens.length).join(' ')
-                msg.channel.send(tokens[1] + ' ' + aa)
             }
         } else if (tokens[0] === 'avt') {
             if (tokens.length == 1) {
@@ -174,15 +174,15 @@ async function gotMessage(msg) {
                 })
             }
         } else if (tokens[0] === 'cha') {
-            if (tokens.length < 3) {
+            if (tokens.length >= 3) {
                 let keywords = tokens.slice(2, tokens.length).join(' ')
                 msg.guild.channels.cache.find(i => i.name === tokens[1]).send(keywords)
             } else {
-                msg.reply(`Type correctly. For help type ${prefix}help`)
+                msg.reply(`Type correctly. For help type '${prefix}help'`)
             }
         } else if (tokens[0] === 'kick') {
             if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
-                if (tokens.length > 2) {
+                if (tokens.length >= 3) {
                     let userArray = msg.mentions.users.array();
                     userArray.forEach(function (el) {
                         msg.guild.members.cache.get(el.id).kick()
@@ -196,7 +196,7 @@ async function gotMessage(msg) {
             }
         } else if (tokens[0] === 'ban') {
             if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
-                if (tokens.length > 1) {
+                if (tokens.length >= 2) {
                     let userArray = msg.mentions.users.array();
                     userArray.forEach(function (el) {
                         msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
