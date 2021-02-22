@@ -5,43 +5,60 @@ module.exports = function (msg, prefix) {
         .setColor('#0099ff')
         .setTitle('Help')
         .setAuthor('My Test', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
-        .setDescription('Use it in the perfect way.')
         .addFields({
-            name: `'hi', 'hello, 'hlw' `,
-            value: ` type 'hi <GMT>', 'hello <GMT>','hlw <GMT>' to get welcome text according to your timezone. Such as 'hi +5' or 'hello -6' etc. Otherwise it will respond according to GMT +6 timezone.`
+            name: `'${prefix}hi', '${prefix}hello, '${prefix}hlw' or 'hi', 'hello, 'hlw'`,
+            value: `Get welcome text according to GMT +6`
+        }, {
+            name: `'hi <GMT>', 'hello <GMT>','hlw <GMT>' or '${prefix}hi <GMT>', '${prefix}hello <GMT>','${prefix}hlw <GMT>' `,
+            value: `Get welcome text according to provided timezone <GMT>.'Hi +5' or '${prefix}Hi +5' => Get text according to GMT +5.'Hi -2' or '${prefix}Hi -2' => Get text according to GMT -2.`
         }, {
             name: `'${prefix}gif'`,
-            value: `${prefix}gif <search>' for gif such as '${prefix}gif dog' '${prefix}gif cute kitten'`,
+            value: `Get a random anime gif.`,
+        }, {
+            name: `'${prefix}gif <search>'`,
+            value: `Get a random gif from your search. '${prefix}gif cute kitten'=> to get a cute kitten gif.`,
         }, {
             name: `'${prefix}time'`,
-            value: `'${prefix}time' to get time accoding to GMT+6. To get time according to your time zone type '${prefix}time <GMT>'. Such as '${prefix}time +6', '${prefix}time -3'`,
+            value: `'${prefix}time' to get time of to GMT+6.`,
+        }, {
+            name: `'${prefix}time <GMT>'`,
+            value: ` Get time according to provided <GMT> . '${prefix}time +2' to get time of GMT +2. '${prefix}time -3' to get time of GMT -3.'`,
         }, {
             name: `'${prefix}clear'`,
-            value: `'${prefix}clear' to delete previous message.
-            It has some other functionality that only administrators are allowed to perform. Such as- Type '${prefix}clear <number but must be less than 100.>' => Type '${prefix}clear 50' to delete pevious 50 messages. Type '${prefix}clear all' to delete previous several messages.`,
+            value: `'${prefix}clear' to delete previous message.`,
         }, {
-            name: `'${prefix}bhf'`,
-            value: `If you type '${prefix}bhf <@mension> <Type your text>' then the bot will say on your behalf. Such as- '${prefix}bhf  @Rifat I'm well' etc.`,
+            name: `'${prefix}clear <how many>'`,
+            value: `'${prefix}'${prefix}clear <number but must be less than 100>'. '${prefix}clear 50' to delete pevious 50 messages.`,
+        }, {
+            name: `'${prefix}clear all'`,
+            value: `Delete previous several messages.`,
+        }, {
+            name: `'${prefix}bhf <Type your text>'`,
+            value: `The bot will send your text. '${prefix}bhf I'm well' => The bot will send I'm well`,
         }, {
             name: `'${prefix}avt'`,
-            value: `if you type '${prefix}avt' then the bot will send your avatar. If you type '${prefix}avt @mention @mention ...' then the bot will reply their avaters one by one.`,
+            value: `The bot will send your avatar. If you type '${prefix}avt @mention @mention ...' then the bot will reply their avaters one by one.`,
         }, {
-            name: `'${prefix}cha'`,
-            value: `If you type '${prefix}cha <channel name> <Your message>' then the bot will send that message to that specific channel. Such as- '${prefix}cha general How are you??' etc..`,
+            name: `'${prefix}avt <mention> <mention> ...'`,
+            value: `The bot will send all the mentioned user's avater. '${prefix}avt @Rifat @Helper'=> The bot will send Rifat and Helper's avater.`,
         }, {
-            name: `'${prefix}kick'`,
-            value: `Type '${prefix}kick <reason in one word. For more words join them by hyfen or underscore> <Mention them whom you want to kick>'. Such as-'${prefix}kick for_testing_purpose @Rifat @Anilist Bot @My Test'`,
+            name: `'${prefix}cha <channel name> <Your message>'`,
+            value: `The bot will send Your message to that specific channel. '${prefix}cha general How are you??' => The bot will send "How are you in general channel"`,
         }, {
-            name: `'${prefix}ban'`,
-            value: `Type '${prefix}ban <reason in one word. For more words join them by hyfen or underscore> <Mention them whom you want to kick>'. Such as-'${prefix}ban for_testing_purpose @Rifat @Anilist Bot @My Test'`,
+            name: `'${prefix}kick <reason> <mention> <mention>'`,
+            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}kick for_testing_purpose @Rifat @Bot @ Helper'=> The bot will kick Rifat, Bot, Helper.`,
         }, {
-            name: `'${prefix}snick'`,
-            value: `Type '${prefix}snick <mention user whose nickname you want to change> <nickname>'. Such as- '${prefix}snick @Rifat dev' or, '${prefix}snick @Rifat dev @My test BOT' etc.. `,
+            name: `'${prefix}ban <reason> <mention> <mention>'`,
+            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}ban for_testing_purpose @Rifat @Bot @ Helper'=> The bot will ban Rifat, Bot, Helper`,
         }, {
-            name: `'${prefix}rnick'`,
-            value: `Type '${prefix}rnick <mention user which nickname you want to remove>'. Such as- '${prefix}rnick @admin @BOT' etc..`,
+            name: `'${prefix}snick <mention> <nickname> <mention> <nickname>...'`,
+            value: `You must type nickname in one word. '${prefix}snick @Rifat dev'=> The bot will set Rifat's nickname Devloper. '${prefix}snick @Rifat dev @MBOT helper' => The bot will set Rifat's nickname Devloper and MBOT's nickname helper.`,
+        }, {
+            name: `'${prefix}rnick <mention> <mention> ...'`,
+            value: `Mention users whose nickname you want to remove. '${prefix}rnick @Rifat @MBOT' => The bot will remove their nickname.`,
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye etc.', false)
+        .setDescription('Administrator or specific permissions such as kick, ban, nickname edit etc are needed for some functions.')
         .setFooter('Have a nice time');
 
     msg.channel.send(embed);
