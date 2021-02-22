@@ -15,11 +15,11 @@ module.exports = function (msg, tokens, prefix) {
         }
     } else if (tokens[0] === 'ban') {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
-            if (tokens.length >= 2) {
+            if (tokens.length >= 3) {
                 let userArray = msg.mentions.users.array();
                 userArray.forEach(function (el) {
-                    msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
                     msg.guild.members.cache.get(el.id).ban()
+                    msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
                 })
             } else {
                 msg.reply(`Type correctly. For help type '${prefix}help'`)
