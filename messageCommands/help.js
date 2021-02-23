@@ -56,6 +56,9 @@ module.exports = function (msg, prefix) {
         }, {
             name: `'${prefix}rnick <mention> <mention> ...'`,
             value: `Mention users whose nickname you want to remove. '${prefix}rnick @Rifat @MBOT' => The bot will remove their nickname.`,
+        }, {
+            name: `'${prefix}roles'`,
+            value: `Type '${prefix}roles' to get all the role names.`,
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. ', false)
         .addField('Automated', 'Bot will autimatically respond if someone is added or kicked or banned from this server', false)

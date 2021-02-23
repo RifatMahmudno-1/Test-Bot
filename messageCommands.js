@@ -13,6 +13,8 @@ const avtcha = require('./messageCommands/avaterChannel.js')
 const kickban = require('./messageCommands/kickban.js')
 const nickname = require('./messageCommands/nickname.js')
 const auto = require('./messageCommands/auto.js')
+const roles = require('./messageCommands/roles.js')
+
 
 //end
 /*commands = {
@@ -52,6 +54,8 @@ module.exports = async function (msg) {
             kickban(msg, tokens, prefix)
         } else if (tokens[0] === 'snick' || tokens[0] === 'rnick') {
             nickname(msg, tokens)
+        } else if (tokens[0] === 'roles') {
+            roles(msg)
         }
     } else {
         auto(msg, tokens, prefix, otfn, fetch)
