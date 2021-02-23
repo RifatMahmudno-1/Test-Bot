@@ -7,9 +7,6 @@ module.exports = function (msg, tokens, prefix, otfn) {
             let user = msg.member.id;
             let time = parseFloat(tokens[1]);
             msg.channel.send(`${otfn.greeting(time)} <@${user}>. Have a great time.`)
-        } else {
-            let user = msg.member.id;
-            msg.channel.send(`<@${user}>, please type correctly. For help type ${prefix}help.`)
         }
     } else if (tokens[0] === 'bye' || tokens[0] === 'Goodbye' || tokens[0] === 'GoodBye') {
         let user = msg.member.id;
