@@ -8,7 +8,7 @@ const keepalive = require('./keepalive')
 
 function readyDiscord() {
     console.log('me');
-    keepalive.alive();
+    //keepalive.alive();
 }
 const messageCommands = require('./messageCommands');
 client.on('message', messageCommands)
