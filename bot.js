@@ -4,10 +4,10 @@ const client = new Discord.Client();
 client.login(process.env.TOKEN)
 client.on('ready', readyDiscord)
 
-const keepalive = require('./keepalive')
+//const keepalive = require('./keepalive')
 
 function readyDiscord() {
-    console.log('me');
+    console.log('Application has started');
     //keepalive.alive();
 }
 const messageCommands = require('./messageCommands');
