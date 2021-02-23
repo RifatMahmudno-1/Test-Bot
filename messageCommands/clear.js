@@ -1,8 +1,7 @@
 module.exports = async function (msg, tokens) {
     if (tokens.length == 1) {
-        let xy = 2
         msg.channel.messages.fetch({
-            limit: xy
+            limit: 2
         }).then(results => {
             msg.channel.bulkDelete(results)
         })

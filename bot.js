@@ -12,3 +12,7 @@ function readyDiscord() {
 }
 const messageCommands = require('./messageCommands');
 client.on('message', messageCommands)
+const welcome = require('./welcome')
+client.on('guildMemberAdd', welcome)
+const bye = require('./bye')
+client.on('guildMemberRemove', bye)

@@ -12,6 +12,8 @@ const bhf = require('./messageCommands/behalf.js')
 const avtcha = require('./messageCommands/avaterChannel.js')
 const kickban = require('./messageCommands/kickban.js')
 const nickname = require('./messageCommands/nickname.js')
+const auto = require('./messageCommands/auto.js')
+
 //end
 /*commands = {
     help,
@@ -32,6 +34,8 @@ module.exports = async function (msg) {
         //var command = tokens[0]
         if (tokens[0] === 'admin') {
             msg.channel.send('Admin is <@715938370840166433>')
+        } else if (tokens[0] === 'hi' || tokens[0] === 'hello' || tokens[0] === 'hlw' || tokens[0] === 'Hi' || tokens[0] === 'Hello' || tokens[0] === 'bye' || tokens[0] === 'Goodbye' || tokens[0] === 'GoodBye') {
+            greeting(msg, tokens, prefix, otfn)
         } else if (tokens[0] === 'time') {
             time(msg, tokens, prefix, otfn)
         } else if (tokens[0] === 'gif') {
@@ -49,8 +53,7 @@ module.exports = async function (msg) {
         } else if (tokens[0] === 'snick' || tokens[0] === 'rnick') {
             nickname(msg, tokens)
         }
-    }
-    if (tokens[0] === 'hi' || tokens[0] === 'hello' || tokens[0] === 'hlw' || tokens[0] === 'Hi' || tokens[0] === 'Hello' || tokens[0] === 'bye' || tokens[0] === 'Goodbye' || tokens[0] === 'GoodBye') {
-        greeting(msg, tokens, prefix, otfn)
+    } else {
+        auto(msg, tokens, prefix, otfn, fetch)
     }
 }
