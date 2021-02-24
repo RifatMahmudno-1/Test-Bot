@@ -39,23 +39,23 @@ module.exports = function (msg, prefix) {
             name: `'${prefix}avt'`,
             value: `The bot will send your avatar. If you type '${prefix}avt @mention @mention ...' then the bot will reply their avaters one by one.`,
         }, {
-            name: `'${prefix}avt <mention> <mention> ...'`,
-            value: `The bot will send all the mentioned user's avater. '${prefix}avt @Rifat @Helper'=> The bot will send Rifat and Helper's avater.`,
+            name: `'${prefix}avt <mention users> ...'`,
+            value: `The bot will send all the mentioned user's avater. '${prefix}avt @Rifat @Helper'=> The bot will send Rifat and Helper's avater. You can add more or less members.`,
         }, {
             name: `'${prefix}cha <channel name> <Your message>'`,
             value: `The bot will send Your message to that specific channel. '${prefix}cha general How are you??' => The bot will send "How are you in general channel"`,
         }, {
-            name: `'${prefix}kick <reason> <mention> <mention>'`,
-            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}kick for_testing_purpose @Rifat @Bot @ Helper'=> The bot will kick Rifat, Bot, Helper.`,
+            name: `'${prefix}kick <reason> <mention users> ...'`,
+            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}kick for_testing_purpose @Rifat @Bot @Helper'=> The bot will kick Rifat, Bot, Helper for for_testing_purpose. You can add more or less members.`,
         }, {
-            name: `'${prefix}ban <reason> <mention> <mention>'`,
-            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}ban for_testing_purpose @Rifat @Bot @ Helper'=> The bot will ban Rifat, Bot, Helper`,
+            name: `'${prefix}ban <reason> <mention users> ...'`,
+            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}ban for_testing_purpose @Rifat @Bot @Helper'=> The bot will ban Rifat, Bot, Helper for_testing_purpose. You can add more or less members.`,
         }, {
             name: `'${prefix}snick <mention> <nickname> <mention> <nickname>...'`,
-            value: `You must type nickname in one word. '${prefix}snick @Rifat dev'=> The bot will set Rifat's nickname Devloper. '${prefix}snick @Rifat dev @MBOT helper' => The bot will set Rifat's nickname Devloper and MBOT's nickname helper.`,
+            value: `You must type each member's nickname in one word. '${prefix}snick @Rifat dev'=> The bot will set Rifat's nickname Devloper. '${prefix}snick @Rifat dev @MBOT helper' => The bot will set Rifat's nickname Devloper and MBOT's nickname helper. You can add nicknames to more or less members.`,
         }, {
-            name: `'${prefix}rnick <mention> <mention> ...'`,
-            value: `Mention users whose nickname you want to remove. '${prefix}rnick @Rifat @MBOT' => The bot will remove their nickname.`,
+            name: `'${prefix}rnick <mention users> ...'`,
+            value: `Mention users whose nickname you want to remove. '${prefix}rnick @Rifat @MBOT' => The bot will remove their nicknames. You can add more or less members.`,
         }, {
             name: `'${prefix}roles'`,
             value: `Type '${prefix}roles' to get all the role names.`,
@@ -66,11 +66,9 @@ module.exports = function (msg, prefix) {
             name: `'${prefix}roles remove <mantion roles> ... <mantion members> ...'`,
             value: `Type '${prefix}roles remove <mantion roles> <mantion users>' to give them those roles. Type '${prefix}roles remove @moderator @bot @Rifat @Alex' to give Rifat and Alex the moderator and bot roles. You can add more or less roles and member.`,
         })
-        .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. ', false)
-        .addField('Automated', 'Bot will autimatically respond if someone is added or kicked or banned from this server', false)
-        .addField('Automated', 'Bot will autimatically react to certain messages', false)
+        .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
 
-        .setDescription('Administrator or specific permissions such as kick, ban, nickname edit etc are needed for some functions.')
+        .setDescription('Administrator or specific permissions such as kick, ban, nickname edit, manage roles etc are needed for some functions.')
         .setFooter('Have a nice time');
 
     msg.channel.send(embed);
