@@ -13,13 +13,17 @@ module.exports = function (msg, tokens) {
         }
         msg.channel.send(nameID)
     } else if (tokens.length >= 3) {
-        let roleArray = msg.mentions.roles.array();
-        let userArray = msg.mentions.members.array();
-        roleArray.forEach(function (el) {
-            let role = el.id
-            userArray.forEach(function (el) {
-                el.roles.add(role)
+        if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('MANAGE_ROLES')) {
+            let roleArray = msg.mentions.roles.array();
+            let userArray = msg.mentions.members.array();
+            roleArray.forEach(function (el) {
+                let role = el.id
+                userArray.forEach(function (el) {
+                    el.roles.add(role)
+                })
             })
-        })
+        } else {
+            msg.reply(`You don't have permission to add, remove or give roles.`)
+        }
     }
 }
