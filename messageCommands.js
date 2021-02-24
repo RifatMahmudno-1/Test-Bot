@@ -49,6 +49,14 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'roles') {
                 roles(msg, tokens)
                 msg.react(otfn.reac())
+            } else if (tokens[0] === 'members') {
+                var user = msg.guild.members.cache
+                    .map(r => r);
+                let nameID = [];
+                for (var i = 0; i < user.length; i++) {
+                    nameID.push(`Name: <@${user[i].id}> => ID: ${user[i].id}`)
+                }
+                msg.channel.send(nameID)
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
