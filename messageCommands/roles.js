@@ -12,7 +12,7 @@ module.exports = function (msg, tokens) {
             nameID.push(`${bb} => <@&${cc}>`)
         }
         msg.channel.send(nameID)
-    } else if (tokens.length >= 3) {
+    } else if (tokens.length >= 4 && tokens[1] === 'add') {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('MANAGE_ROLES')) {
             let roleArray = msg.mentions.roles.array();
             let userArray = msg.mentions.members.array();
@@ -25,5 +25,20 @@ module.exports = function (msg, tokens) {
         } else {
             msg.reply(`You don't have permission to add, remove or give roles.`)
         }
+    } else if (tokens.length >= 4 && tokens[1] === 'remove') {
+        if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('MANAGE_ROLES')) {
+            let roleArray = msg.mentions.roles.array();
+            let userArray = msg.mentions.members.array();
+            roleArray.forEach(function (el) {
+                let role = el.id
+                userArray.forEach(function (el) {
+                    el.roles.remove(role)
+                })
+            })
+        } else {
+            msg.reply(`You don't have permission to add, remove or give roles.`)
+        }
+    } else {
+        msg.reply(`Please type correctly. For help type '${prefix}help'`)
     }
 }

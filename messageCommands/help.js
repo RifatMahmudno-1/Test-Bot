@@ -60,8 +60,11 @@ module.exports = function (msg, prefix) {
             name: `'${prefix}roles'`,
             value: `Type '${prefix}roles' to get all the role names.`,
         }, {
-            name: `'${prefix}roles <mantion role> <mantion role>... <mantion member> <mantion member> ...'`,
-            value: `Type '${prefix}roles <mantion roles> <mantion users>' to give them those roles. Type '${prefix}roles @moderator @bot @Rifat @Alex' to give Rifat and Alex the moderator and bot roles. You add more or less roles and member.`,
+            name: `'${prefix}roles add <mantion roles> ... <mantion members> ...'`,
+            value: `Type '${prefix}roles add <mantion roles> <mantion users>' to give them those roles. Type '${prefix}roles add @moderator @bot @Rifat @Alex' to give Rifat and Alex the moderator and bot roles. You can add more or less roles and member.`,
+        }, {
+            name: `'${prefix}roles remove <mantion roles> ... <mantion members> ...'`,
+            value: `Type '${prefix}roles remove <mantion roles> <mantion users>' to give them those roles. Type '${prefix}roles remove @moderator @bot @Rifat @Alex' to give Rifat and Alex the moderator and bot roles. You can add more or less roles and member.`,
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. ', false)
         .addField('Automated', 'Bot will autimatically respond if someone is added or kicked or banned from this server', false)
