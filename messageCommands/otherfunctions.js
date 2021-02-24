@@ -55,5 +55,10 @@ module.exports = {
         }).then(results => {
             msg.channel.bulkDelete(results)
         })
+    },
+    reac: function () {
+        var rea = ['💖', '❤', '👍', '😊', '🌹'];
+        let ran = Math.floor(Math.random() * 5)
+        return rea[ran];
     }
 }

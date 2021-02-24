@@ -62,6 +62,7 @@ module.exports = function (msg, prefix) {
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. ', false)
         .addField('Automated', 'Bot will autimatically respond if someone is added or kicked or banned from this server', false)
+        .addField('Automated', 'Bot will autimatically react to certain messages', false)
 
         .setDescription('Administrator or specific permissions such as kick, ban, nickname edit etc are needed for some functions.')
         .setFooter('Have a nice time');
