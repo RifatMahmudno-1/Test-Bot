@@ -45,7 +45,7 @@ module.exports = async function (msg) {
         } else if (tokens[0] === 'snick' || tokens[0] === 'rnick') {
             nickname(msg, tokens)
         } else if (tokens[0] === 'roles') {
-            roles(msg)
+            roles(msg, tokens)
             msg.react(otfn.reac())
         } else {
             msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
