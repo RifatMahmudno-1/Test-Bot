@@ -8,9 +8,9 @@ module.exports = function (msg, tokens, prefix, otfn) {
             let time = parseFloat(tokens[1]);
             msg.channel.send(`${otfn.greeting(time)} <@${user}>. Hope you will have a great time with us.`)
         }
-    } else if (tokens[0] === 'bye' || tokens[0] === 'Goodbye' || tokens[0] === 'GoodBye') {
+    } else if (tokens[0] === 'bye' || tokens[0] === 'Bye' || tokens[0] === 'Goodbye' || tokens[0] === 'goodbye' || tokens[0] === 'GoodBye') {
         let user = msg.member.id;
-        msg.channel.send(`GoodBye.. <@${user}>. Hope to see you soon.`)
+        msg.channel.send(`Goodbye <@${user}>. Hope to see you soon.`)
     }
 
 }

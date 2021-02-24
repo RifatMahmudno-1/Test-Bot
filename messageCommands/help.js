@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 //https://www.codegrepper.com/code-examples/javascript/discord.js+embed+builder
-module.exports = function (msg, prefix) {
+module.exports = function (msg, tokens, prefix) {
     const embed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Help')
@@ -70,8 +70,14 @@ module.exports = function (msg, prefix) {
 
         .setDescription('Administrator or specific permissions such as kick, ban, nickname edit, manage roles etc are needed for some functions.')
         .setFooter('Have a nice time');
-
-    msg.channel.send(embed);
+    if (tokens[1] === 'here') {
+        msg.channel.send(embed)
+    } else {
+        if (msg.channel.id !== '813476929268351007') {
+            msg.reply(`Check. You have received a message from me. Everything is written there.`)
+        }
+        msg.author.send(embed);
+    }
 }
 /*msg.channel.send(
         
