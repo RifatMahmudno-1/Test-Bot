@@ -77,6 +77,12 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}mem names'`,
             value: `Type '${prefix}mem names' to get all members' name.`
+        }, {
+            name: `'${prefix}abt'`,
+            value: `Type '${prefix}abt' to info about this Guild/Server.`
+        }, {
+            name: `'${prefix}abt <mention users>'`,
+            value: `Type '${prefix}abt <mention users>' to get their info about this guild. Such as- Type '${prefix}abt @Helper @Rifat' to get this bot and Rifat's info. You can add more or less roles and members`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
 

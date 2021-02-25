@@ -1,5 +1,5 @@
 const prefix = process.env.PREFIX;
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 //messageCommands
 //start
 const otfn = require('./messageCommands/otherfunctions.js')
@@ -14,8 +14,8 @@ const kickban = require('./messageCommands/kickban.js')
 const nickname = require('./messageCommands/nickname.js')
 const auto = require('./messageCommands/auto.js')
 const roles = require('./messageCommands/roles.js')
-const memb = require('./messageCommands/member.js')
-
+const member = require('./messageCommands/member.js')
+const abt = require('./messageCommands/about.js')
 
 module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
@@ -51,7 +51,10 @@ module.exports = async function (msg) {
                 roles(msg, tokens)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'mem') {
-                memb(msg, tokens, prefix)
+                member(msg, tokens, prefix)
+                msg.react(otfn.reac())
+            } else if (tokens[0] === 'abt') {
+                abt(msg, tokens);
                 msg.react(otfn.reac())
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
