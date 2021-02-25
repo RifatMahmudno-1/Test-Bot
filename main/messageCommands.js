@@ -14,6 +14,7 @@ const kickban = require('./messageCommands/kickban.js')
 const nickname = require('./messageCommands/nickname.js')
 const auto = require('./messageCommands/auto.js')
 const roles = require('./messageCommands/roles.js')
+const memb = require('./messageCommands/member.js')
 
 
 module.exports = async function (msg) {
@@ -24,7 +25,7 @@ module.exports = async function (msg) {
             //command
             tokens[0] = tokens[0].substring(1)
             if (tokens[0] === 'hi' || tokens[0] === 'hello' || tokens[0] === 'hlw' || tokens[0] === 'Hi' || tokens[0] === 'Hello' || tokens[0] === 'bye' || tokens[0] === 'Goodbye' || tokens[0] === 'GoodBye') {
-                greeting(msg, tokens, otfn)
+                greeting(msg, tokens, prefix, otfn)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'time') {
                 time(msg, tokens, prefix, otfn)
@@ -49,14 +50,8 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'roles') {
                 roles(msg, tokens)
                 msg.react(otfn.reac())
-            } else if (tokens[0] === 'members') {
-                var user = msg.guild.members.cache
-                    .map(r => r);
-                let nameID = [];
-                for (var i = 0; i < user.length; i++) {
-                    nameID.push(`Name: <@${user[i].id}> => ID: ${user[i].id}`)
-                }
-                msg.channel.send(nameID)
+            } else if (tokens[0] === 'mem') {
+                memb(msg, tokens)
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
@@ -82,7 +77,7 @@ module.exports = async function (msg) {
                 msg.channel.send(`You can't use this command here. You can only use gif, help, avt, time command here.`)
                 msg.react(otfn.reac())
             }
-        } else if (tokens[0].slice(0, 1) === prefix && msg.channel.id === '813476929268351007' && !msg.author.bot) {
+        } else if (tokens[0].slice(0, 1) === prefix) {
             tokens[0] = tokens[0].substring(1)
             if (tokens[0] === 'gif') {
                 gif(msg, tokens, fetch)

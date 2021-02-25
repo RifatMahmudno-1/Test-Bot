@@ -4,17 +4,17 @@ const client = new Discord.Client();
 client.login(process.env.TOKEN)
 client.on('ready', readyDiscord)
 
-//const keepalive = require('./keepalive')
+//const keepalive = require('./main/keepalive')
 
 function readyDiscord() {
     console.log('Application has started');
     //keepalive.alive();
 }
-const messageCommands = require('./messageCommands');
+const messageCommands = require('./main/messageCommands');
 client.on('message', messageCommands)
-const welcome = require('./welcome')
+const welcome = require('./main/welcome')
 client.on('guildMemberAdd', welcome)
-const bye = require('./bye')
+const bye = require('./main/bye')
 client.on('guildMemberRemove', bye)
 /*client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.emoji.name === '❌') {
