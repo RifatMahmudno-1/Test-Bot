@@ -60,5 +60,9 @@ module.exports = {
         var rea = ['💖', '❤', '👍', '😊', '👏'];
         let ran = Math.floor(Math.random() * 5)
         return rea[ran];
+    },
+    greew: function () {
+        greetwords = ['hi', 'hello', 'hlw', 'Hi', 'Hello', 'bye', 'Bye', 'Goodbye', 'goodbye', 'GoodBye'];
+        return greetwords;
     }
 }

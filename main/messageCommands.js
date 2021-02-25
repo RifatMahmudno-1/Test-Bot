@@ -16,7 +16,6 @@ const auto = require('./messageCommands/auto.js')
 const roles = require('./messageCommands/roles.js')
 const member = require('./messageCommands/member.js')
 const abt = require('./messageCommands/about.js')
-
 module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
@@ -24,7 +23,7 @@ module.exports = async function (msg) {
         if (tokens[0].slice(0, 1) === prefix) {
             //command
             tokens[0] = tokens[0].substring(1)
-            if (tokens[0] === 'hi' || tokens[0] === 'hello' || tokens[0] === 'hlw' || tokens[0] === 'Hi' || tokens[0] === 'Hello' || tokens[0] === 'bye' || tokens[0] === 'Goodbye' || tokens[0] === 'GoodBye') {
+            if (otfn.greew().includes(tokens[0])) {
                 greeting(msg, tokens, prefix, otfn)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'time') {
@@ -60,7 +59,7 @@ module.exports = async function (msg) {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
         } else {
-            auto(msg, tokens, prefix, otfn, fetch)
+            auto(msg, tokens, prefix, otfn)
         }
     } else if (msg.channel.id === '813476929268351007' && !msg.author.bot) {
         //For DMChannels
