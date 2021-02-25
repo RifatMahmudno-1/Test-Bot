@@ -9,5 +9,7 @@ module.exports = function (msg, tokens, prefix, otfn, fetch) {
         msg.reply(`Please, don't use bad words.`)
     } else if (tokens.includes('like') || tokens.includes('love') || tokens.includes('adore') || tokens.includes('cute')) {
         msg.react(otfn.reac())
+    } else if (message.attachments.size > 0) {
+        msg.react(otfn.reac())
     }
 }
