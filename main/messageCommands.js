@@ -51,7 +51,7 @@ module.exports = async function (msg) {
                 roles(msg, tokens)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'mem') {
-                memb(msg, tokens)
+                memb(msg, tokens, prefix)
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }

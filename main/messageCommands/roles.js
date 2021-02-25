@@ -1,4 +1,4 @@
-module.exports = function (msg, tokens) {
+module.exports = async function (msg, tokens) {
     if (tokens.length == 1) {
         rolemap = msg.guild.roles.cache
             .map(a => a)
@@ -20,6 +20,7 @@ module.exports = function (msg, tokens) {
                 let role = el.id
                 userArray.forEach(function (el) {
                     el.roles.add(role)
+                    msg.channel.send(`I've given <@&${role}> role to <@${el.id}>`)
                 })
             })
         } else {
@@ -33,6 +34,7 @@ module.exports = function (msg, tokens) {
                 let role = el.id
                 userArray.forEach(function (el) {
                     el.roles.remove(role)
+                    msg.channel.send(`I've removed <@&${role}> role from <@${el.id}>`)
                 })
             })
         } else {

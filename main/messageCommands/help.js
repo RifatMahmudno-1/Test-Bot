@@ -6,6 +6,9 @@ module.exports = function (msg, tokens, prefix) {
         .setTitle('Help')
         .setAuthor('My Test', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
         .addFields({
+            name: `'${prefix}help here'`,
+            value: `The bot will send the help text in this channel. If you don't add here then the bot will send help text in you messages.`
+        }, {
             name: `'${prefix}hi', '${prefix}hello, '${prefix}hlw' or 'hi', 'hello, 'hlw'`,
             value: `Get welcome text according to GMT +6`
         }, {
@@ -65,6 +68,15 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}roles remove <mantion roles> ... <mantion members> ...'`,
             value: `Type '${prefix}roles remove <mantion roles> <mantion users>' to give them those roles. Type '${prefix}roles remove @moderator @bot @Rifat @Alex' to give Rifat and Alex the moderator and bot roles. You can add more or less roles and member.`,
+        }, {
+            name: `'${prefix}mem all'`,
+            value: `Type '${prefix}mem all' to get list of all members' name, id and roles.`
+        }, {
+            name: `'${prefix}mem roles'`,
+            value: `Type '${prefix}mem roles' to get list of all members' roles.`
+        }, {
+            name: `'${prefix}mem names'`,
+            value: `Type '${prefix}mem names' to get all members' name.`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
 

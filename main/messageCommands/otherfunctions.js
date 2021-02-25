@@ -57,7 +57,7 @@ module.exports = {
         })
     },
     reac: function () {
-        var rea = ['💖', '❤', '👍', '😊', '🌹'];
+        var rea = ['💖', '❤', '👍', '😊', '👏'];
         let ran = Math.floor(Math.random() * 5)
         return rea[ran];
     }
