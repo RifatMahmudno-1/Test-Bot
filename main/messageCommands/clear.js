@@ -9,12 +9,21 @@ module.exports = async function (msg, tokens) {
         msg.channel.messages.fetch().then(results => {
             msg.channel.bulkDelete(results)
         })
-    } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens.length >= 2) {
+    } else if (tokens[1] >= 2 && tokens[1] <= 10) {
         let xy = parseInt(tokens[1]) + 1
         msg.channel.messages.fetch({
             limit: xy
         }).then(results => {
             msg.channel.bulkDelete(results)
         })
+    } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens[1] > 10) {
+        let xy = parseInt(tokens[1]) + 1
+        msg.channel.messages.fetch({
+            limit: xy
+        }).then(results => {
+            msg.channel.bulkDelete(results)
+        })
+    } else {
+        msg.reply(`I think you don't have permission to delete lot's of messages. Only admins are permitted.`)
     }
 }
