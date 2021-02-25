@@ -52,6 +52,7 @@ module.exports = async function (msg) {
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'mem') {
                 memb(msg, tokens, prefix)
+                msg.react(otfn.reac())
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
@@ -75,7 +76,6 @@ module.exports = async function (msg) {
                 msg.react(otfn.reac())
             } else {
                 msg.channel.send(`You can't use this command here. You can only use gif, help, avt, time command here.`)
-                msg.react(otfn.reac())
             }
         } else if (tokens[0].slice(0, 1) === prefix) {
             tokens[0] = tokens[0].substring(1)
