@@ -1,5 +1,6 @@
 const prefix = process.env.PREFIX;
 const fetch = require('node-fetch');
+const fs = require('fs')
 //messageCommands
 //start
 const otfn = require('./messageCommands/otherfunctions.js')
@@ -16,6 +17,8 @@ const auto = require('./messageCommands/auto.js')
 const roles = require('./messageCommands/roles.js')
 const member = require('./messageCommands/member.js')
 const abt = require('./messageCommands/about.js')
+const count = require("./messageCommands/count.js")
+const counter = require("./messageCommands/counter.json")
 module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
@@ -61,6 +64,8 @@ module.exports = async function (msg) {
         } else {
             auto(msg, tokens, prefix, otfn)
         }
+        //counter
+        count(msg, counter, fs)
     } else if (msg.channel.id === '813476929268351007' && !msg.author.bot) {
         //For DMChannels
         if (tokens[0].slice(0, 1) !== prefix) {
