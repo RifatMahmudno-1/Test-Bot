@@ -13,8 +13,8 @@ module.exports = function (msg, counter, fs) {
         fs.writeFile("./main/messageCommands/counter.json", JSON.stringify(counter, null, 4), err => {
             if (err) throw err;
         })
-        if (Number.isInteger((counter[msg.author.id].count) / 20) == true) {
-            msg.channel.send(`<@${msg.author.id}>, You have reached level ${(counter[msg.author.id].count) / 20}.`)
-        }
     }
+            if (Number.isInteger(Math.cbrt(counter[msg.author.id].count)) == true) {
+            msg.channel.send(`<@${msg.author.id}>, You have reached level ${Math.cbrt(counter[msg.author.id].count)}.`)
+        }
 }
