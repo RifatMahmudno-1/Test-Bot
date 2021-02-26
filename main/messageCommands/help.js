@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 //https://www.codegrepper.com/code-examples/javascript/discord.js+embed+builder
 module.exports = function (msg, tokens, prefix) {
-    const embed = new Discord.MessageEmbed()
+    const embed1 = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Help')
         .setAuthor('My Test', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
@@ -77,28 +77,36 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}mem names'`,
             value: `Type '${prefix}mem names' to get all members' name.`
-        }, {
+        })
+    const embed2 = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .addFields({
             name: `'${prefix}abt'`,
             value: `Type '${prefix}abt' to info about this Guild/Server.`
         }, {
             name: `'${prefix}abt <mention users>'`,
             value: `Type '${prefix}abt <mention users>' to get their info about this guild. Such as- Type '${prefix}abt @Helper @Rifat' to get this bot and Rifat's info. You can add more or less roles and members`
+        }, {
+            name: `'${prefix}rank'`,
+            value: `Type '${prefix}rank' to get info of your total sent messages, level and rank etc.`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
 
         .setDescription('Administrator or specific permissions such as kick, ban, nickname edit, manage roles etc are needed for some functions.')
         .setFooter('Have a nice time');
     if (tokens[1] === 'here') {
-        msg.channel.send(embed)
+        msg.channel.send(embed1)
+        msg.channel.send(embed2)
     } else {
         if (msg.channel.id !== '813476929268351007') {
             msg.reply(`Check. You have received a message from me. Everything is written there.`)
         }
-        msg.author.send(embed);
+        msg.author.send(embed1);
+        msg.author.send(embed2);
     }
 }
 /*msg.channel.send(
-        
+
         `**Type**
             **(1)** '${prefix}hi' or '${prefix}hello' for greetings according to GMT+6
             **(2)** '${prefix}hi <GMT>' or '${prefix}hello <GMT>' for greetings according to provided GMT such as '${prefix}hi +3' '${prefix}hello -5'
@@ -112,10 +120,10 @@ module.exports = function (msg, tokens, prefix) {
             **(10)** if you type '${prefix}cha <channel name> <Your message>' then the bot will send that message to that specific channel. Such as- '${prefix}cha general How are you??' etc..
             **(11)** type '${prefix}kick <reason in one word. For more words join them by hyfen or underscore> <Mention them whom you want to kick>'. Such as-'${prefix}kick for_testing_purpose @Rifat @Anilist Bot @My Test'
             ** (12) ** type '${prefix}ban <reason in one word. For more words join them by hyfen or underscore> <Mention them whom you want to ban>'.Such as - '${prefix}ban for_testing_purpose @Rifat @Anilist Bot @My Test'
-            **(13)** type '${prefix}snick <mention user whose nickname you want to change> <nickname>'. Such as- '${prefix}snick @Rifat admin' or, '${prefix}snick @Rifat admin @My test BOT' etc.. 
+            **(13)** type '${prefix}snick <mention user whose nickname you want to change> <nickname>'. Such as- '${prefix}snick @Rifat admin' or, '${prefix}snick @Rifat admin @My test BOT' etc..
             **(14)**type '${prefix}rnick <mention user which nickname you want to remove>'. Such as- '${prefix}rnick @admin @BOT' etc..
             `
-            
+
     )
     msg.channel.send(`
     **(1) and (2)** also works without '${prefix}'.

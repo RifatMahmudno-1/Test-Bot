@@ -19,9 +19,13 @@ const member = require('./messageCommands/member.js')
 const abt = require('./messageCommands/about.js')
 const count = require("./messageCommands/count.js")
 const counter = require("./messageCommands/counter.json")
+const mrank = require("./messageCommands/mrank.js")
+
 module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
+        //counter
+        count(msg, counter, fs)
         //for Discord Server
         if (tokens[0].slice(0, 1) === prefix) {
             //command
@@ -58,14 +62,15 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'abt') {
                 abt(msg, tokens);
                 msg.react(otfn.reac())
+            } else if (tokens[0] === 'rank') {
+                mrank(msg, counter, tokens)
+                msg.react(otfn.reac())
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
         } else {
             auto(msg, tokens, prefix, otfn)
         }
-        //counter
-        count(msg, counter, fs)
     } else if (msg.channel.id === '813476929268351007' && !msg.author.bot) {
         //For DMChannels
         if (tokens[0].slice(0, 1) !== prefix) {
@@ -73,7 +78,7 @@ module.exports = async function (msg) {
                 gif(msg, tokens, fetch)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'help') {
-                help(msg, prefix)
+                help(msg, tokens, prefix)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'avt') {
                 avtcha(msg, tokens, prefix)
@@ -90,7 +95,7 @@ module.exports = async function (msg) {
                 gif(msg, tokens, fetch)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'help') {
-                help(msg, prefix)
+                help(msg, tokens, prefix)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'avt') {
                 avtcha(msg, tokens, prefix)

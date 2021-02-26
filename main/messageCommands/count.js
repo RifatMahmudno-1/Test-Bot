@@ -14,7 +14,7 @@ module.exports = function (msg, counter, fs) {
             if (err) throw err;
         })
     }
-            if (Number.isInteger(Math.cbrt(counter[msg.author.id].count)) == true) {
-            msg.channel.send(`<@${msg.author.id}>, You have reached level ${Math.cbrt(counter[msg.author.id].count)}.`)
-        }
+    if (Number.isInteger(Math.cbrt(counter[msg.author.id].count)) == true) {
+        msg.channel.send(`<@${msg.author.id}>, You have reached level ${Math.cbrt(counter[msg.author.id].count)}.`)
+    }
 }
