@@ -16,6 +16,7 @@ const welcome = require('./main/welcome')
 client.on('guildMemberAdd', welcome)
 const bye = require('./main/bye')
 client.on('guildMemberRemove', bye)
+client.on('guildMemberRemove', bye)
 
 /*client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.emoji.name === '❌') {
