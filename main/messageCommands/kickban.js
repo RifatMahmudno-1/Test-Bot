@@ -4,7 +4,7 @@ module.exports = function (msg, tokens, prefix) {
             if (tokens.length >= 3) {
                 let userArray = msg.mentions.users.array();
                 userArray.forEach(function (el) {
-                    msg.guild.members.cache.get(el.id).kick()
+                    msg.guild.members.cache.get(el.id).kick({ reason: tokens[1] })
                     msg.channel.send(`${el.username} was kicked from this server successfully ${tokens[1]}.`)
                 })
             } else {
@@ -17,8 +17,10 @@ module.exports = function (msg, tokens, prefix) {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
             if (tokens.length >= 3) {
                 let userArray = msg.mentions.users.array();
+                let Days = 1;
+                if (parseFloat(tokens[3]) == Number) Days = parseFloat(tokens[3])
                 userArray.forEach(function (el) {
-                    msg.guild.members.cache.get(el.id).ban()
+                    msg.guild.members.cache.get(el.id).ban({ days: Days, reason: tokens[1] })
                     msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
                 })
             } else {

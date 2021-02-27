@@ -19,21 +19,32 @@ module.exports = function (msg, tokens, prefix) {
             }
         }
     }
+    function count(aaa) {
+        let math;
+        if (Math.trunc(user.length / aaa) == 0) {
+            math = 1
+        } else {
+            math = Math.trunc(user.length / aaa)
+        }
+        return math
+    }
     const embed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Member Details');
     if (tokens.length == 1) {
-        msg.reply(`Type '${prefix}mem all' to get all members name, id and roles. Type '${prefix}mem names' to get all members 'names. Type '${prefix}mem roles' to get all members roles.`)
-    }
-    if (tokens.includes('all') && user.length <= 100) {
+        msg.reply(`Type '${prefix}mem all' to get all members name, id and roles. Type '${prefix}mem names' to get all members 'names. Type '${prefix}mem roles' to get all members roles. Type '${prefix}mem ids' to get all members ids.`)
+    } else if (tokens.includes('all') && user.length <= 100) {
         let arra = [];
         var abc = user.length;
         let jkl = -1;
-        for (var xyz = 0; xyz < Math.round(user.length / 8); xyz++) {
+        for (var xyz = 0; xyz < count(8); xyz++) {
             if (abc >= 8) {
                 bb = 8
                 arra.push(bb)
                 abc = abc - 8
+                const embed = new Discord.MessageEmbed()
+                    .setColor('#0099ff')
+                    .setTitle('Member Details')
                 for (var sdf = 0; sdf < arra[xyz]; sdf++) {
                     jkl += 1
                     embed.addFields({
@@ -54,6 +65,9 @@ module.exports = function (msg, tokens, prefix) {
             }
             if (abc < 8) {
                 arra.push(abc)
+                const embed = new Discord.MessageEmbed()
+                    .setColor('#0099ff')
+                    .setTitle('Member Details')
                 for (var sdf = 0; sdf < abc; sdf++) {
                     jkl += 1
                     embed.addFields({
@@ -83,7 +97,7 @@ module.exports = function (msg, tokens, prefix) {
         let arra = [];
         var abc = user.length;
         let jkl = -1;
-        for (var xyz = 0; xyz < Math.round(user.length / 8); xyz++) {
+        for (var xyz = 0; xyz < count(8); xyz++) {
             if (abc >= 8) {
                 bb = 8
                 arra.push(bb)
@@ -134,22 +148,86 @@ module.exports = function (msg, tokens, prefix) {
             }
         }
     } else if (tokens.includes('roles') && user.length > 100) {
-        let sendArr = [];
-        for (var i = 0; i < user.length; i++) {
-            sendArr.push(`Member: ${Uname[i]}, Roles: ${Uroles[i]}`)
+        let arra = [];
+        var abc = user.length;
+        let jkl = -1;
+        for (var xyz = 0; xyz < count(20); xyz++) {
+            if (abc >= 20) {
+                bb = 20
+                arra.push(bb)
+                abc = abc - 20
+                let sendArr = [];
+                for (var sdf = 0; sdf < arra[xyz]; sdf++) {
+                    jkl += 1
+                    sendArr.push(`Member: ${Uname[jkl]}, Role: ${Uroles[jkl]}`)
+                }
+                msg.channel.send(sendArr)
+            }
+            if (abc < 20) {
+                arra.push(abc)
+                let sendArr = [];
+                for (var sdf = 0; sdf < abc; sdf++) {
+                    jkl += 1
+                    sendArr.push(`Member: ${Uname[jkl]}, Role: ${Uroles[jkl]}`)
+                }
+                msg.channel.send(sendArr)
+            }
         }
-        msg.channel.send(sendArr)
     } else if (tokens.includes('names')) {
-        let all = Uname.join(', ')
-        msg.channel.send(all)
-    } else if (tokens.includes('ids')) {
-        let sendArr = [];
-        for (var i = 0; i < user.length; i++) {
-            sendArr.push(`Member: ${Uname[i]}=> ID: ${Uid[i]}`)
+        let arra = [];
+        var abc = user.length;
+        let jkl = -1;
+        for (var xyz = 0; xyz < count(100); xyz++) {
+            if (abc >= 100) {
+                bb = 100
+                arra.push(bb)
+                abc = abc - 100
+                let sendArr = [];
+                for (var sdf = 0; sdf < arra[xyz]; sdf++) {
+                    jkl += 1;
+                    sendArr.push(Uname[jkl])
+                }
+                let all = sendArr.join(', ')
+                msg.channel.send(all)
+            }
+            if (abc < 100) {
+                arra.push(abc)
+                let sendArr = [];
+                for (var sdf = 0; sdf < abc; sdf++) {
+                    jkl += 1;
+                    sendArr.push(Uname[jkl])
+                }
+                let all = sendArr.join(', ')
+                msg.channel.send(all)
+            }
         }
-        msg.channel.send(sendArr);
-    } else if (tokens.length >= 2) {
-        `Please type correctly. For help type '${prefix}help'`
+    } else if (tokens.includes('ids')) {
+        let arra = [];
+        var abc = user.length;
+        let jkl = -1;
+        for (var xyz = 0; xyz < count(20); xyz++) {
+            if (abc >= 20) {
+                bb = 20
+                arra.push(bb)
+                abc = abc - 20
+                let sendArr = [];
+                for (var sdf = 0; sdf < arra[xyz]; sdf++) {
+                    jkl += 1
+                    sendArr.push(`Member: ${Uname[jkl]}, ID: ${Uid[jkl]}`)
+                }
+                msg.channel.send(sendArr)
+            }
+            if (abc < 20) {
+                arra.push(abc)
+                let sendArr = [];
+                for (var sdf = 0; sdf < abc; sdf++) {
+                    jkl += 1
+                    sendArr.push(`Member: ${Uname[jkl]}, ID: ${Uid[jkl]}`)
+                }
+                msg.channel.send(sendArr)
+            }
+        }
+    } else {
+        msg.reply(`Please type correctly. For help type '${prefix}help'`)
     }
-
 }

@@ -49,10 +49,10 @@ module.exports = function (msg, tokens, prefix) {
             value: `The bot will send Your message to that specific channel. '${prefix}cha general How are you??' => The bot will send "How are you in general channel"`,
         }, {
             name: `'${prefix}kick <reason> <mention users> ...'`,
-            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}kick for_testing_purpose @Rifat @Bot @Helper'=> The bot will kick Rifat, Bot, Helper for for_testing_purpose. You can add more or less members.`,
+            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}kick for_beaking_rules @Rifat @Bot @Helper'=> The bot will kick Rifat, Bot, Helper for for_beaking_rules. You can add more or less members.`,
         }, {
-            name: `'${prefix}ban <reason> <mention users> ...'`,
-            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}ban for_testing_purpose @Rifat @Bot @Helper'=> The bot will ban Rifat, Bot, Helper for_testing_purpose. You can add more or less members.`,
+            name: `'${prefix}ban <reason> <days> <mention users> ...'`,
+            value: `You must type reason in one word. For more than one words, add them with Underscore or hyfen to make it one. '${prefix}ban for_beaking_rules 3 @Rifat @Bot @Helper'=> The bot will ban Rifat, Bot, Helper for_beaking_rules for 3days. If you don't add days then the bot will ban that member for 1day. You can add more or less members and days.`,
         }, {
             name: `'${prefix}snick <mention> <nickname> <mention> <nickname>...'`,
             value: `You must type each member's nickname in one word. '${prefix}snick @Rifat dev'=> The bot will set Rifat's nickname Devloper. '${prefix}snick @Rifat dev @MBOT helper' => The bot will set Rifat's nickname Devloper and MBOT's nickname helper. You can add nicknames to more or less members.`,
@@ -68,7 +68,10 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}roles remove <mantion roles> ... <mantion members> ...'`,
             value: `Type '${prefix}roles remove <mantion roles> <mantion users>' to give them those roles. Type '${prefix}roles remove @moderator @bot @Rifat @Alex' to give Rifat and Alex the moderator and bot roles. You can add more or less roles and member.`,
-        }, {
+        })
+    const embed2 = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .addFields({
             name: `'${prefix}mem all'`,
             value: `Type '${prefix}mem all' to get list of all members' name, id and roles.`
         }, {
@@ -77,10 +80,10 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}mem names'`,
             value: `Type '${prefix}mem names' to get all members' name.`
-        })
-    const embed2 = new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .addFields({
+        }, {
+            name: `'${prefix}mem ids'`,
+            value: `Type '${prefix}mem ids' to get all members' id.`
+        }, {
             name: `'${prefix}abt'`,
             value: `Type '${prefix}abt' to info about this Guild/Server.`
         }, {
@@ -95,7 +98,6 @@ module.exports = function (msg, tokens, prefix) {
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
 
-        .setDescription('Administrator or specific permissions such as kick, ban, nickname edit, manage roles etc are needed for some functions.')
         .setFooter('Have a nice time');
     if (tokens[1] === 'here') {
         msg.channel.send(embed1)
