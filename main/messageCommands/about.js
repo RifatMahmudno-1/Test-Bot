@@ -70,7 +70,6 @@ module.exports = function (msg, tokens) {
         }
         Gchan = msg.guild.channels.cache.map(a => a.name);
 
-        console.log(Gchan);
         embed.setTitle(`${Gname}'s details:`);
         embed.addFields({
             name: 'Name',

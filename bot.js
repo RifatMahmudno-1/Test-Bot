@@ -5,9 +5,9 @@ client.login(process.env.TOKEN)
 client.on('ready', readyDiscord)
 
 //const keepalive = require('./main/keepalive')
-
 function readyDiscord() {
     console.log('Application has started');
+    client.user.setPresence({ activity: { name: `Help others`, type: 0 } })
     //keepalive.alive();
 }
 const messageCommands = require('./main/messageCommands');
