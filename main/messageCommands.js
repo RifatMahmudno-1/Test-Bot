@@ -20,6 +20,7 @@ const abt = require('./messageCommands/about.js')
 const count = require("./messageCommands/count.js")
 const counter = require("./messageCommands/counter.json")
 const mrank = require("./messageCommands/mrank.js")
+const anilist = require("./messageCommands/anilist.js")
 
 module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
@@ -64,6 +65,9 @@ module.exports = async function (msg) {
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'rank') {
                 mrank(msg, counter, tokens)
+                msg.react(otfn.reac())
+            } else if (otfn.anime().includes(tokens[0])) {
+                anilist(msg, tokens, fetch, prefix)
                 msg.react(otfn.reac())
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)

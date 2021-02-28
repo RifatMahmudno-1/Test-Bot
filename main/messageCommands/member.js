@@ -28,9 +28,6 @@ module.exports = function (msg, tokens, prefix) {
         }
         return math
     }
-    const embed = new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('Member Details');
     if (tokens.length == 1) {
         msg.reply(`Type '${prefix}mem all' to get all members name, id and roles. Type '${prefix}mem names' to get all members 'names. Type '${prefix}mem roles' to get all members roles. Type '${prefix}mem ids' to get all members ids.`)
     } else if (tokens.includes('all') && user.length <= 100) {

@@ -64,5 +64,9 @@ module.exports = {
     greew: function () {
         greetwords = ['hi', 'hello', 'hlw', 'Hi', 'Hello', 'bye', 'Bye', 'Goodbye', 'goodbye', 'GoodBye'];
         return greetwords;
+    },
+    anime: function () {
+        aniwords = ['a', 'anime', 'm', 'manga', 'u', 'user', 'p', 'staff', 'c', 'character']
+        return aniwords;
     }
 }
