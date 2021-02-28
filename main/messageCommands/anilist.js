@@ -25,6 +25,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             siteUrl
             title {
                 romaji
+                english
             }
             coverImage {
                 extraLarge
@@ -33,6 +34,8 @@ module.exports = function (msg, tokens, fetch, prefix) {
             description(asHtml: false)
             averageScore
             genres
+            popularity
+            favourites
         }
     }`;
 
@@ -60,18 +63,28 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 let url = all.siteUrl
                 let cimg = all['coverImage'].extraLarge
                 let tiTle = all['title'].romaji
+                let tiTleE = all['title'].english
                 let sts = all.status;
                 let des = all.description.replace(/<\/?[^>]+(>|$)/g, "");
                 let scr = all.averageScore;
-                let gen = all.genres;
+                let fav = all.favourites; let pop = all.popularity;
+                let gen = all.genres.join(', ');
                 const embed = new Discord.MessageEmbed()
                 embed.setColor('#0099ff')
                 embed.setTitle(tiTle).setURL(url)
                 embed.setDescription(des)
                 embed.setImage(cimg)
                 embed.addFields({
-                    name: `Popularity`,
+                    name: `Avarge Score`,
                     value: `${scr}%`,
+                    inline: true
+                }, {
+                    name: `popularity`,
+                    value: pop,
+                    inline: true
+                }, {
+                    name: `favourites`,
+                    value: fav,
                     inline: true
                 }, {
                     name: `Status`,
@@ -80,6 +93,11 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 }, {
                     name: `Genres`,
                     value: `${gen}`,
+                    inline: true
+                }, {
+                    name: `Titles`,
+                    value: `Romaji- ${tiTle}, 
+                    English- ${tiTleE}`,
                     inline: true
                 })
                 msg.channel.send(embed)
@@ -308,6 +326,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
                     id
                     name
                     siteUrl
+                    favourites
                     media (isMain: true, sort: POPULARITY_DESC, perPage: 15) {
                         nodes {
                             siteUrl
@@ -342,15 +361,17 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 let all = r.data['Studio'];
                 let nAmE = all.name;
                 let url = all.siteUrl;
+                let fav = all.favourites;
                 let aniurl = all['media']['nodes'].map(r => r.siteUrl)
                 let aniname = all['media']['nodes'].map(r => r['title'].romaji)
                 const embed = new Discord.MessageEmbed()
                 embed.setColor('#0099ff')
                 embed.setTitle(`Popular Animes of '${nAmE}' Studio`)
                 for (var i = 0; i < aniname.length; i++) {
-                    embed.addField('\u200B', `[${aniname[i]}](${aniurl[i]})`, true)
+                    embed.addField(aniname[i], `[${aniname[i]}](${aniurl[i]})`, true)
                 }
-                embed.addField(nAmE, url, false)
+                embed.addField(`Favourites`, fav, true)
+                embed.addField(`Studio`, `[${nAmE}](${url})`, true)
                 msg.channel.send(embed)
             })
             .catch(handleError);
