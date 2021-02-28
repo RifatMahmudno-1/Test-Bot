@@ -22,17 +22,17 @@ module.exports = function (msg, tokens, fetch, prefix) {
         var query = `
         query ($search: String, $type: MediaType) {
             Media(search: $search, type: $type, isAdult:false) {
-            id
             siteUrl
             title {
                 romaji
             }
             coverImage {
-                large
+                extraLarge
             }
             status(version:2)
             description(asHtml: false)
             averageScore
+            genres
         }
     }`;
 
@@ -58,17 +58,30 @@ module.exports = function (msg, tokens, fetch, prefix) {
             .then(r => {
                 let all = r.data['Media'];
                 let url = all.siteUrl
-                let cimg = all['coverImage'].large
+                let cimg = all['coverImage'].extraLarge
                 let tiTle = all['title'].romaji
                 let sts = all.status;
                 let des = all.description.replace(/<\/?[^>]+(>|$)/g, "");
                 let scr = all.averageScore;
+                let gen = all.genres;
                 const embed = new Discord.MessageEmbed()
                 embed.setColor('#0099ff')
                 embed.setTitle(tiTle).setURL(url)
                 embed.setDescription(des)
-                embed.setThumbnail(cimg)
-                embed.setFooter(`Popularity: ${scr}%     Status: ${sts.toLowerCase()}`)
+                embed.setImage(cimg)
+                embed.addFields({
+                    name: `Popularity`,
+                    value: `${scr}%`,
+                    inline: true
+                }, {
+                    name: `Status`,
+                    value: `${sts.toLowerCase()}`,
+                    inline: true
+                }, {
+                    name: `Genres`,
+                    value: `${gen}`,
+                    inline: true
+                })
                 msg.channel.send(embed)
             })
             .catch(handleError);
@@ -87,11 +100,10 @@ module.exports = function (msg, tokens, fetch, prefix) {
     }
     function chastf(msg, NaMe, tokens) {
         let aaa;
-        if (tokens[0] === 'c' || tokens[0] === 'cha') { aaa = 'Character' } else if (tokens[0] === 'p' || tokens[0] === 'staff') { aaa = 'Staff' }
+        if (tokens[0] === 'c' || tokens[0] === 'character') { aaa = 'Character' } else if (tokens[0] === 'p' || tokens[0] === 'staff') { aaa = 'Staff' }
         var query =
             `query ($search: String) {
             ${aaa}(search: $search) {
-                id
                 siteUrl
                 name {
                     first
@@ -100,6 +112,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 image {
                     large
                 }
+                favourites
                 description(asHtml: false)
             }
         }`;
@@ -130,12 +143,14 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 let name1 = all['name'].first
                 let name2 = all['name'].last
                 let des = all.description;
+                let fav = all.favourites
                 if (name2 === null) { name12 = `${name1}` } else { name12 = `${name1} ${name2}` }
                 const embed = new Discord.MessageEmbed()
                 embed.setColor('#0099ff')
                 embed.setTitle(name12).setURL(url)
                 embed.setDescription(des)
-                embed.setThumbnail(img)
+                embed.setImage(img)
+                embed.addField('Favourites', `${fav}`)
                 msg.channel.send(embed)
             })
             .catch(handleError);
@@ -155,25 +170,29 @@ module.exports = function (msg, tokens, fetch, prefix) {
     }
     function user(msg, NaMe) {
         var query = `
-        query ($search: String) {
-            User(name: $search) {
-                id
-                name
-                siteUrl
-                avatar {
-                    large
-                }
-                about (asHtml: false),
-                statistics {
-                    anime {
-                        minutesWatched
+                    query ($search: String) {
+                    User(name: $search) {
+                        name
+                        siteUrl
+                        avatar {
+                        large
+                        }
+                        about(asHtml: false)
+                        statistics {
+                        anime {
+                            minutesWatched
+                            meanScore
+                            episodesWatched
+                            count
+                        }
+                        manga {
+                            chaptersRead
+                            meanScore
+                            count
+                        }
+                        }
                     }
-                    manga {
-                        chaptersRead
                     }
-                }
-            }
-        }
         `;
 
         var variables = {
@@ -205,13 +224,13 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 } else {
                     desp = all.about.replace(/[\\~]/g, '').split(' ')
                     des = [];
-                    if (desp.length >= 100) {
-                        for (var i = 0; i < 100; i++) {
+                    if (desp.length >= 80) {
+                        for (var i = 0; i < 80; i++) {
                             des.push(desp[i])
                         }
                         des.push('... ... ...')
                         des = des.join(' ')
-                    } else if (desp.length < 100) {
+                    } else if (desp.length < 80) {
                         for (var i = 0; i < desp.length; i++) {
                             des.push(desp[i])
                         }
@@ -220,19 +239,53 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 }
                 let stat = all['statistics']
                 let ani = stat['anime'].minutesWatched
-                let man = stat['manga'].chaptersRead
+                let ascr = stat['anime'].meanScore
+                let aepi = stat['anime'].episodesWatched
+                let acount = stat['anime'].count;
+                let man = stat['manga'].chaptersRead;
+                let mscr = stat['manga'].meanScore;
+                let mcount = stat['manga'].count;
                 const embed = new Discord.MessageEmbed()
                 embed.setColor('#0099ff')
                 embed.setTitle(Name).setURL(url)
                 embed.setDescription(des)
-                embed.setThumbnail(img)
+                embed.setImage(img)
                 embed.addFields({
                     name: `Anime Watched:`,
-                    value: `${ani} hours`,
+                    value: `${Math.round(ani / 60)} hours`,
                     inline: true
                 }, {
+                    name: `Episode Watched:`,
+                    value: `${aepi}`,
+                    inline: true
+                }, {
+                    name: `Mean Score:`,
+                    value: `${ascr}`,
+                    inline: true
+                }, {
+                    name: `Title watched`,
+                    value: `${acount}`,
+                    inline: true
+                }, {
+                    name: `\u200B`,
+                    value: '\u200B',
+                    inline: true
+                }, {
+                    name: `\u200B`,
+                    value: '\u200B',
+                    inline: true
+                })
+                embed.addFields({
                     name: `Manga Read:`,
                     value: `${man} chapters`,
+                    inline: true
+                }, {
+                    name: `Title Read:`,
+                    value: `${mcount}`,
+                    inline: true
+                }, {
+                    name: `Mean Score:`,
+                    value: `${mscr}`,
                     inline: true
                 })
                 msg.channel.send(embed)
@@ -247,9 +300,5 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 return response.ok ? json : Promise.reject(json);
             });
         }
-        /*
-        function handleData(data) {
-            console.log([data].media);
-        }*/
     }
 }
