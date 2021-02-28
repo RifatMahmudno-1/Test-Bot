@@ -350,7 +350,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 for (var i = 0; i < aniname.length; i++) {
                     embed.addField('\u200B', `[${aniname[i]}](${aniurl[i]})`, true)
                 }
-                embed.addField(`${nAmE}`, `[${nAmE}](${url})`, false)
+                embed.addField(nAmE, url, false)
                 msg.channel.send(embed)
             })
             .catch(handleError);
