@@ -66,7 +66,7 @@ module.exports = {
         return greetwords;
     },
     anime: function () {
-        aniwords = ['a', 'anime', 'm', 'manga', 'u', 'user', 'p', 'staff', 'c', 'character']
+        aniwords = ['a', 'anime', 'm', 'manga', 'u', 'user', 'p', 'staff', 'c', 'character', 'std', 'studio']
         return aniwords;
     }
 }

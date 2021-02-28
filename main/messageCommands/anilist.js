@@ -1,20 +1,20 @@
 const Discord = require('discord.js');
 module.exports = function (msg, tokens, fetch, prefix) {
-    if (tokens.length >= 2 && tokens[0] === 'a' || tokens[0] === 'anime' && tokens.length >= 2) {
+    if (tokens.length >= 2) {
         let NaMe = tokens.slice(1, tokens.length).join(' ')
-        maan(msg, 'ANIME', NaMe)
-    } else if (tokens.length >= 2 && tokens[0] === 'm' || tokens[0] === 'manga' && tokens.length >= 2) {
-        let NaMe = tokens.slice(1, tokens.length).join(' ')
-        maan(msg, 'MANGA', NaMe)
-    } else if (tokens.length >= 2 && tokens[0] === 'c' || tokens[0] === 'character' && tokens.length >= 2) {
-        let NaMe = tokens.slice(1, tokens.length).join(' ')
-        chastf(msg, NaMe, tokens)
-    } else if (tokens.length >= 2 && tokens[0] === 'u' || tokens[0] === 'user' && tokens.length >= 2) {
-        let NaMe = tokens.slice(1, tokens.length).join(' ')
-        user(msg, NaMe)
-    } else if (tokens.length >= 2 && tokens[0] === 'p' || tokens[0] === 'staff' && tokens.length >= 2) {
-        let NaMe = tokens.slice(1, tokens.length).join(' ')
-        chastf(msg, NaMe, tokens)
+        if (tokens[0] === 'a' || tokens[0] === 'anime') {
+            maan(msg, 'ANIME', NaMe)
+        } else if (tokens[0] === 'm' || tokens[0] === 'manga') {
+            maan(msg, 'MANGA', NaMe)
+        } else if (tokens[0] === 'c' || tokens[0] === 'character') {
+            chastf(msg, NaMe, tokens)
+        } else if (tokens[0] === 'u' || tokens[0] === 'user') {
+            user(msg, NaMe)
+        } else if (tokens[0] === 'p' || tokens[0] === 'staff') {
+            chastf(msg, NaMe, tokens)
+        } else if (tokens[0] === 'std' || tokens[0] === 'studio') {
+            std(msg, NaMe)
+        }
     } else {
         msg.channel.send(`Please type correctly. For help type '${prefix}help'`)
     }
@@ -86,7 +86,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             })
             .catch(handleError);
         function handleError() {
-            msg.channel.send(`Not found. Try to seach clearly. For help type '${prefix}help'`)
+            msg.channel.send(`Not found. Try not to make any spelling mistakes and type clearly. For help type '${prefix}help'`)
         }
         function handleResponse(response) {
             return response.json().then(function (json) {
@@ -155,7 +155,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             })
             .catch(handleError);
         function handleError() {
-            msg.channel.send(`Not found. Try to seach clearly. For help type '${prefix}help'`)
+            msg.channel.send(`Not found. Try not to make any spelling mistakes and type clearly. For help type '${prefix}help'`)
         }
 
         function handleResponse(response) {
@@ -292,7 +292,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             })
             .catch(handleError);
         function handleError() {
-            msg.channel.send(`Not found. Try to seach clearly. For help type '${prefix}help'`)
+            msg.channel.send(`Not found. Try not to make any spelling mistakes and type clearly. For help type '${prefix}help'`)
         }
 
         function handleResponse(response) {
@@ -300,5 +300,72 @@ module.exports = function (msg, tokens, fetch, prefix) {
                 return response.ok ? json : Promise.reject(json);
             });
         }
+    }
+    function std(msg, NaMe) {
+        var query =
+            `query ($search: String) {
+                Studio(search: $search) {
+                    id
+                    name
+                    siteUrl
+                    media (isMain: true, sort: POPULARITY_DESC, perPage: 15) {
+                        nodes {
+                            siteUrl
+                            title {
+                                romaji
+                            }
+                        }
+                    }
+                }
+            }
+            `;
+
+        var variables = {
+            search: NaMe
+        };
+
+        var url = 'https://graphql.anilist.co',
+            options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: query,
+                    variables: variables
+                })
+            };
+
+        fetch(url, options).then(handleResponse)
+            .then(r => {
+                let all = r.data['Studio'];
+                let nAmE = all.name;
+                let url = all.siteUrl;
+                let aniurl = all['media']['nodes'].map(r => r.siteUrl)
+                let aniname = all['media']['nodes'].map(r => r['title'].romaji)
+                const embed = new Discord.MessageEmbed()
+                embed.setColor('#0099ff')
+                embed.setTitle(`Popular Animes of '${nAmE}' Studio`)
+                for (var i = 0; i < aniname.length; i++) {
+                    embed.addField('\u200B', `[${aniname[i]}](${aniurl[i]})`, true)
+                }
+                embed.addField(`${nAmE}`, `[${nAmE}](${url})`, false)
+                msg.channel.send(embed)
+            })
+            .catch(handleError);
+        function handleError() {
+            msg.channel.send(`Not found. Try not to make any spelling mistakes and type clearly. For help type '${prefix}help'`)
+        }
+
+        function handleResponse(response) {
+            return response.json().then(function (json) {
+                return response.ok ? json : Promise.reject(json);
+            });
+        }
+        /*
+        function handleData(data) {
+            console.log([data].media);
+        }*/
     }
 }
