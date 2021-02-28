@@ -99,10 +99,10 @@ module.exports = function (msg, tokens, prefix) {
             name: `'${prefix}a' or '${prefix}anime'`,
             value: `Type '${prefix}a' or '${prefix}anime' to get info of that anime from Anilist. Such as=> ${prefix}anime Death Note'`
         }, {
-            name: `'${prefix}a' or '${prefix}anime'`,
+            name: `'${prefix}m' or '${prefix}manga'`,
             value: `Type '${prefix}m' or '${prefix}manga' to get info of that mange from Anilist. Such as=> ${prefix}manga Death Note'`
         }, {
-            name: `'${prefix}a' or '${prefix}anime'`,
+            name: `'${prefix}c' or '${prefix}character'`,
             value: `Type '${prefix}c' or '${prefix}character' to get info of that character from Anilist. Such as=> ${prefix}c Aqua'`
         }, {
             name: `'${prefix}u' or '${prefix}user'`,
