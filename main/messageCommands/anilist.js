@@ -73,7 +73,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             })
             .catch(handleError);
         function handleError() {
-            msg.channel.send(`Not found. Try to seach clearly.`)
+            msg.channel.send(`Not found. Try to seach clearly. For help type '${prefix}help'`)
         }
         function handleResponse(response) {
             return response.json().then(function (json) {
@@ -140,7 +140,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             })
             .catch(handleError);
         function handleError() {
-            msg.channel.send(`Not found. Try to seach clearly.`)
+            msg.channel.send(`Not found. Try to seach clearly. For help type '${prefix}help'`)
         }
 
         function handleResponse(response) {
@@ -239,7 +239,7 @@ module.exports = function (msg, tokens, fetch, prefix) {
             })
             .catch(handleError);
         function handleError() {
-            msg.channel.send(`Not found. Try to seach clearly.`)
+            msg.channel.send(`Not found. Try to seach clearly. For help type '${prefix}help'`)
         }
 
         function handleResponse(response) {
