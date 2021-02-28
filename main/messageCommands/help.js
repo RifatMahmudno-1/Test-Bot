@@ -110,6 +110,9 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}p' or '${prefix}staff'`,
             value: `Type '${prefix}c' or '${prefix}character' to get info of that person from Anilist. Such as=> ${prefix} Hiroshi Kamiya'`
+        }, {
+            name: `'${prefix}std' or '${prefix}studio'`,
+            value: `Type '${prefix}std' or '${prefix}studio' to get most popular 15 animes of that studio. Such as=> ${prefix} MAPPA'`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
 
