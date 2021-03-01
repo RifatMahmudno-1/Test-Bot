@@ -7,6 +7,7 @@ module.exports = function (msg, tokens, prefix) {
                     msg.guild.members.cache.get(el.id).kick({ reason: tokens[1] })
                     msg.channel.send(`${el.username} was kicked from this server successfully ${tokens[1]}.`)
                 })
+                msg.channel.send(`If anyone wasn't kicked that means I don't have permission to kick him.`)
             } else {
                 msg.reply(`Type correctly. For help type '${prefix}help'`)
             }
@@ -23,6 +24,7 @@ module.exports = function (msg, tokens, prefix) {
                     msg.guild.members.cache.get(el.id).ban({ days: Days, reason: tokens[1] })
                     msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
                 })
+                msg.channel.send(`If anyone wasn't banned that means I don't have permission to kick him.`)
             } else {
                 msg.reply(`Type correctly. For help type '${prefix}help'`)
             }
