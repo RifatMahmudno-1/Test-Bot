@@ -7,5 +7,5 @@ module.exports = async function (msg, tokens, fetch) {
     let response = await fetch(url);
     let json = await response.json();
     const index = Math.floor(Math.random() * json.results.length)
-    msg.reply(json.results[index].url);
+    msg.reply(json.results[index].url).then(r => r.react('❌'));
 }
