@@ -16,7 +16,7 @@ module.exports = async function (msg, tokens) {
         }).then(results => {
             msg.channel.bulkDelete(results)
         })
-    } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens[1] > 5) {
+    } else if (msg.member.hasPermission('ADMINISTRATOR') && tokens[1] > 5 && tokens[1] <= 80) {
         let xy = parseInt(tokens[1]) + 1
         msg.channel.messages.fetch({
             limit: xy

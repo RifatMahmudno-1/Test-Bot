@@ -5,9 +5,16 @@ module.exports = function (msg, tokens, prefix) {
                 let userArray = msg.mentions.users.array();
                 userArray.forEach(function (el) {
                     msg.guild.members.cache.get(el.id).kick({ reason: tokens[1] })
-                    msg.channel.send(`${el.username} was kicked from this server successfully ${tokens[1]}.`)
+                        .then(handleResponse)
+                        .catch(handleError);
+                    function handleError() {
+                        msg.channel.send(`I don't have permission to kick ${el.username}.`)
+                    }
+
+                    function handleResponse() {
+                        msg.channel.send(`${el.username} was kicked from this server successfully ${tokens[1]}.`)
+                    }
                 })
-                msg.channel.send(`If anyone wasn't kicked that means I don't have permission to kick him.`)
             } else {
                 msg.reply(`Type correctly. For help type '${prefix}help'`)
             }
@@ -22,9 +29,15 @@ module.exports = function (msg, tokens, prefix) {
                 if (parseFloat(tokens[3]) == Number) Days = parseFloat(tokens[3])
                 userArray.forEach(function (el) {
                     msg.guild.members.cache.get(el.id).ban({ days: Days, reason: tokens[1] })
-                    msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
+                        .then(handleResponse)
+                        .catch(handleError);
+                    function handleError() {
+                        msg.channel.send(`I don't have permission to ban ${el.username}.`)
+                    }
+                    function handleResponse() {
+                        msg.channel.send(`${el.username} was banned from this server successfully ${tokens[1]}.`)
+                    }
                 })
-                msg.channel.send(`If anyone wasn't banned that means I don't have permission to kick him.`)
             } else {
                 msg.reply(`Type correctly. For help type '${prefix}help'`)
             }

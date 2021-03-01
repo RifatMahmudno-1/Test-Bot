@@ -31,7 +31,7 @@ module.exports = function (msg, tokens, prefix) {
             value: `'${prefix}clear' to delete previous message.`,
         }, {
             name: `'${prefix}clear <how many>'`,
-            value: `'${prefix}'${prefix}clear <number but must be less than 100>'. '${prefix}clear 50' to delete pevious 50 messages.`,
+            value: `'${prefix}'${prefix}clear <number but must be less than 80>'. '${prefix}clear 50' to delete pevious 50 messages.`,
         }, {
             name: `'${prefix}clear all'`,
             value: `Delete previous several messages.`,
