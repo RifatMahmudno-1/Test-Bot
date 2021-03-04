@@ -3,8 +3,8 @@ module.exports = function (msg, tokens, prefix, otfn) {
         otfn.del(msg);
         let aa = tokens.slice(1, tokens.length).join(' ')
         let user = msg.member.id
-        msg.channel.send(`<@${user}> said,
-        "${aa}"`)
+        msg.channel.send(`"${aa}" 
+        --by <@${user}>`)
     } else {
         msg.reply(`Type correctly. For help type '${prefix}help'`)
     }

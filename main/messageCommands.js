@@ -53,7 +53,7 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'kick' || tokens[0] === 'ban') {
                 kickban(msg, tokens, prefix)
             } else if (tokens[0] === 'snick' || tokens[0] === 'rnick') {
-                nickname(msg, tokens)
+                nickname(msg, tokens, pefix)
             } else if (tokens[0] === 'roles') {
                 roles(msg, tokens)
                 msg.react(otfn.reac())
