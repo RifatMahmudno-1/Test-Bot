@@ -22,6 +22,8 @@ const counter = require("./messageCommands/counter.json")
 const mrank = require("./messageCommands/mrank.js")
 const anilist = require("./messageCommands/anilist.js")
 const meme = require('./messageCommands/meme.js')
+const googleimage = require('./messageCommands/googleimage.js')
+
 
 module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
@@ -72,6 +74,8 @@ module.exports = async function (msg) {
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
                 meme(msg, tokens, prefix, fetch)
+            } else if (tokens[0] === 'gimg') {
+                googleimage(msg, tokens)
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
@@ -93,8 +97,12 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'time') {
                 time(msg, tokens, prefix, otfn)
                 msg.react(otfn.reac())
+            } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
+                meme(msg, tokens, prefix, fetch)
+            } else if (tokens[0] === 'gimg') {
+                googleimage(msg, tokens)
             } else {
-                msg.channel.send(`You can't use this command here. You can only use gif, help, avt, time command here.`)
+                msg.channel.send(`You can't use this command here. You can only use gif, help, avt, gimg, meme, wallpaper, time command here.`)
             }
         } else if (tokens[0].slice(0, 1) === prefix) {
             tokens[0] = tokens[0].substring(1)
@@ -110,9 +118,12 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'time') {
                 time(msg, tokens, prefix, otfn)
                 msg.react(otfn.reac())
+            } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
+                meme(msg, tokens, prefix, fetch)
+            } else if (tokens[0] === 'gimg') {
+                googleimage(msg, tokens)
             } else {
-                msg.channel.send(`You can't use this command here. You can only use '${prefix}gif', '${prefix}help', '${prefix}avt', '${prefix}time' command here.`)
-                msg.react(otfn.reac())
+                msg.channel.send(`You can't use this command here. You can only use '${prefix}gif', '${prefix}help', '${prefix}avt', '${prefix}time', '${prefix}gimg', '${prefix}meme', '${prefix}'wallpaper command here.`)
             }
         }
     }

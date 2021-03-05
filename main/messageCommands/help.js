@@ -122,6 +122,9 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}wallpaper'`,
             value: `Type '${prefix}wallpaper' to get a wallpaper from reddit.`
+        }, {
+            name: `'${prefix}gimg <search>'`,
+            value: `Type '${prefix}gimg' to get first google image from that search and send it. such as- '${prefix}gimg cat' to get a image of cat.`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
         .addField('Reaction info', 'In those messages where bot has reacted ❌, there if you click on that reaction and increase the number then the message will be deleted. After 8second the bot will auto remove that emoji.', false)
