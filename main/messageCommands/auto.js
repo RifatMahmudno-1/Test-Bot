@@ -17,5 +17,5 @@ module.exports = function (msg, tokens, prefix, otfn) {
         msg.react(otfn.reac())
     } else if (msg.embeds[0] && emtypes.includes(msg.embeds[0].type)) {
         msg.react(otfn.reac())
-    } else {}
+    }
 }
