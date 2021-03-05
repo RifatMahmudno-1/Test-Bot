@@ -1,7 +1,9 @@
 //https://github.com/jimkang/g-i-s
 //https://www.npmjs.com/package/google-images
+require('dotenv').config();
+
 const GoogleImages = require('google-images');
-const google = new GoogleImages('0833af6984d7e4422', 'AIzaSyB3nVCwDDSA9Fm-e7u-oG_KmSmqAg6arrM');
+const google = new GoogleImages(`${process.env.GOOGLEID}`, `${process.env.GOOGLEAPI}`);
 module.exports = function (msg, tokens, prefix) {
     if (tokens.length > 1) {
         let keywords = tokens.slice(1, tokens.length).join(' ')
