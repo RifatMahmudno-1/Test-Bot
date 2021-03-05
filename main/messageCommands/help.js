@@ -128,6 +128,7 @@ module.exports = function (msg, tokens, prefix) {
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
         .addField('Reaction info', 'In those messages where bot has reacted ❌, there if you click on that reaction and increase the number then the message will be deleted. After 8second the bot will auto remove that emoji.', false)
+        .addField('Add this bot in your server', `[Click and authorize pemission to add this bot in your server](https://discord.com/api/oauth2/authorize?client_id=812537560030117928&permissions=8&scope=bot)`, false)
 
         .setFooter('Have a nice time');
     if (tokens[1] === 'here') {
