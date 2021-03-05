@@ -75,7 +75,8 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
                 meme(msg, tokens, prefix, fetch)
             } else if (tokens[0] === 'gimg') {
-                googleimage(msg, tokens)
+                googleimage(msg, tokens, prefix)
+                msg.react(otfn.reac())
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
@@ -100,7 +101,7 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
                 meme(msg, tokens, prefix, fetch)
             } else if (tokens[0] === 'gimg') {
-                googleimage(msg, tokens)
+                googleimage(msg, tokens, prefix)
             } else {
                 msg.channel.send(`You can't use this command here. You can only use gif, help, avt, gimg, meme, wallpaper, time command here.`)
             }
@@ -121,7 +122,7 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
                 meme(msg, tokens, prefix, fetch)
             } else if (tokens[0] === 'gimg') {
-                googleimage(msg, tokens)
+                googleimage(msg, tokens, prefix)
             } else {
                 msg.channel.send(`You can't use this command here. You can only use '${prefix}gif', '${prefix}help', '${prefix}avt', '${prefix}time', '${prefix}gimg', '${prefix}meme', '${prefix}'wallpaper command here.`)
             }

@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const redditImageFetcher = require('reddit-image-fetcher')
 module.exports = function (msg, tokens, prefix) {
     if (tokens[0] === 'meme') {
@@ -19,9 +18,7 @@ module.exports = function (msg, tokens, prefix) {
                 addSubreddit: bbb
             })
             .then(result => {
-                const atta = new Discord.MessageAttachment()
-                    .setFile(result[0].image)
-                msg.channel.send(result[0].title, atta).then(r => r.react(ccc))
+                msg.channel.send(result[0].title).then(msg.channel.send(result[0].image).then(r => r.react(ccc)))
             }).catch(() => {
                 msg.channel.send(`Failed to load. Plz try again.`).then(r => r.react('😭'))
             })
