@@ -113,6 +113,15 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}std' or '${prefix}studio'`,
             value: `Type '${prefix}std' or '${prefix}studio' to get most popular 15 animes of that studio. Such as=> ${prefix}std MAPPA'`
+        }, {
+            name: `'${prefix}meme'`,
+            value: `Type '${prefix}meme'to get a meme from reddit.`
+        }, {
+            name: `'${prefix}meme anime'`,
+            value: `Type '${prefix}meme anime' to get a anime meme from reddit.`
+        }, {
+            name: `'${prefix}wallpaper'`,
+            value: `Type '${prefix}wallpaper' to get a wallpaper from reddit.`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
         .addField('Reaction info', 'In those messages where bot has reacted ❌, there if you click on that reaction and increase the number then the message will be deleted. After 8second the bot will auto remove that emoji.', false)
