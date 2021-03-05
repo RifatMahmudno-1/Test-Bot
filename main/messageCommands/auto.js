@@ -1,6 +1,6 @@
 const greeting = require('./greeting.js')
+const badwords=require('./badwords.js')
 let emtypes = ['rich', 'image', 'video', 'gifv', 'article', 'link']
-let badwords = ['sex', 'fuck', 'fucking', 'sexy', 'sucking', 'suck', 'horny', 'fuckoff', 'fuckup', 'dick', 'ass']
 module.exports = function (msg, tokens, prefix, otfn) {
     if (otfn.greew().includes(tokens[0])) {
         greeting(msg, tokens, prefix, otfn)
