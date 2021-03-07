@@ -58,7 +58,7 @@ module.exports = async function (msg) {
             } else if (tokens[0] === 'snick' || tokens[0] === 'rnick') {
                 nickname(msg, tokens, pefix)
             } else if (tokens[0] === 'roles') {
-                roles(msg, tokens)
+                roles(msg, tokens, prefix)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'mem') {
                 member(msg, tokens, prefix)

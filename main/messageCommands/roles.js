@@ -1,4 +1,4 @@
-module.exports = async function (msg, tokens) {
+module.exports = async function (msg, tokens, prefix) {
     if (tokens.length == 1) {
         rolemap = msg.guild.roles.cache
             .map(a => a)
@@ -16,13 +16,22 @@ module.exports = async function (msg, tokens) {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('MANAGE_ROLES')) {
             let roleArray = msg.mentions.roles.array();
             let userArray = msg.mentions.members.array();
-            roleArray.forEach(function (el) {
-                let role = el.id
-                userArray.forEach(function (el) {
-                    el.roles.add(role)
-                    msg.channel.send(`I've given <@&${role}> role to <@${el.id}>`)
+            if (roleArray.length !== 0 && userArray.length !== 0) {
+                roleArray.forEach(function (el) {
+                    let role = el.id
+                    userArray.forEach(function (el) {
+                        el.roles.add(role)
+                            .then(function () {
+                                msg.channel.send(`I've given <@&${role}> role to <@${el.id}>`)
+                            })
+                            .catch(function () {
+                                msg.reply(`I don't have permission to give <@&${role}> role to <@${el.id}>.`)
+                            })
+                    })
                 })
-            })
+            } else {
+                msg.reply(`Make sure to mention the roles and members whom you want to give those roles.`)
+            }
         } else {
             msg.reply(`You don't have permission to add, remove or give roles.`)
         }
@@ -30,13 +39,22 @@ module.exports = async function (msg, tokens) {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('MANAGE_ROLES')) {
             let roleArray = msg.mentions.roles.array();
             let userArray = msg.mentions.members.array();
-            roleArray.forEach(function (el) {
-                let role = el.id
-                userArray.forEach(function (el) {
-                    el.roles.remove(role)
-                    msg.channel.send(`I've removed <@&${role}> role from <@${el.id}>`)
+            if (roleArray.length !== 0 && userArray.length !== 0) {
+                roleArray.forEach(function (el) {
+                    let role = el.id
+                    userArray.forEach(function (el) {
+                        el.roles.remove(role)
+                            .then(function () {
+                                msg.channel.send(`I've removed <@&${role}> role from <@${el.id}>`)
+                            })
+                            .catch(function () {
+                                msg.reply(`I don't have permission to remove <@&${role}> role from <@${el.id}>.`)
+                            })
+                    })
                 })
-            })
+            } else {
+                msg.reply(`Make sure to mention the roles and members from whom you want to remove those roles.`)
+            }
         } else {
             msg.reply(`You don't have permission to add, remove or give roles.`)
         }
