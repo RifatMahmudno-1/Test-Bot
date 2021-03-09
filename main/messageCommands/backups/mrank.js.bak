@@ -1,42 +1,32 @@
 const Discord = require('discord.js');
 module.exports = async function (msg, counter, tokens) {
-    let guild = `${msg.guild.name} --> ${msg.guild.id}`
-
     function rank(aa) {
         let user = aa.id
-        //------------------
-        function allmem(aa) {
-            return counter[guild].filter(obj => {
-                return (obj.user === aa)
-            })
-        }
-        var already = allmem(user)
-        var ccc = counter[guild].indexOf(already[0])
-        //----------------------
-        if (counter[guild][ccc] !== undefined) {
-            let total = counter[guild][ccc].count;
-            let nextlvl = Math.ceil(Math.cbrt(counter[guild][ccc].count))
-            let nowlvl = Math.trunc(Math.cbrt(counter[guild][ccc].count))
+        if (counter[user].count !== undefined) {
+            let total = counter[user].count;
+            let nextlvl = Math.ceil(Math.cbrt(counter[user].count))
+            let nowlvl = Math.trunc(Math.cbrt(counter[user].count))
             let req = Math.pow(nextlvl, 3);
             let reqnx = req - total;
             let percent = Math.trunc(total * 100 / req) + '%';
 
             function rraa() {
+                var mem = msg.guild.members.cache.map(r => r.id)
                 let sortmem = [];
                 let rankpos = [];
-                for (var i = 0; i < counter[guild].length; i++) {
-                    //mem.push(counter[guild][i].user)
-                    sortmem.push(counter[guild][i].count)
+                for (var i = 0; i < mem.length; i++) {
+                    if (counter[mem[i]] !== undefined) {
+                        sortmem.push(counter[mem[i]].count)
+                        sortmem = sortmem.sort((a, b) => b - a);
+                    }
                 }
-                sortmem = sortmem.sort((a, b) => b - a);
                 for (var i = 0; i < sortmem.length; i++) {
                     if (nowlvl == Math.trunc(Math.cbrt(sortmem[i]))) {
                         rankpos.push(Math.cbrt(sortmem[i]))
                     }
                 }
-                return [rankpos.indexOf(Math.cbrt(counter[guild][ccc].count)) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length];
+                return [rankpos.indexOf(Math.cbrt(counter[user].count)) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length];
             }
-
             const Embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle(`Level:${nowlvl},    Rank:${rraa()[0]}`)
@@ -78,7 +68,7 @@ module.exports = async function (msg, counter, tokens) {
                 .setDescription('Counting was started from 26-Feb-2021')
             msg.channel.send(Embed)
         } else {
-            msg.channel.send(`<@${user}> hasn't send a single message since 26-Feb-2021 in any of the servers where I'm added.`)
+            msg.channel.send(`@<${user}> hasn't send a single message since 26-Feb-2021 in any of the servers where I'm added.`)
         }
     }
     if (tokens.length == 1) {
