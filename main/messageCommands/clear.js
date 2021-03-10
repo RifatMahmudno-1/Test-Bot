@@ -9,7 +9,7 @@ module.exports = async function (msg, tokens) {
         msg.channel.messages.fetch().then(results => {
             msg.channel.bulkDelete(results)
         })
-    } else if (tokens[1] >= 2 && tokens[1] <= 5) {
+    } else if (tokens[1] >= 1 && tokens[1] <= 5) {
         let xy = parseInt(tokens[1]) + 1
         msg.channel.messages.fetch({
             limit: xy
@@ -23,7 +23,9 @@ module.exports = async function (msg, tokens) {
         }).then(results => {
             msg.channel.bulkDelete(results)
         })
-    } else {
-        msg.reply(`I think you don't have permission to delete lot's of messages. Only admins are permitted.`)
+    } else if(msg.member.hasPermission('ADMINISTRATOR') && tokens[1] > 5 && tokens[1] > 80) {
+        msg.reply(`You can only delete maximum of 80 messages at once.`)
+    }else{
+      msg.reply(`I think you don't have permission to delete lot's of messages. Only admins are permitted.`)
     }
 }

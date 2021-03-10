@@ -17,15 +17,19 @@ module.exports = async function (msg, counter, tokens) {
             let total = counter[guild][ccc].count;
             let nextlvl = Math.ceil(Math.cbrt(counter[guild][ccc].count))
             let nowlvl = Math.trunc(Math.cbrt(counter[guild][ccc].count))
+            let nowlvlms = Math.pow(nowlvl, 3);
             let req = Math.pow(nextlvl, 3);
+            let nextlvlms = req - nowlvlms
             let reqnx = req - total;
-            let percent = Math.trunc(total * 100 / req) + '%';
+            let percent = Math.trunc((total - nowlvlms) * 100 / nextlvlms);
+            if(isNaN(percent)==true){
+              percent=100;
+            }
 
             function rraa() {
                 let sortmem = [];
                 let rankpos = [];
                 for (var i = 0; i < counter[guild].length; i++) {
-                    //mem.push(counter[guild][i].user)
                     sortmem.push(counter[guild][i].count)
                 }
                 sortmem = sortmem.sort((a, b) => b - a);
@@ -63,7 +67,7 @@ module.exports = async function (msg, counter, tokens) {
                     inline: true
                 }, {
                     name: 'Your progress',
-                    value: percent,
+                    value: percent+'%',
                     inline: true
                 }, {
                     name: 'Your rank',
