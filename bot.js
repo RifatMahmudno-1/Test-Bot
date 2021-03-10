@@ -13,7 +13,7 @@ function readyDiscord() {
             type: 0
         }
     })
-    keepalive.alive();
+    keepalive();
 }
 const messageCommands = require('./main/messageCommands');
 client.on('message', messageCommands)
