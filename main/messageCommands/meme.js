@@ -2,7 +2,7 @@ const redditImageFetcher = require('reddit-image-fetcher')
 module.exports = function (msg, tokens, prefix) {
     if (tokens[0] === 'meme') {
         if (tokens.length == 1) {
-            sendd('meme', [], '😂')
+            sendd('meme', ['memes','funny'], '😂')
         } else if (tokens.length == 2 && tokens[1] == 'anime') {
             sendd('custom', ['Animemes', 'animememes'], '😂')
         } else {
