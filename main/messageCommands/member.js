@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-module.exports = function (msg, tokens, prefix) {
+module.exports = function (msg, tokens, prefix, Discord) {
     var user = msg.guild.members.cache
         .map(r => r);
     let Uname = [];

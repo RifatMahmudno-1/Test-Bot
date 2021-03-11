@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-module.exports = async function (msg, counter, tokens) {
+module.exports = async function (msg, counter, tokens, Discord) {
     let guild = `${msg.guild.name} --> ${msg.guild.id}`
 
     function rank(aa) {
@@ -22,8 +21,8 @@ module.exports = async function (msg, counter, tokens) {
             let nextlvlms = req - nowlvlms
             let reqnx = req - total;
             let percent = Math.trunc((total - nowlvlms) * 100 / nextlvlms);
-            if(isNaN(percent)==true){
-              percent=100;
+            if (isNaN(percent) == true) {
+                percent = 100;
             }
 
             function rraa() {
@@ -67,7 +66,7 @@ module.exports = async function (msg, counter, tokens) {
                     inline: true
                 }, {
                     name: 'Your progress',
-                    value: percent+'%',
+                    value: percent + '%',
                     inline: true
                 }, {
                     name: 'Your rank',

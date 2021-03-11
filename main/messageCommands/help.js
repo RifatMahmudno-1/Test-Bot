@@ -1,6 +1,5 @@
-const Discord = require('discord.js');
 //https://www.codegrepper.com/code-examples/javascript/discord.js+embed+builder
-module.exports = function (msg, tokens, prefix) {
+module.exports = function (msg, tokens, prefix, Discord) {
     const embed1 = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Help')
@@ -125,8 +124,11 @@ module.exports = function (msg, tokens, prefix) {
         }, {
             name: `'${prefix}gimg <search>'`,
             value: `Type '${prefix}gimg' to get first google image from that search and send it. such as- '${prefix}gimg cat' to get a image of cat.`
+        }, {
+            name: `'${prefix}quote;`,
+            value: `Type '${prefix}quote' to get a random quote.`
         })
-        .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages', false)
+        .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye or any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages. Bot will automatic send quotes and wishes.', false)
         .addField('Reaction info', 'In those messages where bot has reacted ❌, there if you click on that reaction and increase the number then the message will be deleted. After 8second the bot will auto remove that emoji.', false)
         .addField('Add this bot in your server', `[Click and authorize pemission to add this bot in your server](https://discord.com/api/oauth2/authorize?client_id=812537560030117928&permissions=8&scope=bot)`, false)
 

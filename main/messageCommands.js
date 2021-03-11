@@ -1,6 +1,7 @@
 const prefix = process.env.PREFIX;
 const fetch = require('node-fetch');
 const fs = require('fs')
+const Discord = require('discord.js');
 //messageCommands
 //start
 const otfn = require('./messageCommands/otherfunctions.js')
@@ -23,6 +24,7 @@ const mrank = require("./messageCommands/mrank.js")
 const anilist = require("./messageCommands/anilist.js")
 const meme = require('./messageCommands/meme.js')
 const googleimage = require('./messageCommands/googleimage.js')
+const quote = require('./messageCommands/quote.js')
 
 
 module.exports = async function (msg) {
@@ -44,7 +46,7 @@ module.exports = async function (msg) {
                 gif(msg, tokens, fetch)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'help') {
-                help(msg, tokens, prefix)
+                help(msg, tokens, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'clear') {
                 clear(msg, tokens)
@@ -61,22 +63,24 @@ module.exports = async function (msg) {
                 roles(msg, tokens, prefix)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'mem') {
-                member(msg, tokens, prefix)
+                member(msg, tokens, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'abt') {
-                abt(msg, tokens);
+                abt(msg, tokens, Discord);
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'rank') {
-                mrank(msg, counter, tokens)
+                mrank(msg, counter, tokens, Discord)
                 msg.react(otfn.reac())
             } else if (otfn.anime().includes(tokens[0])) {
-                anilist(msg, tokens, fetch, prefix)
+                anilist(msg, tokens, fetch, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
                 meme(msg, tokens, prefix, fetch)
             } else if (tokens[0] === 'gimg') {
                 googleimage(msg, tokens, prefix)
                 msg.react(otfn.reac())
+            } else if (tokens[0] === 'quote') {
+                quote(fetch, Discord, msg.channel)
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
@@ -90,7 +94,7 @@ module.exports = async function (msg) {
                 gif(msg, tokens, fetch)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'help') {
-                help(msg, tokens, prefix)
+                help(msg, tokens, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'avt') {
                 avtcha(msg, tokens, prefix)
@@ -111,7 +115,7 @@ module.exports = async function (msg) {
                 gif(msg, tokens, fetch)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'help') {
-                help(msg, tokens, prefix)
+                help(msg, tokens, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'avt') {
                 avtcha(msg, tokens, prefix)

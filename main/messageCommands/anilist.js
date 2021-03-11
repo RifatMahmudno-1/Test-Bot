@@ -1,9 +1,8 @@
-const Discord = require('discord.js');
 const maan = require('./anilist/manani.js');
 const uSEr = require('./anilist/user.js');
 const chastuf = require('./anilist/chastuf.js');
 const std = require('./anilist/studio.js')
-module.exports = function (msg, tokens, fetch, prefix) {
+module.exports = function (msg, tokens, fetch, prefix, Discord) {
     if (tokens.length >= 2) {
         let NaMe = tokens.slice(1, tokens.length).join(' ')
         if (tokens[0] === 'a' || tokens[0] === 'anime') {

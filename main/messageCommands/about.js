@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-module.exports = function (msg, tokens) {
+module.exports = function (msg, tokens, Discord) {
     let userArray = msg.mentions.users.array();
     if (userArray.length >= 1) {
         userArray.forEach(function (el) {
