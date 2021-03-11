@@ -21,13 +21,13 @@ module.exports = function (auto, Discord) {
         guilds.forEach(function (el) {
             var aaa = el.channels.cache.find(i => i.type === `text`);
             if (Time() + 6 == 8) {
-                aaa.send(`Good Morning, @everyone. Hope you will have a great day.`)
+                aaa.send(`Good Morning, everyone. Hope you will have a great day.`)
             } else if (Time() + 6 == 16) {
-                aaa.send(`Good Afternoon, <@everyone>.`)
+                aaa.send(`Good Afternoon, everyone.`)
             } else if (Time() + 6 == 18) {
-                aaa.send(`Good Evening, <@everyone>.`)
+                aaa.send(`Good Evening, everyone.`)
             } else if (Time() + 6 == 23) {
-                aaa.send(`Good night, <@everyone>. Now, stop scrolling the internet and go to bed.`)
+                aaa.send(`Good night, everyone. Now, stop scrolling the internet and go to bed.`)
             }
         })
     }
