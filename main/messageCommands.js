@@ -25,6 +25,7 @@ const anilist = require("./messageCommands/anilist.js")
 const reddit = require('./messageCommands/reddit.js')
 const googleimage = require('./messageCommands/googleimage.js')
 const quote = require('./messageCommands/quote.js')
+const slowM = require('./messageCommands/slowM.js')
 
 
 module.exports = async function (msg) {
@@ -76,11 +77,16 @@ module.exports = async function (msg) {
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'rd') {
                 reddit(msg, tokens, prefix, Discord)
+                msg.react(otfn.reac())
             } else if (tokens[0] === 'gimg') {
                 googleimage(msg, tokens, prefix)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'quote') {
                 quote(fetch, Discord, msg.channel)
+                msg.react(otfn.reac())
+            } else if (tokens[0] === 'slow') {
+                slowM(msg, tokens, prefix)
+                msg.react(otfn.reac())
             } else {
                 msg.reply(`If you want me to help you with anything then type correctly. For help type ${prefix}help`)
             }
