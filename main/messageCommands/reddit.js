@@ -1,7 +1,6 @@
 const redditFetch = require('reddit-fetch');
 module.exports = function (msg, tokens, prefix, Discord) {
-  function Supermain(){
-const embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
     if (tokens[1] === 'meme') {
         main(['funny', 'memes', 'wholesomememes', 'dankmemes', 'MemeEconomy', 'teenagers', 'AdviceAnimals'], '😂');
     } else if (tokens[1] === 'showerthoughts' || tokens[1] === 'thought') {
@@ -47,12 +46,10 @@ const embed = new Discord.MessageEmbed()
                 ${SubRe}`)
                 msg.channel.send(embed).then(r => r.react(em))
             } else {
-                console.log('sorry');
-                Supermain();
+                msg.reply(`Failed to load. Plz try again.`).then(r => r.react('😭'))
             }
         }).catch(() => {
             msg.channel.send(`Failed to load. Some errors may have occured. Plz try again.`).then(r => r.react('😭'))
         });
     }
-  }Supermain()
 }
