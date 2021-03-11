@@ -15,6 +15,6 @@
     "google-images": "^2.1.0",
     "http": "0.0.1-security",
     "node-fetch": "^2.6.1",
-    "reddit-image-fetcher": "^2.0.6"
+    "reddit-fetch": "^1.5.1"
   }
 }

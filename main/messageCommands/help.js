@@ -114,13 +114,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
             value: `Type '${prefix}std' or '${prefix}studio' to get most popular 15 animes of that studio. Such as=> ${prefix}std MAPPA'`
         }, {
             name: `'${prefix}meme'`,
-            value: `Type '${prefix}meme'to get a meme from reddit.`
-        }, {
-            name: `'${prefix}meme anime'`,
-            value: `Type '${prefix}meme anime' to get a anime meme from reddit.`
-        }, {
-            name: `'${prefix}wallpaper'`,
-            value: `Type '${prefix}wallpaper' to get a wallpaper from reddit.`
+            value: `Type '${prefix}rd meme'to get a meme from reddit. Type '${prefix}rd anime' to get a meme on anime from reddit. Type '${prefix}wallpaper' to get a wallpaper from reddit. Type '${prefix}rd thought' to get random person's thought from reddit.`
         }, {
             name: `'${prefix}gimg <search>'`,
             value: `Type '${prefix}gimg' to get first google image from that search and send it. such as- '${prefix}gimg cat' to get a image of cat.`

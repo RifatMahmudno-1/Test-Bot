@@ -22,7 +22,7 @@ const count = require("./messageCommands/count.js")
 const counter = require("./messageCommands/counter.json")
 const mrank = require("./messageCommands/mrank.js")
 const anilist = require("./messageCommands/anilist.js")
-const meme = require('./messageCommands/meme.js')
+const reddit = require('./messageCommands/reddit.js')
 const googleimage = require('./messageCommands/googleimage.js')
 const quote = require('./messageCommands/quote.js')
 
@@ -74,8 +74,8 @@ module.exports = async function (msg) {
             } else if (otfn.anime().includes(tokens[0])) {
                 anilist(msg, tokens, fetch, prefix, Discord)
                 msg.react(otfn.reac())
-            } else if (tokens[0] === 'meme' || tokens[0] === 'wallpaper') {
-                meme(msg, tokens, prefix, fetch)
+            } else if (tokens[0] === 'rd') {
+                reddit(msg, tokens, prefix, Discord)
             } else if (tokens[0] === 'gimg') {
                 googleimage(msg, tokens, prefix)
                 msg.react(otfn.reac())
