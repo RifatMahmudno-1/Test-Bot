@@ -25,6 +25,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
             allowVideo: false
         }).then(post => {
             Url = post.url;
+            Author = post.author;
             Title = post.title;
             Ups = post.ups;
             Downs = post.downs;
@@ -39,7 +40,8 @@ module.exports = function (msg, tokens, prefix, Discord) {
                 msg.channel.send(embed).then(r => r.react(em))
             } else if (post.is_reddit_media_domain == false) {
                 Color == true ? embed.setColor(Color) : embed.setColor('#0099ff')
-                if (Title) embed.setTitle(Title)
+                if (Title) embed.setTitle(`${Title}.  
+                --${Author}`)
                 embed.setFooter(`Ups👍: ${Ups} -- Downs👎:${Downs}
                 ${SubRe}`)
                 msg.channel.send(embed).then(r => r.react(em))
