@@ -15,10 +15,15 @@ module.exports = function (msg, tokens, prefix, Discord) {
         return aa[Math.floor(Math.random() * aa.length)]
     }
 
+    function hottop() {
+        aa = ['hot', 'top']
+        return aa[Math.floor(Math.random() * aa.length)]
+    }
+
     function main(xx, em) {
         redditFetch({
             subreddit: subre(xx),
-            sort: 'hot',
+            sort: hottop(),
             allowNSFW: true,
             allowModPost: false,
             allowCrossPost: true,
