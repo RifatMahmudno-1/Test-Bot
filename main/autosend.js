@@ -34,13 +34,11 @@ module.exports = function (auto, Discord) {
         })
     }
 
-    //call immediately
-    Quote(guilds);
-    Greeting(guilds);
-
     //interval 1 minute
     let minINT = setInterval(() => {
         if (Time()[1] >= 5) {
+            Quote(guilds);
+            Greeting(guilds);
             hourINT(); //start hourINT
             clearInterval(minINT) //clear minINT
         }
