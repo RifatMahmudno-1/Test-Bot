@@ -28,7 +28,7 @@ module.exports = function (auto, Discord) {
                 aaa.send(`Good Afternoon, everyone.`)
             } else if (Time()[0] + 6 == 18) {
                 aaa.send(`Good Evening, everyone.`)
-            } else if (Time()[0] + 6 == 0) {
+            } else if (Time()[0] + 6 == 24) {
                 aaa.send(`Good night, everyone. Now, stop scrolling the internet and go to bed. Don't worry. I'll stay awake on yout behalf for this server's safety.`).then(r => r.react('😁'))
             }
         })
