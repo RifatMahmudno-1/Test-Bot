@@ -38,7 +38,7 @@ module.exports = function (msg, counter, fs) {
                 count: num
             }
             counter[guild].push(bbb)
-            fs.writeFile('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
+            fs.writFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
                 if (err) throw err;
             })
         } else {
@@ -48,7 +48,7 @@ module.exports = function (msg, counter, fs) {
                 name: userName,
                 count: num + 1
             }
-            fs.writeFile('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
+            fs.writFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
                 if (err) throw err;
             })
         }
