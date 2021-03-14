@@ -88,13 +88,15 @@ module.exports = function (msg, tokens, prefix, Discord) {
         }, {
             name: `'${prefix}abt <mention users>'`,
             value: `Type '${prefix}abt <mention users>' to get their info about this guild. Such as- Type '${prefix}abt @Helper @Rifat' to get this bot and Rifat's info. You can add more or less roles and members`
-        }, {
+        }, 
+        /*{
             name: `'${prefix}rank'`,
             value: `Type '${prefix}rank' to get info about your total sent messages, level and rank etc.`
         }, {
             name: `'${prefix}rank <mention users...>'`,
             value: `Type '${prefix}rank and mention users' to get info about their total sent messages, level and rank etc. such as=> '${prefix}rank @Rifat @Tasfin @Galib'`
-        }, {
+        },*/
+        {
             name: `'${prefix}a' or '${prefix}anime'`,
             value: `Type '${prefix}a' or '${prefix}anime' to get info of that anime from Anilist. Such as=> ${prefix}anime Death Note'`
         }, {
