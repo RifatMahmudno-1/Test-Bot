@@ -9,7 +9,7 @@ module.exports = function (msg, counter, fs) {
             name: userName,
             count: 1
         }]
-        fs.writeFile('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
+        fs.writFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
             if (err) throw err;
         })
         var already = counter[guild].filter(obj => {
