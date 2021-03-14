@@ -25,7 +25,7 @@ client.on('guildMemberAdd', welcome)
 const bye = require('./main/bye')
 client.on('guildMemberRemove', bye)
 client.on("error", () => {
-    client.login(token)
+    client.login(process.env.TOKEN)
 });
 const reactionAdd = require('./main/reaction')
 client.on('messageReactionAdd', reactionAdd)
