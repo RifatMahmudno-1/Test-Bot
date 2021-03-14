@@ -9,7 +9,7 @@ module.exports = function (msg, counter, fs) {
             name: userName,
             count: 1
         }]
-        fs.writFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
+        fs.writeFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
             if (err) throw err;
         })
         var already = counter[guild].filter(obj => {
@@ -38,7 +38,7 @@ module.exports = function (msg, counter, fs) {
                 count: num
             }
             counter[guild].push(bbb)
-            fs.writFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
+            fs.writeFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
                 if (err) throw err;
             })
         } else {
@@ -48,7 +48,7 @@ module.exports = function (msg, counter, fs) {
                 name: userName,
                 count: num + 1
             }
-            fs.writFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
+            fs.writeFileSync('./main/messageCommands/counter.json', JSON.stringify(counter, null, 4), err => {
                 if (err) throw err;
             })
         }
