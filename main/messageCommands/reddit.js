@@ -2,7 +2,7 @@ const redditFetch = require('reddit-fetch');
 module.exports = function (msg, tokens, prefix, Discord) {
     const embed = new Discord.MessageEmbed()
     if (tokens[1] === 'meme') {
-        main(['funny', 'memes', 'wholesomememes', 'dankmemes', 'MemeEconomy', 'teenagers', 'AdviceAnimals'], '😂');
+        main(['funny', 'memes', 'wholesomememes', 'dankmemes', 'teenagers', 'AdviceAnimals'], '😂');
     } else if (tokens[1] === 'showerthoughts' || tokens[1] === 'thought') {
         main(['Showerthoughts'], '🤔');
     } else if (tokens[1] === 'anime') {
@@ -43,7 +43,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
                 ${SubRe}`)
                 if (Url) embed.setImage(Url)
                 msg.channel.send(embed).then(r => r.react(em))
-            } else if (Url.slice(-3) !== 'jpg' || Url.slice(-3) !== 'png' || Url.slice(-3) !== 'gif' || Url.slice(-4) !== 'jpeg' || Url.slice(-4) !== 'webp' /*post.is_reddit_media_domain == false*/) {
+            } else if (post.is_reddit_media_domain == false) {
                 Color == true ? embed.setColor(Color) : embed.setColor('#0099ff')
                 if (Title) embed.setTitle(`${Title}.  
                 --${Author}`)
