@@ -36,7 +36,7 @@ module.exports = function (auto, Discord) {
 
     //interval 1 minute
     let minINT = setInterval(() => {
-        if (Time()[1] >= 3 && Time()[1] <= 20) {
+        if (Time()[1] >= 2 && Time()[1] <= 20) {
             Quote(guilds);
             Greeting(guilds);
             hourINT(); //start hourINT

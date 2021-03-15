@@ -1,6 +1,6 @@
 const prefix = process.env.PREFIX;
 const fetch = require('node-fetch');
-//const fs = require('fs')
+const fs = require('fs')
 const Discord = require('discord.js');
 //messageCommands
 //start
@@ -18,9 +18,9 @@ const auto = require('./messageCommands/auto.js')
 const roles = require('./messageCommands/roles.js')
 const member = require('./messageCommands/member.js')
 const abt = require('./messageCommands/about.js')
-/*const count = require("./messageCommands/count.js")
+const count = require("./messageCommands/count.js")
 const counter = require("./messageCommands/counter.json")
-const mrank = require("./messageCommands/mrank.js")*/
+const mrank = require("./messageCommands/mrank.js")
 const anilist = require("./messageCommands/anilist.js")
 const reddit = require('./messageCommands/reddit.js')
 const googleimage = require('./messageCommands/googleimage.js')
@@ -32,7 +32,7 @@ module.exports = async function (msg) {
     let tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
         //counter
-        //count(msg, counter, fs)
+        if(msg.author.id==='715938370840166433')count(msg, counter, fs)
         //for Discord Server
         if (tokens[0].slice(0, 1) === prefix) {
             //command
@@ -70,10 +70,10 @@ module.exports = async function (msg) {
                 abt(msg, tokens, Discord);
                 msg.react(otfn.reac())
             }
-            /*else if (tokens[0] === 'rank') {
+            else if (tokens[0] === 'rank' && msg.author.id==='715938370840166433') {
                 mrank(msg, counter, tokens, Discord)
                 msg.react(otfn.reac())
-            }*/
+            }
             else if (otfn.anime().includes(tokens[0])) {
                 anilist(msg, tokens, fetch, prefix, Discord)
                 msg.react(otfn.reac())
