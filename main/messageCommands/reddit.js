@@ -43,7 +43,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
                 ${SubRe}`)
                 if (Url) embed.setImage(Url)
                 msg.channel.send(embed).then(r => r.react(em))
-            } else if (post.is_reddit_media_domain == false) {
+            } else if (Url.slice(-3) !== 'jpg' || Url.slice(-3) !== 'png' || Url.slice(-3) !== 'gif' || Url.slice(-4) !== 'jpeg' || Url.slice(-4) !== 'webp' /*post.is_reddit_media_domain == false*/) {
                 Color == true ? embed.setColor(Color) : embed.setColor('#0099ff')
                 if (Title) embed.setTitle(`${Title}.  
                 --${Author}`)
