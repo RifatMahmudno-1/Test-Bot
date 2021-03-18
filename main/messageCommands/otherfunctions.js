@@ -62,7 +62,7 @@ module.exports = {
         return rea[ran];
     },
     greew: function () {
-        greetwords = ['hi', 'hello', 'hlw', 'Hi', 'Hello', 'bye', 'Bye', 'Goodbye', 'goodbye', 'GoodBye'];
+        greetwords = ['hi', 'hello', 'hlw', 'bye', 'goodbye'];
         return greetwords;
     },
     anime: function () {

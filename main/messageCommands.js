@@ -29,7 +29,8 @@ const slowM = require('./messageCommands/slowM.js')
 
 
 module.exports = async function (msg) {
-    let tokens = msg.content.split(' ');
+    let tokens = msg.content.toLowerCase()
+    tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
         //counter
         //count(msg, counter, fs)

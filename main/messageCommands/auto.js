@@ -2,7 +2,7 @@ const greeting = require('./greeting.js')
 const badwords = require('./badwords.js')
 let emtypes = ['rich', 'image', 'video', 'gifv', 'article', 'link']
 module.exports = function (msg, tokens, prefix, otfn) {
-    var keywords = tokens.join(' ').toLowerCase()
+    var keywords = tokens.join(' ')
     keywords = keywords.split(' ');
 
     if (otfn.greew().includes(tokens[0])) {
