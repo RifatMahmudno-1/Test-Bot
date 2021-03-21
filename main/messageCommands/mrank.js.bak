@@ -1,4 +1,4 @@
-module.exports = async function (msg, counter, tokens, Discord) {
+module.exports = async function (msg, counter, tokens, Discord, lvl) {
     let guild = `${msg.guild.name} --> ${msg.guild.id}`
 
     function rank(aa) {
@@ -13,11 +13,12 @@ module.exports = async function (msg, counter, tokens, Discord) {
         var ccc = counter[guild].indexOf(already[0])
         //----------------------
         if (counter[guild][ccc] !== undefined) {
+            let Invpow = Math.pow(counter[guild][ccc].count, 1 / lvl)
             let total = counter[guild][ccc].count;
-            let nextlvl = Math.ceil(Math.cbrt(counter[guild][ccc].count))
-            let nowlvl = Math.trunc(Math.cbrt(counter[guild][ccc].count))
-            let nowlvlms = Math.pow(nowlvl, 3);
-            let req = Math.pow(nextlvl, 3);
+            let nextlvl = Math.ceil(Invpow)
+            let nowlvl = Math.trunc(Invpow)
+            let nowlvlms = Math.pow(nowlvl, lvl);
+            let req = Math.pow(nextlvl, lvl);
             let nextlvlms = req - nowlvlms
             let reqnx = req - total;
             let percent = Math.trunc((total - nowlvlms) * 100 / nextlvlms);
@@ -33,11 +34,11 @@ module.exports = async function (msg, counter, tokens, Discord) {
                 }
                 sortmem = sortmem.sort((a, b) => b - a);
                 for (var i = 0; i < sortmem.length; i++) {
-                    if (nowlvl == Math.trunc(Math.cbrt(sortmem[i]))) {
-                        rankpos.push(Math.cbrt(sortmem[i]))
+                    if (nowlvl == Math.trunc(Math.pow(sortmem[i], 1 / lvl))) {
+                        rankpos.push(Math.pow(sortmem[i], 1 / lvl))
                     }
                 }
-                return [rankpos.indexOf(Math.cbrt(counter[guild][ccc].count)) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length];
+                return [rankpos.indexOf(Math.pow(counter[guild][ccc].count, 1 / lvl)) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length];
             }
 
             const Embed = new Discord.MessageEmbed()
@@ -92,5 +93,4 @@ module.exports = async function (msg, counter, tokens, Discord) {
             rank(el)
         })
     }
-
 }

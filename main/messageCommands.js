@@ -33,7 +33,7 @@ module.exports = async function (msg) {
     //tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
         //counter
-        //count(msg, counter, fs)
+        //count(msg, counter, fs, 2)
         //for Discord Server
         if (tokens[0].slice(0, 1) === prefix) {
             //command
@@ -72,7 +72,7 @@ module.exports = async function (msg) {
                 msg.react(otfn.reac())
             }
             /*else if (tokens[0] === 'rank') {
-                mrank(msg, counter, tokens, Discord)
+                mrank(msg, counter, tokens, Discord, 2)
                 msg.react(otfn.reac())
             }*/
             else if (otfn.anime().includes(tokens[0])) {
