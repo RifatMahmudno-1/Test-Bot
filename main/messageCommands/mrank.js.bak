@@ -13,7 +13,7 @@ module.exports = async function (msg, counter, tokens, Discord, lvl) {
         var ccc = counter[guild].indexOf(already[0])
         //----------------------
         if (counter[guild][ccc] !== undefined) {
-            let Invpow = Math.pow(counter[guild][ccc].count, 1 / lvl)
+            let Invpow = Math.fround(Math.pow(counter[guild][ccc].count, 1 / lvl))
             let total = counter[guild][ccc].count;
             let nextlvl = Math.ceil(Invpow)
             let nowlvl = Math.trunc(Invpow)
@@ -35,10 +35,10 @@ module.exports = async function (msg, counter, tokens, Discord, lvl) {
                 sortmem = sortmem.sort((a, b) => b - a);
                 for (var i = 0; i < sortmem.length; i++) {
                     if (nowlvl == Math.trunc(Math.pow(sortmem[i], 1 / lvl))) {
-                        rankpos.push(Math.pow(sortmem[i], 1 / lvl))
+                        rankpos.push(Math.fround(Math.pow(sortmem[i], 1 / lvl)))
                     }
                 }
-                return [rankpos.indexOf(Math.pow(counter[guild][ccc].count, 1 / lvl)) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length];
+                return [rankpos.indexOf(Math.fround(Math.pow(counter[guild][ccc].count, 1 / lvl))) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length];
             }
 
             const Embed = new Discord.MessageEmbed()

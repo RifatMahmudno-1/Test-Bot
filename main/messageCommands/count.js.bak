@@ -16,49 +16,34 @@ module.exports = function (msg, counter, fs, lvl) {
             count: 1
         }]
         FsW(counter)
-        var already = counter[guild].filter(obj => {
-            return (obj.user === user)
-        })
-        UserC = already[0].count
+        UserC = 1;
     } else {
         var already = counter[guild].filter(obj => {
             return (obj.user === user)
         })
-
-        function haha() {
-            var aaa
-            if (already.length == 0 || already == undefined) {
-                aaa = 1
-            } else {
-                aaa = already[0].count
-            }
-            return aaa
-        }
-        var num = haha();
-        if (already.length == 0) {
+        if (already.length == 0 || already == undefined) {
             var bbb = {
                 user: user,
                 name: userName,
-                count: num
+                count: 1
             }
             counter[guild].push(bbb)
             FsW(counter)
+            UserC = 1;
         } else {
             var ccc = counter[guild].indexOf(already[0])
             counter[guild][ccc] = {
                 user: user,
                 name: userName,
-                count: num + 1
+                count: already[0].count + 1
             }
             FsW(counter)
+            UserC = already[0].count + 1
         }
-        already = counter[guild].filter(obj => {
-            return (obj.user === user)
-        })
-        UserC = already[0].count
     }
-    if (Number.isInteger(Math.pow(UserC, 1 / lvl)) == true) {
-        msg.channel.send(`<@${user}>, You have reached level ${Math.pow(UserC, 1/lvl)}.`)
+    let abc = Math.fround(Math.pow(UserC, 1 / lvl))
+    if (Number.isInteger(abc) == true) {
+        msg.channel.send(`<@${user}>, You have reached level ${abc}.`)
     }
 }
 /*
