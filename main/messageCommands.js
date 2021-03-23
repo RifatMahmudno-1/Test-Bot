@@ -1,7 +1,5 @@
 const prefix = process.env.PREFIX;
 const fetch = require('node-fetch');
-//const fs = require('fs')
-const Discord = require('discord.js');
 //messageCommands
 //start
 const otfn = require('./messageCommands/otherfunctions.js')
@@ -18,20 +16,30 @@ const auto = require('./messageCommands/auto.js')
 const roles = require('./messageCommands/roles.js')
 const member = require('./messageCommands/member.js')
 const abt = require('./messageCommands/about.js')
-//const count = require("./messageCommands/count.js")
-//const counter = require("./messageCommands/counter.json")
-//const mrank = require("./messageCommands/mrank.js")
+/*
+//for internal  db
+const fs = require('fs')
+const count = require("./messageCommands/count.js")
+const counter = require("./messageCommands/counter.json")
+const mrank = require("./messageCommands/mrank.js")
+*/
+//for external database
+const count = require('./messageCommands/CountDB/count.js')
+const mrank = require('./messageCommands/CountDB/mrank.js')
+//end
 const anilist = require("./messageCommands/anilist.js")
 const reddit = require('./messageCommands/reddit.js')
 const googleimage = require('./messageCommands/googleimage.js')
 const quote = require('./messageCommands/quote.js')
 const slowM = require('./messageCommands/slowM.js')
 
-
-module.exports = async function (msg) {
+module.exports = async function (msg, mongoose, Discord) {
     let tokens = msg.content.toLowerCase().split(' ')
     //tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
+
+        count(msg, mongoose, 3)
+
         //counter
         //count(msg, counter, fs, 2)
         //for Discord Server
@@ -75,7 +83,10 @@ module.exports = async function (msg) {
                 mrank(msg, counter, tokens, Discord, 2)
                 msg.react(otfn.reac())
             }*/
-            else if (otfn.anime().includes(tokens[0])) {
+            else if (tokens[0] === 'rank') {
+                mrank(msg, mongoose, tokens, Discord, 3)
+                msg.react(otfn.reac())
+            } else if (otfn.anime().includes(tokens[0])) {
                 anilist(msg, tokens, fetch, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'rd') {

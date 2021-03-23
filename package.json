@@ -13,6 +13,7 @@
     "dotenv": "^8.2.0",
     "google-images": "^2.1.0",
     "http": "0.0.1-security",
+    "mongoose": "^5.12.2",
     "node-fetch": "^2.6.1",
     "reddit-fetch": "^1.5.1"
   }
