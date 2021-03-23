@@ -81,8 +81,13 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                         inline: true
                     })
                     .setTimestamp()
-                    .setDescription('Counting was started from 01-March-2021')
-                msg.channel.send(Embed)
+                    .setDescription('Counting was started from 01-March-2021');
+                if(other[0]===0){
+                  msg.reply(`Too much load. Plz try again to get <@${User}>'s rank.`).then(r => r.react('😥'))
+                }else{
+                  msg.channel.send(Embed)
+                }
+                
             } else {
                 msg.channel.send(`<@${User}> hasn't sent a single message in this server since March 1st, 2021.`)
             }
