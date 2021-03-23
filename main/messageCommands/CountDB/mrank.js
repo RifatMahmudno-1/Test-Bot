@@ -29,6 +29,7 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                 }
 
                 function rraa() {
+                    let aaa=total;
                     let sortmem = []; //big-small
                     let rankpos = [];
                     for (var i = 0; i < allUser.length; i++) {
@@ -40,7 +41,10 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                             rankpos.push(Math.fround(Math.pow(sortmem[i], 1 / lvl)))
                         }
                     }
-                    return [rankpos.indexOf(Math.fround(Math.pow(total, 1 / lvl))) + 1, rankpos.length, sortmem.indexOf(total) + 1, sortmem.length]
+                    if(sortmem.indexOf(aaa)=== -1){
+                      aaa=aaa-1;
+                    }
+                    return [rankpos.indexOf(Math.fround(Math.pow(aaa, 1 / lvl))) + 1, rankpos.length, sortmem.indexOf(aaa) + 1, sortmem.length]
                 }
                 let other = rraa()
                 const Embed = new Discord.MessageEmbed()
@@ -82,12 +86,7 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                     })
                     .setTimestamp()
                     .setDescription('Counting was started from 01-March-2021');
-                if(other[0]===0){
-                  msg.reply(`Database error. Plz try again to get <@${User}>'s rank.`).then(r => r.react('😥'))
-                }else{
-                  msg.channel.send(Embed)
-                }
-                
+                msg.channel.send(Embed)  
             } else {
                 msg.channel.send(`<@${User}> hasn't sent a single message in this server since March 1st, 2021.`)
             }
