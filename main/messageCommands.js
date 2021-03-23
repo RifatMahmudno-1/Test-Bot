@@ -37,11 +37,11 @@ module.exports = async function (msg, mongoose, Discord) {
     let tokens = msg.content.toLowerCase().split(' ')
     //tokens = msg.content.split(' ');
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
-
-        count(msg, mongoose, 3)
-
-        //counter
+        //counter internal
         //count(msg, counter, fs, 2)
+        
+        //counter mongoose
+        count(msg, mongoose, 3)
         //for Discord Server
         if (tokens[0].slice(0, 1) === prefix) {
             //command
@@ -79,10 +79,13 @@ module.exports = async function (msg, mongoose, Discord) {
                 abt(msg, tokens, Discord);
                 msg.react(otfn.reac())
             }
-            /*else if (tokens[0] === 'rank') {
+            /*
+            //rank internal
+            else if (tokens[0] === 'rank') {
                 mrank(msg, counter, tokens, Discord, 2)
                 msg.react(otfn.reac())
             }*/
+            //rank mongoose
             else if (tokens[0] === 'rank') {
                 mrank(msg, mongoose, tokens, Discord, 3)
                 msg.react(otfn.reac())
