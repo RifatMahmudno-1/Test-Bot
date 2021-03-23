@@ -83,7 +83,7 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                     .setTimestamp()
                     .setDescription('Counting was started from 01-March-2021');
                 if(other[0]===0){
-                  msg.reply(`Too much load. Plz try again to get <@${User}>'s rank.`).then(r => r.react('😥'))
+                  msg.reply(`Database error. Plz try again to get <@${User}>'s rank.`).then(r => r.react('😥'))
                 }else{
                   msg.channel.send(Embed)
                 }
