@@ -29,7 +29,9 @@ module.exports = function (msg, mongoose, lvl) {
         if (Number.isInteger(abc) == true) {
             msg.channel.send(`<@${msg.author.id}>, You have reached level ${abc}.`)
         }
-    }).then(delete mongoose.connection.models[guild])
+    })
+    .then(delete mongoose.connection.models[guild])
+    .catch((err)=>console.log(err))
 
     /*maindb.find({
         _id: Uid

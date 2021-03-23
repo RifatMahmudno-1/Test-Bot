@@ -91,7 +91,7 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
             } else {
                 msg.channel.send(`<@${User}> hasn't sent a single message in this server since March 1st, 2021.`)
             }
-        })
+        }).catch((err)=>console.log(err))
     }
     if (tokens.length === 1) {
         rank(msg.author)
