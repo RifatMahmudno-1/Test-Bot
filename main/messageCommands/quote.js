@@ -2,7 +2,7 @@ module.exports = function (fetch, Discord, aa, bb, cc) {
     let url = 'https://zenquotes.io/api/random'
     if (bb == undefined) bb = url;
     if (cc == undefined || cc == null) cc='A random quote. ➡➡➡'
-    aa.send(cc).then((=>{
+    aa.send(cc).then(()=>{
       fetch(bb)
           .then(r => r.json())
           .then(r => {
@@ -14,5 +14,5 @@ module.exports = function (fetch, Discord, aa, bb, cc) {
               aa.send(embed)
           })
           .catch(()=>{console.log('Error has occured in Quote.')})
-    }))
+    })
 }
