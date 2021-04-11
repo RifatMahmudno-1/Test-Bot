@@ -14,7 +14,7 @@ module.exports = function (auto, Discord) {
     function Quote(guilds) {
         guilds.forEach(function (el) {
             if (Time()[0] + 6 == 18)
-                quote(fetch, Discord, el.channels.cache.find(i => i.type === `text`), 'https://zenquotes.io/api/today')
+                quote(fetch, Discord, el.channels.cache.find(i => i.type === `text`), 'https://zenquotes.io/api/today', `Today's Quote ➡➡➡`)
         })
     }
 
@@ -27,7 +27,7 @@ module.exports = function (auto, Discord) {
             } else if (Time()[0] + 6 == 16) {
                 aaa.send(`Good Afternoon, everyone.`)
             } else if (Time()[0] + 6 == 18) {
-                aaa.send(`Good Evening, everyone. Today's quote ➡➡`)
+                aaa.send(`Good Evening, everyone.`)
             } else if (Time()[0] + 6 == 24) {
                 aaa.send(`Good night, everyone. Now, stop scrolling the internet and go to bed. Don't worry. I'll stay awake on yout behalf for this server's safety.`).then(r => r.react('😁'))
             }
@@ -37,7 +37,7 @@ module.exports = function (auto, Discord) {
     //interval 1 minute
     let minINT = setInterval(() => {
         if (Time()[1] >= 2 && Time()[1] <= 20) {
-            Greeting(guilds);
+            //Greeting(guilds);
             Quote(guilds);
             hourINT(); //start hourINT
             clearInterval(minINT) //clear minINT
@@ -48,7 +48,7 @@ module.exports = function (auto, Discord) {
     function hourINT() {
         setInterval(() => {
             guilds = auto.guilds.cache.map(r => r)
-            Greeting(guilds);
+            //Greeting(guilds);
             Quote(guilds);
         }, 3600000);
     }
