@@ -27,7 +27,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
             value: `
             🔰${xx('clear')}=> delete previous 1 message.
             🔰${xx('clear <how many>')}=>**${xx('clear 50')}** to delete pevious 50 messages.
-            🔰${xx('clear aa')}=> Delete previous several messages.
+            🔰${xx('clear all')}=> Delete previous several messages.
             ***You can't delete messages which are older than 14days.***
             `,
         }, {
