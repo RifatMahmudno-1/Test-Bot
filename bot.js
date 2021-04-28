@@ -37,9 +37,13 @@ client.on('message', msg => {
     messageCommands(msg, mongoose, Discord)
 })
 const welcome = require('./main/welcome')
-client.on('guildMemberAdd', welcome)
+client.on('guildMemberAdd', memAdd => {
+    welcome(memAdd, Discord)
+})
 const bye = require('./main/bye')
-client.on('guildMemberRemove', bye)
+client.on('guildMemberRemove', memRem => {
+    bye(memRem, Discord)
+})
 client.on("error", () => {
     client.login(process.env.TOKEN)
 });
