@@ -9,13 +9,13 @@ module.exports = function (msg, tokens, fetch, prefix, Discord) {
             maan(msg, fetch, prefix, 'ANIME', NaMe, Discord)
         } else if (tokens[0] === 'm' || tokens[0] === 'manga') {
             maan(msg, fetch, prefix, 'MANGA', NaMe, Discord)
-        } else if (tokens[0] === 'c' || tokens[0] === 'character') {
+        } else if (tokens[0] === 'anicharacter') {
             chastuf(msg, fetch, prefix, Discord, 'Character', NaMe)
-        } else if (tokens[0] === 'u' || tokens[0] === 'user') {
+        } else if (tokens[0] === 'aniuser') {
             uSEr(msg, fetch, prefix, Discord, NaMe)
-        } else if (tokens[0] === 'p' || tokens[0] === 'staff') {
+        } else if (tokens[0] === 'anistaff') {
             chastuf(msg, fetch, prefix, Discord, 'Staff', NaMe)
-        } else if (tokens[0] === 'std' || tokens[0] === 'studio') {
+        } else if (tokens[0] === 'anistudio') {
             std(msg, fetch, prefix, Discord, NaMe)
         }
     } else {
