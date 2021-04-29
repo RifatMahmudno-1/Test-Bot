@@ -32,6 +32,8 @@ const reddit = require('./messageCommands/reddit.js')
 const googleimage = require('./messageCommands/googleimage.js')
 const quote = require('./messageCommands/quote.js')
 const slowM = require('./messageCommands/slowM.js')
+const ytplay = require('./messageCommands/ytplay.js')
+const ytstop = require('./messageCommands/ytstop.js')
 
 module.exports = async function (msg, mongoose, Discord) {
     let tokens = msg.content.toLowerCase().split(' ')
@@ -39,7 +41,7 @@ module.exports = async function (msg, mongoose, Discord) {
     if (msg.channel.id !== '813476929268351007' && !msg.author.bot) {
         //counter internal
         //count(msg, counter, fs, 2)
-        
+
         //counter mongoose
         count(msg, mongoose, 3)
         //for Discord Server
@@ -78,6 +80,10 @@ module.exports = async function (msg, mongoose, Discord) {
             } else if (tokens[0] === 'abt') {
                 abt(msg, tokens, Discord);
                 msg.react(otfn.reac())
+            } else if (tokens[0] === 'ytplay') {
+                ytplay(msg, Discord)
+            } else if (tokens[0] === 'ytstop') {
+                ytstop(msg)
             }
             /*
             //rank internal
