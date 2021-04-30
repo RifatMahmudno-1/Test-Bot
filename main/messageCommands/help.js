@@ -39,22 +39,21 @@ module.exports = function (msg, tokens, prefix, Discord) {
             name: '🌟' + xx('cha <channel name> <message>'),
             value: `🔰The bot will send Your message to that specific channel. **${xx('cha general How are you??')}** => The bot will send "How are you??" in general channel".`,
         }, {
-            name: '🌟' + xx('kick <@mention users whom you want to kick>') + ' and ' + xx('ban <@mention users whom you want to ban>'),
+            name: '🌟' + xx('kick <@mention users>') + ' and ' + xx('ban <@mention users>'),
             value: `
             🔰${xx('kick <@mention users whom you want to kick>')} => The bot will kick the mentioned members one by one.
             🔰${xx('ban <@mention users whom you want to ban>')} => The bot will ban the mentioned members one by one.`,
         }, {
             name: '🌟' + xx('snick <@mention user> <nickname>') + ' and ' + xx('rnick <mention users>'),
             value: `
-            🔰${xx('snick <@mention user> <nickname>')} => Type **${xx('snick @Alex Gamer @Helper Bot')}** to set Alex's nickname to Gamer and Helper's nickname to Bot. You can add more or less members.
+            🔰${xx('snick <@mention user> <nickname>')} => **${xx('snick @Alex Gamer @Helper Bot')}** -> set Alex's nickname to Gamer and Helper's nickname to Bot. You can add more or less members.
             🔰${xx('rnick <mention users>')} => The bot will remove the nicknames of the mentioned users.`,
         }, {
             name: '🌟' + xx('roles') + ' and ' + xx('roles add <mention roles> <mention users>') + ' and ' + xx('roles remove <mention roles> <mention users>'),
             value: `
             🔰${xx('roles')} => Get a list of all available roles.
-            🔰${xx('roles add <mantion roles> <mantion users>')} => Give the mentioned users the mentioned roles. **${xx('roles add @admin @mod @Alex @Helper')}** to give Alex and Helper the mod and Admin role. 
-            🔰${xx('roles remove <mantion roles> <mantion users>')} => Remove the mentioned roles from the mentioned users. **${xx('roles remove @admin @mod @Alex @Helper')}** to remove the mod and Admin role from Alex and Helper.
-            **You can add more or less roles and member.**`,
+            🔰${xx('roles add <mantion roles> <mantion users>')} => Give the mentioned users the mentioned roles. **${xx('roles add @admin @mod @Alex @Helper')}** -> give Alex and Helper the mod and Admin role. 
+            🔰${xx('roles remove <mantion roles> <mantion users>')} => Remove the mentioned roles from the mentioned users. **${xx('roles remove @admin @mod @Alex @Helper')}** to remove the mod and Admin role from Alex and Helper.`,
         }, {
             name: '🌟' + xx('mem all') + ' and ' + xx('mem roles') + ' and ' + xx('mem names') + ' and ' + xx('mem ids'),
             value: `
@@ -66,7 +65,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
             name: '🌟' + xx('abt') + ' and ' + xx('abt <mention users>'),
             value: `
             🔰${xx('abt')} => Get info about this Guild/Server.
-            🔰${xx('abt <mention users>')} => Get mentioned user's info of this guild. **${xx('abt @Helper @Rifat')}** to get Helper's and Rifat's info. You can add more or less members`,
+            🔰${xx('abt <mention users>')} => Get mentioned user's info of this guild. **${xx('abt @Helper @Rifat')}** to get Helper's and Rifat's info.`,
         }, {
             name: '🌟' + xx('rank') + ' and ' + xx('rank <@mention users>'),
             value: `
