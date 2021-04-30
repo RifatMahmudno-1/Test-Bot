@@ -89,11 +89,11 @@ module.exports = function (msg, tokens, prefix, Discord) {
             name: '🌟' + xx('a <anime\'s name>') + ' or ' + xx('anime <anime\'s name>') + ' and ' + xx('m <manga\'s name>') + ' or ' + xx('manga <manga\'s name>') + ' and ' + xx('anicharacter <character\'s name>') + ' and ' + xx('aniuser <username>') + ' and ' + xx("anistaff <staff's name>") + ' and ' + xx('anistudio <studio\'s name>'),
             value: `
             🔰${xx('a <anime\'s name>') + ' or ' + xx('anime <anime\'s name>')} => Get info of that anime. Example- **${xx('anime konosuba')}** or **${xx('a konosuba')}**
-            🔰${xx('a <manga\'s name>') + ' or ' + xx('manga <manga\'s name>')} => Get info of that manga. Example- **${xx('anime death note')}** or **${xx('a death note')}**
-            🔰${ xx('anicharacter <character\'s name>')} => Get info of that character. Such as=> **${xx('anicharacter Aqua')}**
+            🔰${xx('a <manga\'s name>') + ' or ' + xx('manga <manga\'s name>')} => Get info of that manga.
+            🔰${ xx('anicharacter <character\'s name>')} => Get info of that character.
             🔰${xx('aniuser <username>') } => Get info of that anilist user. Such as=> **${xx('aniuser rifatal')}**
-            🔰${xx("anistaff <staff's name>")} => Get info of that anime/ manga writer, voice actor, director etc. Such as=> **${xx('anistaff Hiroshi Kamiya')}**
-            🔰${xx('anistudio <studio\'s name>')} => Get info of that anime Studio. Such as=> **${xx('anistudio MAPPA')}**
+            🔰${xx("anistaff <staff's name>")} => Get info of that anime/ manga writer, voice actor, director etc.
+            🔰${xx('anistudio <studio\'s name>')} => Get info of that anime Studio.
             ***ALL DATA IS FROM ANILIST***`,
         }, {
             name: '🌟' + xx('ytplay <video title>') + ' and ' + xx('ytplay <video url>') + ' and ' + xx('ytstop'),
