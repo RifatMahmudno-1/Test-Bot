@@ -12,7 +12,7 @@ module.exports = async function (msg, Discord) {
                 videoId: args.match(/=[\w+-_+=]+/g)[0].slice(1)
             })
             .then((video) => {
-                playVid([video.url, video.title, video.author.name, video.timestamp])
+                playVid([video.url, video.title, video.author.name, video.timestamp, video.seconds])
             })
             .catch(() => {
                 msg.channel.send(`Couldn't find any video. Please provide correct title or url and try again.`)
@@ -21,19 +21,34 @@ module.exports = async function (msg, Discord) {
         let getVids = await yts(args);
         if (getVids.videos.length < 1) return msg.channel.send(`Couldn't find any video. Please provide correct title or url and try again.`);
         let video = getVids.videos[0]
-        playVid([video.url, video.title, video.author.name, video.timestamp])
+        playVid([video.url, video.title, video.author.name, video.timestamp, video.seconds])
     }
 
     async function playVid(xx) {
-        msg.channel.send(`Playing music "${xx[1]}" from ${xx[2]} YouTube Channel. Duration: ${xx[3]}`)
+        if (xx[4] === 0) {
+            msg.channel.send(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **It's a live stream**. *Starting may take a few seconds.*`)
+        } else {
+            msg.channel.send(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **Duration: ${xx[3]}.** *Starting may take a few seconds.*`)
+        }
         let stream = await ytdl(xx[0])
         const connection = await voiceChannel.join();
+        let chaID = msg.member.voice.channel.id;
+        let Int;
+        clearInterval(Int);
+        Int = setInterval(() => {
+            if (msg.guild.channels.cache.find(i => i.id === chaID).members.find(i => i.user.bot == true) !== undefined && msg.guild.channels.cache.find(i => i.id === chaID).members.size <= 1) {
+                clearInterval(Int)
+                voiceChannel.leave()
+                msg.channel.send('*Left the voice channel because none was there.*').then(r => r.react('😭'))
+            }
+        }, 60000);
         connection.play(stream, {
                 type: 'opus',
                 seek: 0,
                 volume: 1
             })
             .on('finish', () => {
+                clearInterval(Int)
                 voiceChannel.leave();
                 msg.channel.send(`Full music played "${xx[1]}" from ${xx[2]} YouTube Channel.`);
             })

@@ -9,7 +9,7 @@ module.exports = function (msg, tokens, prefix, Discord) {
         .setDescription('**My prefix is `' + prefix + '`**')
         .setAuthor('My Test', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
         //+'`'+prefix+ 'aaa`, '
-        .addField('Commands', '`' + prefix + 'help`, ' + '`' + prefix + 'gif`, ' + '`' + prefix + 'clear`, ' + '`' + prefix + 'bhf`, ' + '`' + prefix + 'avt`, ' + '`' + prefix + 'cha`, ' + '`' + prefix + 'kick`, ' + '`' + prefix + 'ban`, ' + '`' + prefix + 'snick`, ' + '`' + prefix + 'rnick`, ' + '`' + prefix + 'roles`, ' + '`' + prefix + 'mem`, ' + '`' + prefix + 'abt`, ' + '`' + prefix + 'rank`, ' + '`' + prefix + 'rd`, ' + '`' + prefix + 'gimg`, ' + '`' + prefix + 'quote`, ' + '`' + prefix + 'slow`, ' + '`' + prefix + 'time`, ' + '`' + prefix + 'a or ' + prefix + 'anime`, ' + '`' + prefix + 'm or ' + prefix + 'manga`, ' + '`' + prefix + 'anicharacter`, ' + '`' + prefix + 'anistudio`, ' + '`' + prefix + 'aniuser`, ' + '`' + prefix + 'anistaff`', false)
+        .addField('Commands', '`' + prefix + 'help`, ' + '`' + prefix + 'gif`, ' + '`' + prefix + 'clear`, ' + '`' + prefix + 'bhf`, ' + '`' + prefix + 'avt`, ' + '`' + prefix + 'cha`, ' + '`' + prefix + 'kick`, ' + '`' + prefix + 'ban`, ' + '`' + prefix + 'snick`, ' + '`' + prefix + 'rnick`, ' + '`' + prefix + 'roles`, ' + '`' + prefix + 'ytplay`, ' + '`' + prefix + 'ytstop`, ' + '`' + prefix + 'mem`, ' + '`' + prefix + 'abt`, ' + '`' + prefix + 'rank`, ' + '`' + prefix + 'rd`, ' + '`' + prefix + 'gimg`, ' + '`' + prefix + 'quote`, ' + '`' + prefix + 'slow`, ' + '`' + prefix + 'time`, ' + '`' + prefix + 'a or ' + prefix + 'anime`, ' + '`' + prefix + 'm or ' + prefix + 'manga`, ' + '`' + prefix + 'anicharacter`, ' + '`' + prefix + 'anistudio`, ' + '`' + prefix + 'aniuser`, ' + '`' + prefix + 'anistaff`', false)
         .addFields({
             name: '🌟' + xx('help') + ' and ' + xx('help here'),
             value: `
@@ -108,6 +108,12 @@ module.exports = function (msg, tokens, prefix, Discord) {
             🔰${xx('anistudio <studio\'s name>')} => Get info of that anime Studio. Such as=> **${xx('anistudio MAPPA')}**
             ***ALL DATA IS FROM ANILIST***
             `,
+        }, {
+            name: '🌟' + xx('ytplay <video title>') + ' and ' + xx('ytplay <video url>') + ' and ' + xx('ytstop'),
+            value: `
+            🔰${xx("ytplay <video title>")} => Play youtube video on a voice channel (Audio only). Example- Type **${xx('ytplay faded')}** to play Faded music.
+            🔰${xx("ytplay <video url>")} => Play youtube video from video url/link on a voice channel (Audio Only). Example- Type **${xx('ytplay https://www.youtube.com/watch?v=kJQP7kiw5Fk')}** to play Despacito music/video.
+            🔰${xx("ytstop <ytstop>")} => Stop playing music/video in voice channel.`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye according to GMT +6. Bot will auto delete any offensive words. Bot will autimatically respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages. Bot will automatic send a quote a day.', false)
         .addField('Reaction info', 'In those messages where bot has reacted ❌, there if you click on that reaction and increase the number then the message will be deleted. After 8second the bot will auto remove that emoji.', false)
