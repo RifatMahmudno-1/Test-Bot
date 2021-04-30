@@ -3,6 +3,7 @@ module.exports = function (msg, tokens, prefix) {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
             if (tokens.length >= 2) {
                 let userArray = msg.mentions.users.array();
+                if (userArray.length === 0) return msg.channel.send('Please mention users whom you want to kick')
                 userArray.forEach(function (el) {
                     msg.guild.members.cache.get(el.id).kick()
                         .then(handleResponse)
@@ -26,6 +27,7 @@ module.exports = function (msg, tokens, prefix) {
         if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.hasPermission('KICK_MEMBERS')) {
             if (tokens.length >= 2) {
                 let userArray = msg.mentions.users.array();
+                if (userArray.length === 0) return msg.channel.send('Please mention users whom you want to kick')
                 userArray.forEach(function (el) {
                     msg.guild.members.cache.get(el.id).ban()
                         .then(handleResponse)

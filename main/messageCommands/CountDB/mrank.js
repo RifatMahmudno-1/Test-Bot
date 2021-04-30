@@ -29,7 +29,7 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                 }
 
                 function rraa() {
-                    let aaa=total;
+                    let aaa = total;
                     let sortmem = []; //big-small
                     let rankpos = [];
                     for (var i = 0; i < allUser.length; i++) {
@@ -41,8 +41,8 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                             rankpos.push(Math.fround(Math.pow(sortmem[i], 1 / lvl)))
                         }
                     }
-                    if(sortmem.indexOf(aaa)=== -1){
-                      aaa=aaa-1;
+                    if (sortmem.indexOf(aaa) === -1) {
+                        aaa = aaa - 1;
                     }
                     return [rankpos.indexOf(Math.fround(Math.pow(aaa, 1 / lvl))) + 1, rankpos.length, sortmem.indexOf(aaa) + 1, sortmem.length]
                 }
@@ -86,11 +86,11 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
                     })
                     .setTimestamp()
                     .setDescription('Counting was started from 01-March-2021');
-                msg.channel.send(Embed)  
+                msg.channel.send(Embed)
             } else {
-                msg.channel.send(`<@${User}> hasn't sent a single message in this server since March 1st, 2021.`)
+                msg.channel.send(`<@${User}> hasn't sent a single message in this server since I've joined or that user is a Bot..`)
             }
-        }).catch((err)=>console.log(err))
+        }).catch((err) => console.log(err))
     }
     if (tokens.length === 1) {
         rank(msg.author)
