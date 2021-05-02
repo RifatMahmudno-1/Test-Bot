@@ -18,7 +18,7 @@ module.exports = async function (msg, mongoose) {
     let Int, Int1, fnh;
     //token and args
     let tokens = msg.content.split(' ')
-    tokens[1] = tokens[1].toLowerCase()
+    if (tokens[1]) tokens[1] = tokens[1].toLowerCase()
     let args = tokens.slice(2).join(' ')
     //files
     const del = require('./delete.js')

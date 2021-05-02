@@ -160,7 +160,7 @@ module.exports = {
             return '`' + prefix + 'msc ' + aa + '`'
         }
         embed
-            .setTitle = `Help about playing music`
+            .setTitle(`Help about playing music`)
             .setDescription('My prefix is `' + prefix + 'msc`')
             .setAuthor('Helper', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
             .addField('Commands', `${xy('play')}, ${xy('pause')}, ${xy('resume')}, ${xy('stop')}, ${xy('add')}, ${xy('sel')}, ${xy('select')}, ${xy('del')}, ${xy('delete')}, ${xy('list')}, ${xy('previous')}, ${xy('next')}, ${xy('replay')}, ${xy('clearlist')}, ${xy('playlist')}`, false)
