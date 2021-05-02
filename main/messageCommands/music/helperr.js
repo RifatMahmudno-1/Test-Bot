@@ -98,8 +98,7 @@ module.exports = {
     list2: function (title) {
         embed.setTitle('Your music playlist.')
         for (var i = 0; i < title.length; i++) {
-            title[i] = `
-            ${i+1}) ${title[i]}`
+            title[i] = `**${i+1})** ${title[i]}`
         }
         embed.setDescription(title)
         return embed

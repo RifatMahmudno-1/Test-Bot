@@ -60,7 +60,7 @@ module.exports = async function (msg, mongoose, Discord) {
                 help(msg, tokens, prefix, Discord)
                 msg.react(otfn.reac())
             } else if (tokens[0] === 'clear') {
-                clear(msg, tokens)
+                clear(msg, tokens, prefix)
             } else if (tokens[0] === 'bhf') {
                 bhf(msg, tokens, prefix, otfn)
             } else if (tokens[0] === 'avt' || tokens[0] === 'cha') {
