@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const prefix = process.env.PREFIX
 module.exports = {
     construct: function () {
-        let embed = this.construct()
         const embed = new Discord.MessageEmbed()
         embed.setColor('#0099ff')
         return embed
@@ -201,7 +200,6 @@ module.exports = {
         let embed = this.construct()
 
         function xy(aa) {
-            let embed = this.construct()
             return '`' + prefix + 'msc ' + aa + '`'
         }
         embed
