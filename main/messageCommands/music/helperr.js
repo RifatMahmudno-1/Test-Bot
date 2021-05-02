@@ -1,162 +1,241 @@
 const Discord = require('discord.js')
-const embed = new Discord.MessageEmbed()
-embed.setColor('#0099ff')
 const prefix = process.env.PREFIX
 module.exports = {
     add1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`**Please provide a video title or YouTube video url**`)
         return embed
     },
     replay1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`You didn't add any video in your list. **${prefix}msc add <video title/url>** to add to add that music to the list or **${prefix}msc play <video title/url>** to play that music now!!`)
         return embed
     },
     pause1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Paused playing. The playlist will be saved and You can continue from there whenever you want. To resume type **${prefix}msc resume**`)
         return embed
     },
     help1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Please type correctly. For help type **${prefix}help music** or **${prefix}msc help**`)
         return embed
     },
     veliadd1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Couldn't find any video. Please provide correct title or url and try again.`)
         return embed
     },
     veliadd2: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Added to the playlist. Type **${prefix}msc list** to view the list`)
         return embed
     },
     veliadd3: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription('You can only add 50 video in your list. No videos were added.')
         return embed
     },
     veliadd4: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Couldn't find any video. Please provide correct title or url and try again.`)
         return embed
     },
     setVid1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Some errors have occured in playing video.`)
         return embed
     },
     playVid1: function (xx) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **It's a live stream**. *Starting may take a few seconds.*`)
         return embed
     },
     playVid2: function (xx) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **Duration: ${xx[3]}.** *Starting may take a few seconds.*`)
         return embed
     },
     playVid3: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is no member in this voice channel. If none joins in the next 1 minute, I'll leave but the playlist will be saved.`)
         return embed
     },
     playVid4: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription('*Left the voice channel because none was there.*')
         return embed
     },
     playVid5: function (xx) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Full music played "${xx[1]}" from ${xx[2]} YouTube Channel.`)
         return embed
     },
     stop1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription('Leaving voice channel.')
         return embed
     },
     onFinish1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is no music in your playlist. I'll leave after 1 minute.`)
         return embed
     },
     onFinish2: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`I've player the full list. If you don't replay or add any music, I will leave after 1 minute. But the play list will be saved. View list -> **${prefix}msc list** Play last added vided **${prefix}msc play** Play selected music-> **${prefix}msc sel 2** to play 2nd music of your list.`)
         return embed
     },
     onFinish3: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Playing the next music.`)
         return embed
     },
     delete1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Provide video number from your list. Like- **${prefix}**msc sel 1`)
         return embed
     },
     delete2: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is only one music in your list. You cannot empty your list. To delete your list type **${prefix}msc** clearlist`)
         return embed
     },
     delete3: function (num) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Music number ${num} isn't available. Please check your list again by typing **${prefix}msc list**`)
         return embed
     },
     delete4: function (num) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Deleted video no${num} from your list`)
         return embed
     },
     list1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is no video in this list. Type **${prefix}msc add <url or video title>** to add that video in your list.`)
         return embed
     },
     list2: function (title) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setTitle('Your music playlist.')
         for (var i = 0; i < title.length; i++) {
+            const embed = new Discord.MessageEmbed()
+            embed.setColor('#0099ff')
             title[i] = `**${i+1})** ${title[i]}`
         }
         embed.setDescription(title)
         return embed
     },
     previous1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is no previous music in your list.`)
         return embed
     },
     next1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is no next music in your list.`)
         return embed
     },
     clearlist1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription('Cleared the playlist.')
         return embed
     },
     play1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`You didn't provide any title or url. Last added music will be played. Select specific music from list-> **${prefix}msc list**`)
         return embed
     },
     play2: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Resuming from the last played music.`)
         return embed
     },
     select1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Provide video number from your list. Like- **${prefix}**msc sel 1`)
         return embed
     },
     select2: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`There is no video in this list. Type **${prefix}msc add <url or video title>** to add that video in your list.`)
         return embed
     },
     select3: function (num) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`Music number ${num} isn't available. Please check the list by typing **${prefix}msc list**`)
         return embed
     },
     playlist1: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription('There is no video in this playlist.')
         return embed
     },
     playlist2: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`You can add maximum 50 videos. Only first 50 videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
         return embed
     },
     playlist3: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription('You can add maximum 50 videos. No videos were added.')
         return embed
     },
     playlist4: function (free) {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`You can add maximum 50 videos. Only first ${free} videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
         return embed
     },
     playlist5: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
         embed.setDescription(`All videos of that playlist were added to your list. Type **${prefix}msc list** to view your list`)
         return embed
     },
     help: function () {
+        const embed = new Discord.MessageEmbed()
+        embed.setColor('#0099ff')
+
         function xy(aa) {
+            const embed = new Discord.MessageEmbed()
+            embed.setColor('#0099ff')
             return '`' + prefix + 'msc ' + aa + '`'
         }
         embed
