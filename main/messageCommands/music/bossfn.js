@@ -60,7 +60,7 @@ module.exports = {
             }, 100);
         }, 100);
     },
-    playVid: async (xx, msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID) => {
+    playVid: async function (xx, msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID) {
         if (xx[4] === 0) {
             msg.channel.send(helperr.playVid1(xx))
         } else {
@@ -96,20 +96,20 @@ module.exports = {
                 this.onFinish(msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID)
             })
     },
-    onFinish: (msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID) => {
+    onFinish: function (msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID) {
         maindb.findById(guildID)
             .then(hs => {
                 if (hs == null) {
                     msg.channel.send(helperr.onFinish1())
                     fnh = setTimeout(() => {
-                        this.StOp(nt, Int1, fnh, voiceChannel, msg)
+                        this.StOp(Int, Int1, fnh, voiceChannel, msg)
                     }, 60000);
                 } else {
                     let data = hs.data.length;
                     if (data === hs.playing) {
                         msg.channel.send(helperr.onFinish2())
                         fnh = setTimeout(() => {
-                            this.StOp(nt, Int1, fnh, voiceChannel, msg)
+                            this.StOp(Int, Int1, fnh, voiceChannel, msg)
                         }, 60000);
                     } else if (hs.playing < data) {
                         msg.channel.send(helperr.onFinish3())
@@ -118,7 +118,7 @@ module.exports = {
                 }
             })
     },
-    StOp: async (Int, Int1, fnh, voiceChannel, msg) => {
+    StOp: async function (Int, Int1, fnh, voiceChannel, msg) {
         clearInterval(Int);
         clearTimeout(Int1);
         clearTimeout(fnh)

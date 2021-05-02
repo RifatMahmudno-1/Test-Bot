@@ -16,5 +16,5 @@ module.exports = function (msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maind
                     if (tokens[1] === 'resume') bossfn.setVid(hs.playing, msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID)
                 }
             });
-    }, 5000);
+    }, 4000);
 }
