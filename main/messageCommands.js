@@ -32,8 +32,7 @@ const reddit = require('./messageCommands/reddit.js')
 const googleimage = require('./messageCommands/googleimage.js')
 const quote = require('./messageCommands/quote.js')
 const slowM = require('./messageCommands/slowM.js')
-const ytplay = require('./messageCommands/ytplay.js')
-const ytstop = require('./messageCommands/ytstop.js')
+const mainMusic = require('./messageCommands/music/mainMusic.js')
 
 module.exports = async function (msg, mongoose, Discord) {
     let tokens = msg.content.toLowerCase().split(' ')
@@ -80,10 +79,8 @@ module.exports = async function (msg, mongoose, Discord) {
             } else if (tokens[0] === 'abt') {
                 abt(msg, tokens, Discord);
                 msg.react(otfn.reac())
-            } else if (tokens[0] === 'ytplay') {
-                ytplay(msg, Discord)
-            } else if (tokens[0] === 'ytstop') {
-                ytstop(msg)
+            } else if (tokens[0] === 'msc') {
+                mainMusic(msg, mongoose)
             }
             /*
             //rank internal

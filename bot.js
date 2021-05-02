@@ -1,4 +1,3 @@
-//https://cloud.mongodb.com/v2#/org/60599c11c01d53693cf02ce0/projects
 require('dotenv').config();
 const Discord = require('discord.js');
 //for mongodb

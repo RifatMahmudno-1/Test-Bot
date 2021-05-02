@@ -1,20 +1,22 @@
-//https://www.codegrepper.com/code-examples/javascript/discord.js+embed+builder
 module.exports = function (msg, tokens, prefix, Discord) {
     function xx(aa) {
         return '`' + prefix + aa + '`'
     }
+    const mschelp = require('./music/helperr.js')
     const embed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Help')
         .setDescription('**My prefix is `' + prefix + '`**')
-        .setAuthor('My Test', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
+        .setAuthor('Helper', 'https://cdn.discordapp.com/avatars/812537560030117928/c9e5292e1ef8e3d41f5265e2d3c9be58.webp')
         //+'`'+prefix+ 'aaa`, '
-        .addField('Commands', '`' + prefix + 'help`, ' + '`' + prefix + 'gif`, ' + '`' + prefix + 'clear`, ' + '`' + prefix + 'bhf`, ' + '`' + prefix + 'avt`, ' + '`' + prefix + 'cha`, ' + '`' + prefix + 'kick`, ' + '`' + prefix + 'ban`, ' + '`' + prefix + 'snick`, ' + '`' + prefix + 'rnick`, ' + '`' + prefix + 'roles`, ' + '`' + prefix + 'ytplay`, ' + '`' + prefix + 'ytstop`, ' + '`' + prefix + 'mem`, ' + '`' + prefix + 'abt`, ' + '`' + prefix + 'rank`, ' + '`' + prefix + 'rd`, ' + '`' + prefix + 'gimg`, ' + '`' + prefix + 'quote`, ' + '`' + prefix + 'slow`, ' + '`' + prefix + 'time`, ' + '`' + prefix + 'a or ' + prefix + 'anime`, ' + '`' + prefix + 'm or ' + prefix + 'manga`, ' + '`' + prefix + 'anicharacter`, ' + '`' + prefix + 'anistudio`, ' + '`' + prefix + 'aniuser`, ' + '`' + prefix + 'anistaff`', false)
+        .addField('Commands', `${xx('help')}, ${xx('gif')}, ${xx('clear')}, ${xx('bhf')}, ${xx('avt')}, ${xx('cha')}, ${xx('kick')}, ${xx('ban')}, ${xx('snick')}, ${xx('rnick')}, ${xx('roles')}, ${xx('mem')}, ${xx('abt')}, ${xx('rank')}, ${xx('rd')}, ${xx('gimg')}, ${xx('quote')}, ${xx('slow')}, ${xx('time')}, ${xx('a')}, ${xx('anime')}, ${xx('m')}, ${xx('manga')}, ${xx('anicharacter')}, ${xx('anistudio')}, ${xx('aniuser')}, ${xx('anistaff')}, ${xx('msc')}, `, false)
         .addFields({
-            name: '🌟' + xx('help') + ' and ' + xx('help here'),
+            name: '🌟' + xx('help') + ' and ' + xx('help here') + xx('help music'),
             value: `
             🔰${xx('help')} => Get help in DM channel
-            🔰${xx('help here')} => Get help in this channel`,
+            🔰${xx('help here')} => Get help in this channel
+            🔰${xx('help music')} => Get help with music in voice channel
+            `,
         }, {
             name: '🌟' + xx('gif') + ' and ' + xx('gif <search>'),
             value: `
@@ -96,11 +98,8 @@ module.exports = function (msg, tokens, prefix, Discord) {
             🔰${xx('anistudio <studio\'s name>')} => Get info of that anime Studio.
             ***ALL DATA IS FROM ANILIST***`,
         }, {
-            name: '🌟' + xx('ytplay <video title>') + ' and ' + xx('ytplay <video url>') + ' and ' + xx('ytstop'),
-            value: `
-            🔰${xx("ytplay <video title>")} => Play youtube video on a voice channel (Audio only). Example- Type **${xx('ytplay faded')}** to play Faded music.
-            🔰${xx("ytplay <video url>")} => Play youtube video from video url/link on a voice channel (Audio Only). Example- Type **${xx('ytplay https://www.youtube.com/watch?v=kJQP7kiw5Fk')}** to play Despacito music/video.
-            🔰${xx("ytstop <ytstop>")} => Stop playing music/video in voice channel.`
+            name: '🌟' + xx('msc'),
+            value: `🔰 Type ${xx('msc help')} to get help with music.`
         })
         .addField('Automated', 'Bot will autimatically respond if someone types hi, hello, hlw, bye, Goodbye according to GMT +6. Bot will auto delete any offensive words and respond if someone is added or kicked or banned from this server. Bot will autimatically react to certain messages and automatic send a quote a day.', false)
         .addField('Reaction info', 'click on ❌ react to remove that message. Otherwise, react will be removed in 8 seconds.', false)
@@ -108,10 +107,14 @@ module.exports = function (msg, tokens, prefix, Discord) {
         .setFooter('Have a nice time');
     if (tokens[1] === 'here') {
         msg.channel.send(embed)
+        msg.channel.send(mschelp.help())
+    } else if (tokens[1] === 'music') {
+        msg.channel.send(mschelp.help())
     } else {
         if (msg.channel.id !== '813476929268351007') {
             msg.reply(`Check. You have received a message from me. Everything is written there.`).then(r => r.react('💖'))
         }
         msg.author.send(embed);
+        msg.author.send(mschelp.help())
     }
 }

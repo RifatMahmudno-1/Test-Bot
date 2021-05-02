@@ -1,0 +1,328 @@
+module.exports = async function (msg, mongoose, prefix) {
+    let voiceChannel = msg.member.voice.channel;
+    if (!voiceChannel) return msg.channel.send('You need to be in a channel to play this music');
+    const format = require('./format.js')
+    const ytdl = require('ytdl-core-discord');
+    const yts = require('yt-search');
+    const guildID = `${msg.guild.id}`
+    let chaID = msg.member.voice.channel.id;
+    let maindb;
+    if (mongoose.connection.models.musics) {
+        maindb = mongoose.connection.models.musics
+    } else {
+        maindb = mongoose.model('musics', format(mongoose));
+    }
+    let tokens = msg.content.split(' ')
+    let args = tokens.slice(2).join(' ')
+    if (tokens[1] === 'add') {
+        if (tokens.length <= 2 || tokens[2].length <= 2) return msg.channel.send('Please provide a video title or YouTube video url')
+        valiadd()
+    } else if (tokens[1] === 'sel' || tokens[1] === 'select') {
+        if (tokens.length < 2 || isNaN(tokens[2])) return msg.channel.send(`Provide video number from your list. Like- **${prefix}**msc sel 1`)
+        let num = parseInt(tokens[2])
+        maindb.findById(guildID)
+            .then(hs => {
+                if (hs === null) {
+                    msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                } else if (num >= 1 && num <= hs.data.length) {
+                    setVid(num)
+                } else {
+                    msg.channel.send(`Music number ${num} isn't available. Please check the list by typing **${prefix}msc list**`)
+                }
+            })
+    } else if (tokens[1] === 'del' || tokens[1] === 'delete') {
+        if (tokens.length < 2 || isNaN(tokens[2])) return msg.channel.send(`Provide video number from your list. Like- **${prefix}**msc sel 1`)
+        let num = parseInt(tokens[2])
+        maindb.findById(guildID)
+            .then(hs => {
+                let aa = hs.data.length
+                let bb = hs.data;
+                if (aa <= 1) return msg.channel.send(`There is only one music in your list. You cannot empty your list. To delete your list type **${prefix}msc** clearlist`)
+                if (num > aa || num === 0) return msg.channel.send(`Music number ${num} isn't available. Please check your list again by typing **${prefix}msc list**`)
+                bb.splice(num - 1, 1)
+                maindb.findByIdAndUpdate(guildID, {
+                    data: bb
+                }, function (err) {
+                    if (err) throw err
+                })
+                msg.channel.send(`Deleted video no${num} from your list`)
+            })
+    } else if (tokens[1] === 'list') {
+        maindb.findById(guildID)
+            .then(hs => {
+                if (hs == null) {
+                    msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                } else {
+                    if (hs.data.length <= 0) {
+                        msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                    } else {
+                        let all = hs.data
+                        let title = [];
+                        all.forEach(function (el) {
+                            title.push(el.title)
+                        })
+                        msg.channel.send(title)
+                    }
+                }
+            })
+    } else if (tokens[1] === 'previous') {
+        maindb.findById(guildID)
+            .then(hs => {
+                if (hs === null) {
+                    msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                } else if (hs.data.length <= 0) {
+                    msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                } else if (hs.data.length > 1 && hs.playing > 1) {
+                    setVid(hs.playing - 1)
+                } else {
+                    msg.channel.send(`There is no previous music in your list.`)
+                }
+            })
+    } else if (tokens[1] === 'next') {
+        maindb.findById(guildID)
+            .then(hs => {
+                if (hs === null) {
+                    msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                } else if (hs.data.length <= 0) {
+                    msg.channel.send(`There is no video in this list. Type ${prefix}msc add <url or video title> to add that video in your list.`)
+                } else if (hs.data.length > 1 && hs.playing < hs.data.length) {
+                    setVid(hs.playing + 1)
+                } else {
+                    msg.channel.send(`There is no next music in your list.`)
+                }
+            })
+    } else if (tokens[1] === 'play' || tokens[1] === 'resume') {
+        if (tokens.length < 3 || tokens[2].length <= 2) msg.channel.send(`You didn't provide any title or url. Last added music will be played. Select specific music from list-> **${prefix}msc list**`)
+        else {
+            valiadd()
+        }
+        setTimeout(() => {
+            maindb.findById(guildID)
+                .then(hs => {
+                    if (hs == null) {
+                        msg.channel.send(`You didn't add any video in your list. **${prefix}msc add <video title/url>** to add to add that music to the list or **${prefix}msc play <video title/url>** to play that music now!!`)
+                    } else {
+                        let aa = hs.data.length;
+                        if (tokens[1] === 'play') setVid(aa)
+                        if (tokens[1] === 'resume') setVid(hs.playing)
+                    }
+                });
+        }, 3000);
+    } else if (tokens[1] === 'replay') {
+        maindb.findById(guildID)
+            .then(hs => {
+                if (hs == null) {
+                    msg.channel.send(`You didn't add any video in your list. **${prefix}msc add <video title/url>** to add to add that music to the list or **${prefix}msc play <video title/url>** to play that music now!!`)
+                } else {
+                    setVid(1)
+                }
+            })
+    } else if (tokens[1] === 'pause') {
+        msg.channel.send(`Paused playing. The playlist will be saved and You can continue from there whenever you want. To resume type ${prefix}msc resume`)
+        StOp();
+    } else if (tokens[1] === 'stop') {
+        StOp();
+    } else if (tokens[1] === 'clearlist') {
+        maindb.deleteOne({
+            _id: guildID
+        }, function (err) {
+            if (err) throw err
+        });
+        msg.channel.send('Cleared the playlist.')
+    } else if (tokens[1] === 'playlist') {
+        if (tokens.length <= 2 || tokens[2].length <= 2) return msg.channel.send('Please provide a valid Youtube playlist url')
+        else if (tokens[2].slice(0, 33) !== "https://www.youtube.com/playlist?") return msg.channel.send('Please provide a valid Youtube playlist url')
+        let ID = tokens[2].match(/list=[\w_+-]+/g)[0].replace(/list=/, '')
+        yts({
+                listId: ID
+            })
+            .then(getVids => {
+                let videos = getVids.videos
+                if (videos.length < 1 || videos.length == undefined) return msg.channel.send('There is no video in this playlist.')
+                let arr = [];
+                if (videos.length <= 50) {
+                    for (var i = 0; i < videos.length; i++) {
+                        arr.push({
+                            title: videos[i].title,
+                            url: `https://www.youtube.com/watch?v=${videos[i].videoId}`,
+                            channel: videos[i].author.name,
+                            timestamp: videos[i].duration.timestamp,
+                            time: videos[i].duration.seconds || 0
+                        })
+                    }
+                } else {
+                    for (var i = 0; i < 50; i++) {
+                        arr.push({
+                            title: videos[i].title,
+                            url: `https://www.youtube.com/watch?v=${videos[i].videoId}`,
+                            channel: videos[i].author.name,
+                            timestamp: videos[i].duration.timestamp,
+                            time: videos[i].duration.seconds || 0
+                        })
+                    }
+                }
+                maindb.findById(guildID)
+                    .then(hs => {
+                        if (hs == null) {
+                            new maindb({
+                                _id: guildID,
+                                data: arr,
+                                playing: 1
+                            }).save()
+                            if (videos.length > 50) msg.channel.send(`You can add maximum 50 videos. Only first 50 videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
+                        } else {
+                            let oldDt = hs.data
+                            if (hs.data.length >= 50) return msg.channel.send('You can add maximum 50 videos. No videos were added.')
+                            if (hs.data.length + arr.length > 50) {
+                                let free = 50 - hs.data.length
+                                for (var i = 0; i < free; i++) {
+                                    oldDt.push(arr[i])
+                                }
+                                msg.channel.send(`You can add maximum 50 videos. Only first ${free} videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
+                            } else {
+                                arr.forEach(function (el) {
+                                    oldDt.push(el)
+                                })
+                                msg.channel.send(`All videos of that playlist were added to your list. Type **${prefix}msc list** to view your list`)
+                            }
+                            maindb.findByIdAndUpdate(guildID, {
+                                data: oldDt
+                            }, function (err) {
+                                if (err) throw err
+                            })
+                        }
+                    })
+            })
+    } else {
+        msg.channel.send(`Please type correctly. For help type ${prefix}help.`)
+    }
+    //Interval and Timeout variables
+    let Int, Int1, fnh;
+    //single video validate and add
+    function valiadd() {
+        yts(args)
+            .then(getVids => {
+                let video = getVids.all.filter(x => x.type === 'live' || x.type === 'video')[0]
+                if (video.length < 1) return msg.channel.send(`Couldn't find any video. Please provide correct title or url and try again.`);
+                let obj = {
+                    title: video.title,
+                    url: video.url,
+                    channel: video.author.name,
+                    timestamp: video.timestamp,
+                    time: video.seconds || 0
+                }
+                maindb.findById(guildID)
+                    .then(hs => {
+                        if (hs == null) {
+                            new maindb({
+                                _id: guildID,
+                                data: [obj],
+                                playing: 1
+                            }).save()
+                            msg.channel.send(`Added to the playlist. Type ${prefix}msc list to view the list`)
+                        } else {
+                            let oldDt = hs.data
+                            if (oldDt.length >= 50) return msg.channel.send('You can only add 50 video in your list. No videos were added.')
+                            oldDt.push(obj)
+                            maindb.findByIdAndUpdate(guildID, {
+                                data: oldDt
+                            }, function (err) {
+                                if (err) throw err
+                            })
+                            msg.channel.send(`Added to the playlist. Type ${prefix}msc list to view the list`)
+                        }
+                    })
+                    .catch(() => console.log('Error in DB'))
+            })
+            .catch(() => {
+                msg.channel.send(`Couldn't find any video. Please provide correct title or url and try again.`)
+            })
+    }
+    //set video and play
+    function setVid(n) {
+        setTimeout(() => {
+            maindb.findByIdAndUpdate(guildID, {
+                playing: n
+            }, (err) => {
+                if (err) throw err;
+            })
+            setTimeout(() => {
+                maindb.findById(guildID)
+                    .then(hs => {
+                        let video = hs.data[hs.playing - 1]
+                        playVid([video.url, video.title, video.channel, video.timestamp, video.time])
+                    })
+                    .catch(() => msg.channel.send('Some errors have occured in playing video.'))
+            }, 100);
+        }, 100);
+    }
+    //on finish
+    function onFinish() {
+        maindb.findById(guildID)
+            .then(hs => {
+                if (hs == null) {
+                    msg.channel.send(`There is no music in your playlist. I'll leave after 1 minute.`)
+                    fnh = setTimeout(() => {
+                        StOp()
+                    }, 60000);
+                } else {
+                    let data = hs.data.length;
+                    if (data === hs.playing) {
+                        msg.channel.send(`I've player the full list. If you don't replay or add any music, I will leave after 1 minute. But the play list will be saved. View list -> **${prefix}msc list** Play last added vided **${prefix}msc play** Play selected music-> **${prefix}msc sel 2** to play 2nd music of your list.`)
+                        fnh = setTimeout(() => {
+                            StOp()
+                        }, 60000);
+                    } else if (hs.playing < data) {
+                        msg.channel.send(`Playing the next music.`)
+                        setVid(hs.playing + 1)
+                    }
+                }
+            })
+
+    }
+    //main playing function
+    async function playVid(xx) {
+        if (xx[4] === 0) {
+            msg.channel.send(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **It's a live stream**. *Starting may take a few seconds.*`)
+        } else {
+            msg.channel.send(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **Duration: ${xx[3]}.** *Starting may take a few seconds.*`)
+        }
+        let stream = await ytdl(xx[0])
+        const connection = await voiceChannel.join();
+        clearInterval(Int);
+        clearTimeout(Int1);
+        clearTimeout(fnh);
+        Int = setInterval(() => {
+            if (msg.guild.channels.cache.find(i => i.id === chaID).members.find(i => i.user.bot == true) !== undefined && msg.guild.channels.cache.find(i => i.id === chaID).members.size <= 1) {
+                msg.channel.send(`There is no member in this voice channel. If none joins in the next 1 minute, I'll leave but the playlist will be saved.`)
+                Int1 = setTimeout(async () => {
+                    if (msg.guild.channels.cache.find(i => i.id === chaID).members.find(i => i.user.bot == true) !== undefined && msg.guild.channels.cache.find(i => i.id === chaID).members.size <= 1) {
+                        clearInterval(Int)
+                        clearTimeout(fnh);
+                        await voiceChannel.leave()
+                        msg.channel.send('*Left the voice channel because none was there.*').then(r => r.react('😭'))
+                    }
+                }, 60000);
+            }
+        }, 60000);
+        connection
+            .play(stream, {
+                type: 'opus',
+                seek: 0,
+                volume: 1
+            })
+            .on('finish', () => {
+                clearInterval(Int)
+                msg.channel.send(`Full music played "${xx[1]}" from ${xx[2]} YouTube Channel.`);
+                onFinish()
+            })
+    }
+    //Stop function
+    async function StOp() {
+        clearInterval(Int);
+        clearTimeout(Int1);
+        clearTimeout(fnh)
+        msg.channel.send('Leaving voice channel.').then(r => r.react('😭'))
+        await voiceChannel.leave();
+    }
+}
