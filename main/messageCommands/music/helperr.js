@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-let embed = new Discord.MessageEmbed()
+const Embed = new Discord.MessageEmbed()
+let embed = new Embed
 embed.setColor('#0099ff')
 const prefix = process.env.PREFIX
 module.exports = {
