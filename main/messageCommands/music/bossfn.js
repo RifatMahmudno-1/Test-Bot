@@ -51,6 +51,7 @@ module.exports = {
         }
     },
     playNOW: function (cmd, msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID) {
+        if (!cmd) return;
         setTimeout(() => {
             maindb.findById(guildID)
                 .then(hs => {
@@ -62,7 +63,7 @@ module.exports = {
                         if (cmd === 'resume') this.setVid(hs.playing, msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID)
                     }
                 });
-        }, 100);
+        }, 500);
     },
     setVid: function (n, msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID) {
         setTimeout(() => {
