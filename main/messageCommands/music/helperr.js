@@ -38,7 +38,7 @@ module.exports = {
     },
     veliadd3: function () {
         let embed = this.construct()
-        embed.setDescription('You can only add 50 video in your list. No videos were added.')
+        embed.setDescription(`You can only add 50 video in your list. No videos were added. Type **${prefix}msc del <music number from your list>** to delete that music. Like **${prefix}msc del 2** to delete 2nd music of your list. Type **${prefix}msc clearlist** to delete your list.`)
         return embed
     },
     veliadd4: function () {
@@ -58,7 +58,18 @@ module.exports = {
     },
     playVid2: function (xx) {
         let embed = this.construct()
-        embed.setDescription(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **Duration: ${xx[3]}.** *Starting may take a few seconds.*`)
+        embed
+            .setTitle('Playing Music')
+            .addFields({
+                name: '```Music Title```',
+                value: `**${xx[1]}**`,
+            }, {
+                name: '```Youtube Channel```',
+                value: `**${xx[2]}**`,
+            }, {
+                name: '```Duration```',
+                value: `**${xx[3]}**`,
+            }, )
         return embed
     },
     playVid3: function () {
@@ -73,7 +84,15 @@ module.exports = {
     },
     playVid5: function (xx) {
         let embed = this.construct()
-        embed.setDescription(`Full music played "${xx[1]}" from ${xx[2]} YouTube Channel.`)
+        embed
+            .setTitle('Full Music Played')
+            .addFields({
+                name: '```Music Title```',
+                value: `**${xx[1]}**`,
+            }, {
+                name: '```Youtube Channel```',
+                value: `**${xx[2]}**`,
+            })
         return embed
     },
     stop1: function () {
@@ -125,7 +144,6 @@ module.exports = {
         let embed = this.construct()
         embed.setTitle('Your music playlist.')
         for (var i = 0; i < title.length; i++) {
-            let embed = this.construct()
             title[i] = `**${i+1})** ${title[i]}`
         }
         embed.setDescription(title)
@@ -148,7 +166,7 @@ module.exports = {
     },
     play1: function () {
         let embed = this.construct()
-        embed.setDescription(`You didn't provide any title or url. Last added music will be played. Select specific music from list-> **${prefix}msc list**`)
+        embed.setDescription(`You didn't provide any title or url. Resuming from that last played music. Select specific music from list-> **${prefix}msc list**`)
         return embed
     },
     play2: function () {
@@ -183,7 +201,7 @@ module.exports = {
     },
     playlist3: function () {
         let embed = this.construct()
-        embed.setDescription('You can add maximum 50 videos. No videos were added.')
+        embed.setDescription(`You can only add 50 video in your list. No videos were added. Type **${prefix}msc del <music number from your list>** to delete that music. Like **${prefix}msc del 2** to delete 2nd music of your list. Type **${prefix}msc clearlist** to delete your list.`)
         return embed
     },
     playlist4: function (free) {
@@ -210,7 +228,7 @@ module.exports = {
             .addFields({
                 name: '🌟' + xy('play') + ' and ' + xy('play <Youtube video Url or title>') + ' and ' + xy('add <Youtube video title or url>'),
                 value: `
-                🔰${xy('play')} => Play last added music from your list now.
+                🔰${xy('play')} => Play from last played music from your list.
                 🔰${xy('play <Youtube video Url or title>')} => Play the vidoe form that title or url. like **${xy('play faded')}** to play Faded from youtube now.
                 🔰${xy('add <Youtube video title or url>')} => Add that video to your list. Like **${xy('add Despacito')}** to add despacito in your list.
                 `

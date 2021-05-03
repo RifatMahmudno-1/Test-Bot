@@ -33,7 +33,7 @@ module.exports = async function (msg, mongoose) {
     //end
     if (tokens[1] === 'add') {
         if (tokens.length <= 2 || tokens[2].length <= 2) return msg.channel.send(helperr.add1())
-        bossfn.valiadd(msg, maindb, guildID, yts, args)
+        bossfn.valiadd(msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID, yts, args, helperr, 'add', undefined)
     } else if (tokens[1] === 'sel' || tokens[1] === 'select') {
         select(msg, ytdl, voiceChannel, Int, Int1, fnh, chaID, maindb, guildID, bossfn, tokens, helperr)
     } else if (tokens[1] === 'del' || tokens[1] === 'delete') {
