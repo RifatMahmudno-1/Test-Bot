@@ -90,6 +90,7 @@ module.exports = {
         }
         let stream = await ytdl(xx[0])
         const connection = await voiceChannel.join();
+        connection.voice.setSelfDeaf(true);
         clearInterval(Int);
         clearTimeout(Int1);
         clearTimeout(fnh);
