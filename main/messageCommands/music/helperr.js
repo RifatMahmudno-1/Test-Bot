@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 const prefix = process.env.PREFIX
 module.exports = {
     construct: function () {
@@ -51,11 +51,6 @@ module.exports = {
         embed.setDescription(`Some errors have occured in playing video.`)
         return embed
     },
-    playVid1: function (xx) {
-        let embed = this.construct()
-        embed.setDescription(`Playing music "**${xx[1]}**" from "**${xx[2]}**" YouTube Channel. **It's a live stream**. *Starting may take a few seconds.*`)
-        return embed
-    },
     playVid2: function (xx) {
         let embed = this.construct()
         embed
@@ -63,13 +58,17 @@ module.exports = {
             .addFields({
                 name: '```Music Title```',
                 value: `**${xx[1]}**`,
+                inline: true
             }, {
                 name: '```Youtube Channel```',
                 value: `**${xx[2]}**`,
+                inline: true
             }, {
                 name: '```Duration```',
                 value: `**${xx[3]}**`,
+                inline: true
             }, )
+            .setDescription('*Starting may take a few seconds.*')
         return embed
     },
     playVid3: function () {
@@ -89,9 +88,11 @@ module.exports = {
             .addFields({
                 name: '```Music Title```',
                 value: `**${xx[1]}**`,
+                inline: true
             }, {
                 name: '```Youtube Channel```',
                 value: `**${xx[2]}**`,
+                inline: true
             })
         return embed
     },
@@ -102,12 +103,12 @@ module.exports = {
     },
     onFinish1: function () {
         let embed = this.construct()
-        embed.setDescription(`There is no music in your playlist. I'll leave after 1 minute.`)
+        embed.setDescription(`There is no music in your playlist. I'm leaving. If you  wanna add any music in your list type **${prefix}msc add <vidoe title or url>**. Type **${prefix}msc help** or **${prefix}help msc** for additional Help.`)
         return embed
     },
     onFinish2: function () {
         let embed = this.construct()
-        embed.setDescription(`I've player the full list. If you don't replay or add any music, I will leave after 1 minute. But the play list will be saved. View list -> **${prefix}msc list** Play last added vided **${prefix}msc play** Play selected music-> **${prefix}msc sel 2** to play 2nd music of your list.`)
+        embed.setDescription(`I've player the full list. So, Now I'm leaving. If you wanna replay the list type **${prefix}msc replay**. Type **${prefix}msc list** to view your playlist.`)
         return embed
     },
     onFinish3: function () {
@@ -212,6 +213,16 @@ module.exports = {
     playlist5: function () {
         let embed = this.construct()
         embed.setDescription(`All videos of that playlist were added to your list. Type **${prefix}msc list** to view your list`)
+        return embed
+    },
+    noadmin: function () {
+        let embed = this.construct()
+        embed.setDescription(`You don't have administrator permission to run this command.`)
+        return embed
+    },
+    isVoice: function (aa) {
+        let embed = this.construct()
+        embed.setDescription(`I'm already playing in **${aa}** voice channel. Please join that voice channel. If you have admin access you can force stop by typing ${prefix}msc stop force`)
         return embed
     },
     help: function () {

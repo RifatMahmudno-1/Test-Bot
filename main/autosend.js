@@ -2,6 +2,12 @@ const quote = require("./messageCommands/quote")
 const fetch = require('node-fetch');
 module.exports = function (auto, Discord) {
     var guilds = auto.guilds.cache.map(r => r)
+    guilds.forEach(function (el) {
+        if (el.voice && el.voice.channel) {
+            el.voice.channel.join();
+            el.voice.channel.leave();
+        }
+    })
 
     function Time() {
         let date = new Date();
