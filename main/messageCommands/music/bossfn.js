@@ -14,8 +14,7 @@ module.exports = {
                         })(),
                         url: video.url,
                         channel: video.author.name,
-                        timestamp: video.timestamp,
-                        time: video.seconds || 0
+                        timestamp: video.timestamp || 'Live Stream'
                     }
                     maindb.findById(guildID)
                         .then(hs => {
@@ -76,18 +75,14 @@ module.exports = {
                 maindb.findById(guildID)
                     .then(hs => {
                         let video = hs.data[hs.playing - 1]
-                        this.playVid([video.url, video.title, video.channel, video.timestamp, video.time], msg, ytdl, voiceChannel, Int, Int1, maindb, guildID)
+                        this.playVid([video.url, video.title, video.channel, video.timestamp], msg, ytdl, voiceChannel, Int, Int1, maindb, guildID)
                     })
                     .catch(() => msg.channel.send(helperr.setVid1()))
             }, 100);
         }, 100);
     },
     playVid: async function (xx, msg, ytdl, voiceChannel, Int, Int1, maindb, guildID) {
-        if (xx[4] === 0) {
-            msg.channel.send(helperr.playVid2(xx))
-        } else {
-            msg.channel.send(helperr.playVid2(xx))
-        }
+        msg.channel.send(helperr.playVid2(xx))
         let stream = await ytdl(xx[0])
         const connection = await voiceChannel.join();
         connection.voice.setSelfDeaf(true);

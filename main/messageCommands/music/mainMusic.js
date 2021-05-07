@@ -1,7 +1,7 @@
 module.exports = async function (msg, mongoose) {
     let voiceChannel = msg.member.voice.channel;
-    if (!voiceChannel.joinable) return msg.channel.send(`I don't have permission to join that voice channel.`)
     if (!voiceChannel) return msg.channel.send('You need to be in a channel to play this music');
+    if (!voiceChannel.joinable) return msg.channel.send(`I don't have permission to join that voice channel.`)
     //all modules
     const ytdl = require('ytdl-core-discord');
     const yts = require('yt-search');

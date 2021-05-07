@@ -19,8 +19,7 @@ module.exports = function (yts, msg, tokens, maindb, guildID, helperr) {
                         })(),
                         url: `https://www.youtube.com/watch?v=${videos[i].videoId}`,
                         channel: videos[i].author.name,
-                        timestamp: videos[i].duration.timestamp,
-                        time: videos[i].duration.seconds || 0
+                        timestamp: videos[i].duration.timestamp || 'Live Stream',
                     })
                 }
             } else {
@@ -33,8 +32,7 @@ module.exports = function (yts, msg, tokens, maindb, guildID, helperr) {
                         })(),
                         url: `https://www.youtube.com/watch?v=${videos[i].videoId}`,
                         channel: videos[i].author.name,
-                        timestamp: videos[i].duration.timestamp,
-                        time: videos[i].duration.seconds || 0
+                        timestamp: videos[i].duration.timestamp || 'Live Stream',
                     })
                 }
             }
