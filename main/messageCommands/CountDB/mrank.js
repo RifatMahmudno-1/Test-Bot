@@ -1,7 +1,13 @@
 module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
-    const guild = `${msg.guild.name} --> ${msg.guild.id}`
+    const guild = `${msg.guild.id}`
     const format = require('./format.js')
-    const maindb = mongoose.model(guild, format(mongoose))
+    //const maindb = mongoose.model(guild, format(mongoose))
+    let maindb;
+    if (mongoose.connection.models[guild]) {
+        maindb = mongoose.connection.models[guild]
+    } else {
+        maindb = mongoose.model(guild, format(mongoose));
+    }
 
     function rank(aa) {
         let User = aa.id;
@@ -100,5 +106,5 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
             rank(el)
         })
     }
-    delete mongoose.connection.models[guild]
+    //delete mongoose.connection.models[guild]
 }
