@@ -3,7 +3,6 @@ module.exports = function (msg, mongoose, lvl) {
     let guild = `${msg.guild.id}`
     let Uid = msg.author.id.toString()
     let Uname = msg.author.username;
-    //const maindb = mongoose.model(guild, format(mongoose));
     let maindb;
     if (mongoose.connection.models[guild]) {
         maindb = mongoose.connection.models[guild]
@@ -35,10 +34,5 @@ module.exports = function (msg, mongoose, lvl) {
                 msg.channel.send(`<@${msg.author.id}>, You have reached level ${abc}.`)
             }
         })
-        //.then(delete mongoose.connection.models[guild])
         .catch((err) => console.log(err))
-
-    /*maindb.find({
-        _id: Uid
-    }).then(r => console.log(r[0].count))*/
 }

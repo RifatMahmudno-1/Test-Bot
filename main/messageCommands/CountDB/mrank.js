@@ -1,7 +1,6 @@
 module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
     const guild = `${msg.guild.id}`
     const format = require('./format.js')
-    //const maindb = mongoose.model(guild, format(mongoose))
     let maindb;
     if (mongoose.connection.models[guild]) {
         maindb = mongoose.connection.models[guild]
@@ -106,5 +105,4 @@ module.exports = async function (msg, mongoose, tokens, Discord, lvl) {
             rank(el)
         })
     }
-    //delete mongoose.connection.models[guild]
 }
