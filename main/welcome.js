@@ -8,7 +8,10 @@ module.exports = async function (memAdd, Discord) {
     fetch(welcome)
         .then(r => r.json())
         .then(r => {
-            let atta = new Discord.MessageAttachment(r.screenshot)
+            let atta = new Discord.MessageAttachment(r.screenshot);
             aa.send('🎆New Member🎇', atta)
+        })
+        .catch(r =>{
+          aa.send(`**${dname}** has joined in our server.`)
         })
 }

@@ -10,4 +10,7 @@ module.exports = async function (memAdd, Discord) {
         .then(r => {
             aa.send(new Discord.MessageAttachment(r.screenshot))
         })
+        .catch(r =>{
+          aa.send(`**${dname}** has joined in our server.`)
+        })
 }
