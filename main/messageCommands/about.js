@@ -52,7 +52,7 @@ module.exports = function (msg, tokens, Discord) {
                 inline: true
             }, {
                 name: 'Roles',
-                value: role.join(', '),
+                value: role.join(', ') || 'no roles',
                 inline: true
             })
             msg.channel.send(embed)
