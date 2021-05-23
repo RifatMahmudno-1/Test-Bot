@@ -9,7 +9,7 @@ module.exports = function (yts, msg, tokens, maindb, guildID, helperr) {
             let videos = getVids.videos
             if (videos.length < 1 || videos.length == undefined) return msg.channel.send(helperr.playlist1())
             let arr = [];
-            if (videos.length <= 50) {
+            if (videos.length <= 100) {
                 for (var i = 0; i < videos.length; i++) {
                     arr.push({
                         title: (() => {
@@ -23,7 +23,7 @@ module.exports = function (yts, msg, tokens, maindb, guildID, helperr) {
                     })
                 }
             } else {
-                for (var i = 0; i < 50; i++) {
+                for (var i = 0; i < 100; i++) {
                     arr.push({
                         title: (() => {
                             let aa = videos[i].title.replace(/[`*]+/g, '')
@@ -44,12 +44,13 @@ module.exports = function (yts, msg, tokens, maindb, guildID, helperr) {
                             data: arr,
                             playing: 1
                         }).save()
-                        if (videos.length > 50) msg.channel.send(helperr.playlist2())
+                        if (videos.length > 100) msg.channel.send(helperr.playlist2())
+                        if (videos.length <= 100) msg.channel.send(helperr.playlist6(videos.length))
                     } else {
                         let oldDt = hs.data
-                        if (hs.data.length >= 50) return msg.channel.send(helperr.playlist3())
-                        if (hs.data.length + arr.length > 50) {
-                            let free = 50 - hs.data.length
+                        if (hs.data.length >= 100) return msg.channel.send(helperr.playlist3())
+                        if (hs.data.length + arr.length > 100) {
+                            let free = 100 - hs.data.length
                             for (var i = 0; i < free; i++) {
                                 oldDt.push(arr[i])
                             }

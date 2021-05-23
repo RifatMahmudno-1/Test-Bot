@@ -12,7 +12,11 @@ module.exports = function (msg, maindb, guildID, helperr) {
                     all.forEach(function (el) {
                         title.push(el.title)
                     })
-                    msg.channel.send(helperr.list2(title))
+                    helperr.list2(title).forEach(function (el) {
+                        if (el !== undefined) setTimeout(() => {
+                            msg.channel.send(el)
+                        }, 1);
+                    })
                 }
             }
         })

@@ -27,7 +27,7 @@ module.exports = {
                                 msg.channel.send(helperr.veliadd2())
                             } else {
                                 let oldDt = hs.data
-                                if (oldDt.length >= 50) return msg.channel.send(helperr.veliadd3())
+                                if (oldDt.length >= 100) return msg.channel.send(helperr.veliadd3())
                                 oldDt.push(obj)
                                 maindb.findByIdAndUpdate(guildID, {
                                     data: oldDt

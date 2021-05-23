@@ -38,7 +38,7 @@ module.exports = {
     },
     veliadd3: function () {
         let embed = this.construct()
-        embed.setDescription(`You can only add 50 video in your list. No videos were added. Type **${prefix}msc del <music number from your list>** to delete that music. Like **${prefix}msc del 2** to delete 2nd music of your list. Type **${prefix}msc clearlist** to delete your list.`)
+        embed.setDescription(`You can only add 100 video in your list. No videos were added. Type **${prefix}msc del <music number from your list>** to delete that music. Like **${prefix}msc del 2** to delete 2nd music of your list. Type **${prefix}msc clearlist** to delete your list.`)
         return embed
     },
     veliadd4: function () {
@@ -142,13 +142,29 @@ module.exports = {
         return embed
     },
     list2: function (title) {
-        let embed = this.construct()
-        embed.setTitle('Your music playlist.')
         for (var i = 0; i < title.length; i++) {
             title[i] = `**${i+1})** ${title[i]}`
+        };
+        let embed = this.construct();
+        let embed1;
+        let embed2;
+        let aa = title.slice(0, 34)
+        embed.setTitle(`Your music playlist.(0-${aa.length})`)
+        embed.setDescription(aa)
+
+        let bb = title.slice(34, 67)
+        if (bb && bb.length > 0) {
+            embed1 = this.construct();
+            embed1.setTitle(`Your music playlist.(35-${34+bb.length})`)
+            embed1.setDescription(bb)
         }
-        embed.setDescription(title)
-        return embed
+        let cc = title.slice(67, title.length)
+        if (cc && cc.length > 0) {
+            embed2 = this.construct();
+            embed2.setTitle(`Your music playlist.(68-${67+cc.length})`)
+            embed2.setDescription(cc)
+        }
+        return [embed, embed1, embed2]
     },
     previous1: function () {
         let embed = this.construct()
@@ -197,22 +213,27 @@ module.exports = {
     },
     playlist2: function () {
         let embed = this.construct()
-        embed.setDescription(`You can add maximum 50 videos. Only first 50 videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
+        embed.setDescription(`You can add maximum 100 videos. Only first 100 videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
         return embed
     },
     playlist3: function () {
         let embed = this.construct()
-        embed.setDescription(`You can only add 50 video in your list. No videos were added. Type **${prefix}msc del <music number from your list>** to delete that music. Like **${prefix}msc del 2** to delete 2nd music of your list. Type **${prefix}msc clearlist** to delete your list.`)
+        embed.setDescription(`You can only add 100 video in your list. No videos were added. Type **${prefix}msc del <music number from your list>** to delete that music. Like **${prefix}msc del 2** to delete 2nd music of your list. Type **${prefix}msc clearlist** to delete your list.`)
         return embed
     },
     playlist4: function (free) {
         let embed = this.construct()
-        embed.setDescription(`You can add maximum 50 videos. Only first ${free} videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
+        embed.setDescription(`You can add maximum 100 videos. Only first ${free} videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
         return embed
     },
     playlist5: function () {
         let embed = this.construct()
         embed.setDescription(`All videos of that playlist were added to your list. Type **${prefix}msc list** to view your list`)
+        return embed
+    },
+    playlist6: function (num) {
+        let embed = this.construct()
+        embed.setDescription(`${num} videos were added to your list from that playlist. Type **${prefix}msc list** to view your list`)
         return embed
     },
     noadmin: function () {
@@ -273,7 +294,7 @@ module.exports = {
                 `
             }, {
                 name: '⚠' + 'Desclaimer',
-                value: `**You can't add more than 50 musics in your list.** If you have 50 musics in your list then you have to delete any music to add new music.
+                value: `**You can't add more than 100 musics in your list.** If you have 100 musics in your list then you have to delete any music to add new music.
                 Music starting may take a few seconds. So, please be patient.
                 Any music you play will be added to your list. **One server will have only one list and all other members will be able to access and modify it.**`
             })
